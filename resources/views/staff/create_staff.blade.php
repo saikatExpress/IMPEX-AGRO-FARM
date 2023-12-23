@@ -11,12 +11,14 @@
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Staff Info <small>Include All Field</small></h2>
+                    <h2>স্টাফের তথ্য <small>Include All Field</small></h2>
+
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a class="dropdown-item" href="#">Settings 1</a>
                                 </li>
@@ -27,15 +29,18 @@
                         <li><a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
                     </ul>
+
                     <div class="clearfix"></div>
                 </div>
 
                 <div class="x_content">
                     <br />
-                    <form id="demo-form2" action="{{ route('staff.store') }}" method="post" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" action="{{ route('staff.store') }}" method="post" enctype="multipart/form-data"
+                        data-parsley-validate class="form-horizontal form-label-left">
                         @csrf
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Name <span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" id="name" name="name" class="form-control ">
@@ -46,10 +51,11 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Father Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Father Name <span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="father_name"  class="form-control">
+                                <input type="text" id="last-name" name="father_name" class="form-control">
                             </div>
                             @error('father_name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -57,10 +63,11 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Mother Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Mother Name <span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="mother_name"  class="form-control">
+                                <input type="text" id="last-name" name="mother_name" class="form-control">
                             </div>
                             @error('mother_name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -68,10 +75,11 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Email <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Email <span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="email"  class="form-control">
+                                <input type="text" id="last-name" name="email" class="form-control">
                             </div>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
@@ -79,42 +87,60 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NID No<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NID No<span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="nid"  class="form-control">
+                                <input type="text" id="last-name" name="nid_no" class="form-control">
                             </div>
+
+                            @error('nid_no')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Birth Certificate<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Birth
+                                Certificate<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="birth_certificate"  class="form-control">
+                                <input type="text" id="last-name" name="birth_certificate" class="form-control">
                             </div>
+                            @error('birth_certificate')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Present Address<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Present Address<span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" id="last-name" name="present_address" class="form-control">
                             </div>
+                            @error('present_address')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Permanent Address<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Permanent
+                                Address<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
                                 <input type="text" id="last-name" name="permanent_address" class="form-control">
                             </div>
+                            @error('permanent_address')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Blood Group<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Blood Group<span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select class="form-control">
+                                <select class="form-control" name="blood_group">
                                     <option>Choose option</option>
                                     <option value="ab+">AB+</option>
                                     <option value="ab-">AB-</option>
@@ -126,27 +152,40 @@
                                     <option value="o-">O-</option>
                                 </select>
                             </div>
+                            @error('blood_group')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
                             <div class="col-md-6 col-sm-6 ">
                                 <div id="gender" class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                        <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
+                                    <label class="btn btn-secondary" data-toggle-class="btn-primary"
+                                        data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="gender" value="male" class="join-btn"> &nbsp;
+                                        Male &nbsp;
                                     </label>
-                                    <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                    <label class="btn btn-primary" data-toggle-class="btn-primary"
+                                        data-toggle-passive-class="btn-default">
                                         <input type="radio" name="gender" value="female" class="join-btn"> Female
                                     </label>
                                 </div>
                             </div>
+                            @error('gender')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                <input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy"
+                                    type="text" name="birth_date" onfocus="this.type='date'"
+                                    onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+                                    onmouseout="timeFunctionLong(this)">
                                 <script>
                                     function timeFunctionLong(input) {
                                         setTimeout(function() {
@@ -155,14 +194,21 @@
                                     }
                                 </script>
                             </div>
+                            @error('birth_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Staff Images <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Staff Images <span
+                                    class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input class="form-control" type="file">
+                                <input class="form-control" type="file" name="staff_image">
                             </div>
+                            @error('staff_image')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="ln_solid"></div>
@@ -179,5 +225,4 @@
             </div>
         </div>
     </div>
-
 @endsection

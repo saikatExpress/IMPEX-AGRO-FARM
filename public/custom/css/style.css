@@ -1,4 +1,4 @@
-.dashboard_item p{
+.dashboard_item p {
     margin-left: 5px;
     font-size: 20px;
     margin-bottom: 0;
@@ -6,15 +6,32 @@
     color: #000;
 }
 
-.dashboard_item h2{
+.dashboard_item h2 {
     margin-left: 5px;
 }
 
-.page_header{
+.page_header {
     width: 100%;
 }
 
-.page_header_menu{
+.page_header_menu {
     width: 10%;
     float: right;
+}
+
+.dashboard_menu {
+    border-radius: 4px;
+    background-color: #00c0ef;
+}
+
+.dashboard_menu img {
+    padding: 5px 5px 5px;
+    width: 75px;
+    height: 75px;
+}
+
+.custom-col {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
 }

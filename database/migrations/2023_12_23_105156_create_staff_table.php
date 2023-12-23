@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 250)->nullable();
+            $table->string('father_name', 250)->nullable();
+            $table->string('mother_name', 250)->nullable();
+            $table->string('email', 250)->nullable();
+            $table->string('nid_no', 250)->nullable();
+            $table->string('birth_certificate', 250)->nullable();
+            $table->string('present_address', 250)->nullable();
+            $table->string('permanent_address', 250)->nullable();
+            $table->string('blood_group', 25)->nullable();
+            $table->string('gender', 25)->nullable();
+            $table->timestamp('birth_date')->nullable();
+            $table->string('staff_image', 250)->nullable();
+            $table->string('status', 10)->default('1')->nullable();
             $table->timestamps();
         });
     }
