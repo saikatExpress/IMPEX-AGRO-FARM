@@ -9,3 +9,12 @@
 .dashboard_item h2{
     margin-left: 5px;
 }
+
+.page_header{
+    width: 100%;
+}
+
+.page_header_menu{
+    width: 10%;
+    float: right;
+}

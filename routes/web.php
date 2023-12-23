@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,10 @@ Route::post('login/store', [AuthController::class, 'store'])->name('login.store'
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    // Staff Route
+    Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.us');
+    Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
 
     // Logout Route
     Route::get('/logout', [AuthController::class, 'logout']);
