@@ -50,6 +50,10 @@ class StaffController extends Controller
             $bloodGroup       = $request->input('blood_group');
             $gender           = $request->input('gender');
             $birthDate        = $request->input('birth_date');
+
+            $imageName = time() . '.' . $request->staff_image->extension();
+            return $imageName;
+            $request->staff_image->move(public_path('images'), $imageName);
         } catch (\Exception $e) {
             DB::rollback();
             info($e);
