@@ -31,13 +31,25 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form action="" mathod="post">
+                    @if(session('message'))
+                        <div class="alert alert-danger">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                    <form action="{{ url('login/store') }}" method="post">
+                        @csrf
                         <h1>Login Form</h1>
                         <div>
-                            <input type="email" class="form-control" placeholder="Email" required="" />
+                            <input type="email" name="email" class="form-control" placeholder="Email"/>
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" required="" />
+                            <input type="password" name="password" class="form-control" placeholder="Password" />
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div>

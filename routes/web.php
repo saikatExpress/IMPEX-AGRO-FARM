@@ -16,5 +16,14 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', [AuthController::class, 'create'])->name('login.us');
+Route::post('login/store', [AuthController::class, 'store']);
 
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+
+
+    // Logout Route
+    Route::get('/logout', [AuthController::class, 'logout']);
+});
+

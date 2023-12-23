@@ -18,13 +18,14 @@ class UserSeeder extends Seeder
         $password = Hash::make('123456');
         $now = Carbon::now();
 
-        User::insert(
+        User::insert([
             [
                 'id'           => 1,
                 'name'         => 'Admin',
                 'email'        => 'admin@gmail.com',
                 'phone_number' => '01713617913',
                 'password'     => $password,
+                'status'       => 1,
                 'created_at'   => $now
             ],
             [
@@ -33,8 +34,9 @@ class UserSeeder extends Seeder
                 'email'        => 'superadmin@gmail.com',
                 'phone_number' => '01613617913',
                 'password'     => $password,
+                'status'       => 1,
                 'created_at'   => $now
             ]
-        );
+        ]);
     }
 }
