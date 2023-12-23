@@ -36,7 +36,7 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                    <form action="{{ url('login/store') }}" method="post">
+                    <form action="{{ route('login.store') }}" method="post">
                         @csrf
                         <h1>Login Form</h1>
                         <div>

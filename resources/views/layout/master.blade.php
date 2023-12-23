@@ -31,6 +31,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('asset/build/css/custom.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('custom/css/style.css') }}">
 </head>
 
 <body class="nav-md">
@@ -39,7 +40,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ route('dashboard') }}" class="site_title"><i class="fa fa-paw"></i> <span>Impex Agro Farm</span></a>
+                    <a href="{{ route('dashboard') }}" class="site_title"><i class="fa-solid fa-hippo"></i> <span>Impex Agro Farm</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -72,7 +73,7 @@
                             {{-- HR Menu List --}}
                             <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> মানব সম্পদ <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="form.html">স্টাফ যুক্ত</a></li>
+                                    <li><a href="{{ route('staff.us') }}">স্টাফ যুক্ত</a></li>
                                     <li><a href="form_advanced.html">স্টাফ তালিকা</a></li>
                                     <li><a href="form_validation.html">ব্যাবহারকারীদের তালিকা</a></li>
                                     <li><a href="form_wizards.html">স্টাফ বেতন</a></li>

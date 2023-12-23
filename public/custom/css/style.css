@@ -1,0 +1,11 @@
+.dashboard_item p{
+    margin-left: 5px;
+    font-size: 20px;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #000;
+}
+
+.dashboard_item h2{
+    margin-left: 5px;
+}
