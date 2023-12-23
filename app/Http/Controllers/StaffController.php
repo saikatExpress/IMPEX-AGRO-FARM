@@ -39,10 +39,17 @@ class StaffController extends Controller
         try {
             DB::beginTransaction();
 
-            $name = $request->input('name');
-            $fatherName = $request->input('father_name');
-            $motherName = $request->input('mother_name');
-            $email = $request->input('email');
+            $name             = $request->input('name');
+            $fatherName       = $request->input('father_name');
+            $motherName       = $request->input('mother_name');
+            $email            = $request->input('email');
+            $nidNo            = $request->input('nid_no');
+            $birthCertificate = $request->input('birth_certificate');
+            $presentAddress   = $request->input('present_address');
+            $permanentAddress = $request->input('permanent_address');
+            $bloodGroup       = $request->input('blood_group');
+            $gender           = $request->input('gender');
+            $birthDate        = $request->input('birth_date');
         } catch (\Exception $e) {
             DB::rollback();
             info($e);
