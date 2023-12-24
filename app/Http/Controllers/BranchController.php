@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Branch;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
 
@@ -44,7 +46,17 @@ class BranchController extends Controller
                 $image_name = time() . '.' . $branch_image->getClientOriginalExtension();
 
                 // Set path for storing the image
-                $image_path = public_path('images/branches/' . $image_name);
+                $image_path = public_path('images/branches') . DIRECTORY_SEPARATOR . $image_name;
+
+                if (!is_dir(public_path('images/branches'))) {
+                    // Create the directory if it does not exist
+                    mkdir(public_path('images/branches'), 0777, true);
+                }
+
+                if (!is_writable(public_path('images/branches'))) {
+                    // Log an error or handle the issue appropriately
+                    return response()->json(['error' => 'Directory is not writable'], 500);
+                }
 
                 // Resize and compress the image
                 Image::make($branch_image->getRealPath())
@@ -56,7 +68,8 @@ class BranchController extends Controller
                 // Assign the image name to the branch object property
             }
 
-            $branchObj->branch_name    = $request->input('branch_name');
+            $branchObj->branch_name = $request->input('branch_name');
+            $branchObj->slug        = Str::slug($request->input('branch_name'), '-');
             $branchObj->branch_email   = $request->input('branch_email');
             $branchObj->branch_address = $request->input('branch_address');
             $branchObj->branch_image   = $image_name;

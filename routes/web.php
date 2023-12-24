@@ -22,6 +22,7 @@ Route::post('login/store', [AuthController::class, 'store'])->name('login.store'
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/branch', [AdminController::class, 'branch'])->name('branch');
 
     // For Branch Route
     Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create');
