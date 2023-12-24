@@ -18,6 +18,11 @@
     <div class="container">
         <div class="branch_container">
             <h2 class="text-align">Choose A Branch</h2>
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="branch_body">
                 @foreach ($branches as $key => $branch)
                     <div style="width: 80%;" class="card branch-card">

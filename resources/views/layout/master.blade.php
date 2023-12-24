@@ -233,7 +233,7 @@
                                         <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>
                                     </a>
-                                    <a class="dropdown-item" href="javascript:;">Help</a>
+                                    <a class="dropdown-item" href="{{ route('branch') }}">Switch Branch</a>
                                     <a class="dropdown-item" href="{{ url('logout') }}"><i
                                             class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>

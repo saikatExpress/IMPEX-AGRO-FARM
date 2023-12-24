@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Branch;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
 
@@ -28,6 +30,15 @@ class BranchController extends Controller
     {
         return view('branch.create_branch');
     }
+
+    public function selectBranch(Request $request, $branch_id)
+    {
+        $request->session()->put('branch_id', $branch_id);
+
+        // Redirect to dashboard or another route after selection
+        return redirect()->route('dashboard');
+    }
+
 
     /**
      * Store a newly created resource in storage.

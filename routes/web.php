@@ -21,8 +21,12 @@ Route::get('/', [AuthController::class, 'create'])->name('login.us');
 Route::post('login/store', [AuthController::class, 'store'])->name('login.store');
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/branch', [AdminController::class, 'branch'])->name('branch');
+    Route::get('/select/branch/{branch_id}', [BranchController::class, 'selectBranch'])->name('select.branch');
+});
+
+Route::middleware(['auth', 'auth.branch'])->group(function(){
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // For Branch Route
     Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create');
