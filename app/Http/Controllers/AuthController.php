@@ -57,8 +57,9 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)){
             return redirect()->intended('/dashboard');
+            // return view('branch.branch');
         }
-
+        return redirect()->back()->with('message', 'Your credentials does not match!');
     }
 
     /**

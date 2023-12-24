@@ -72,6 +72,7 @@
                                 <li><a><i class="fa fa-home"></i> হোম <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('dashboard') }}">ড্যাশবোর্ড</a></li>
+                                        <li><a href="{{ route('branch.create') }}">ব্রাঞ্চ</a></li>
                                     </ul>
                                 </li>
 
