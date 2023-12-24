@@ -23,6 +23,9 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'password',
+        'status',
+        'role',
+        'flag',
     ];
 
     /**
@@ -46,6 +49,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'phone_number'      => 'string',
         'password'          => 'hashed',
-        'status'            => 'integer',
+        'status'            => 'string',
+        'role'              => 'integer',
+        'flag'              => 'string',
     ];
 }

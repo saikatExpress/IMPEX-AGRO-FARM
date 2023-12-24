@@ -86,6 +86,7 @@
                                         <li><a href="{{ route('staff.us') }}">স্টাফ যুক্ত</a></li>
                                         <li><a href="form_advanced.html">স্টাফ তালিকা</a></li>
                                         <li><a href="form_validation.html">ব্যাবহারকারীদের তালিকা</a></li>
+                                        <li><a href="{{ route('user.create') }}">ব্যাবহারকারী যুক্ত</a></li>
                                         <li><a href="form_wizards.html">স্টাফ বেতন</a></li>
                                     </ul>
                                 </li>

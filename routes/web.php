@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
@@ -28,6 +29,9 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    //User Route
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 
     // For Branch Route
     Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create');
