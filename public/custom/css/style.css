@@ -1,3 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.search {
+    top: 6px;
+    left: 10px;
+}
+
+.green {
+    color: green;
+}
+
 .dashboard_item p {
     margin-left: 5px;
     font-size: 20px;

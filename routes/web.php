@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
@@ -35,6 +36,16 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     // For Staff Route
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.us');
     Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
+
+    // For Role Route
+    Route::get('/role/list', [RoleController::class, 'index'])->name('role.list');
+    Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
+    Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
+    Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+    Route::post('/role/update', [RoleController::class, 'update'])->name('role.update');
+    Route::get('/role/delete/{id}', [RoleController::class, 'destroy']);
+    Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions');
+
 
     // Logout Route
     Route::get('/logout', [AuthController::class, 'logout']);
