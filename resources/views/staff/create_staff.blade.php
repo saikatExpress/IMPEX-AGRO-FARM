@@ -9,6 +9,13 @@
         </div>
 
         <div class="col-md-12 col-sm-12 ">
+
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
             <div class="x_panel">
                 <div class="x_title">
                     <h2>স্টাফের তথ্য <small>Include All Field</small></h2>
@@ -38,6 +45,7 @@
                     <form id="demo-form2" action="{{ route('staff.store') }}" method="post" enctype="multipart/form-data"
                         data-parsley-validate class="form-horizontal form-label-left">
                         @csrf
+                        <input type="hidden" value="{{ session('branch_id') }}" name="branch_id">
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Name <span
                                     class="required">*</span>
@@ -112,8 +120,8 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Present Address<span
-                                    class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Present
+                                Address<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" id="last-name" name="present_address" class="form-control">

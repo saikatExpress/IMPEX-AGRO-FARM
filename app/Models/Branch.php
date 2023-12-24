@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Staff;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,4 +33,10 @@ class Branch extends Model
         'updated_at'     => 'datetime',
         'deleted_at'     => 'datetime'
     ];
+
+    // Relation Start
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }

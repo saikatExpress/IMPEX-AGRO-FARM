@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('branch_id')->constrained('branches')
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->string('name', 250)->nullable();
             $table->string('father_name', 250)->nullable();
             $table->string('mother_name', 250)->nullable();
@@ -26,6 +28,7 @@ return new class extends Migration
             $table->timestamp('birth_date')->nullable();
             $table->string('staff_image', 250)->nullable();
             $table->string('status', 10)->default('1')->nullable();
+            $table->string('flag', 10)->default('0')->nullable();
             $table->timestamps();
         });
     }
