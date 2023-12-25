@@ -35,21 +35,21 @@
             </div>
             <div class="x_content">
 
-                <form class="" action="{{ route('cow.store') }}" method="post" novalidate>
+                <form class="" action="{{ route('sell.store') }}" method="post" novalidate>
                     @csrf
                     <span class="section">Cow Sell Info</span>
 
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">গরু<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <select name="cow" id="" class="form-control" required="required">
+                            <select name="cow_id" id="" class="form-control" required="required">
                                 <option value="" selected disabled>Select</option>
                                 @foreach ($cows as $key => $cow)
                                     <option value="{{ $cow->id }}">{{ $cow->tag }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        @error('price')
+                        @error('cow_id')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -59,8 +59,8 @@
                         <div class="col-md-6 col-sm-6">
                             <select name="buyer_id" id="" class="form-control" required="required">
                                 <option value="" selected disabled>Select</option>
-                                @foreach ($cows as $key => $cow)
-                                    <option value="{{ $cow->id }}">{{ $cow->tag }}</option>
+                                @foreach ($buyers as $key => $buyer)
+                                    <option value="{{ $buyer->id }}">{{ $buyer->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -70,11 +70,21 @@
                     </div>
 
                     <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">দাম<span class="required">*</span></label>
+                        <label class="col-form-label col-md-3 col-sm-3  label-align">মূল্য<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
                             <input class="form-control" name="price" required="required" />
                         </div>
                         @error('price')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3  label-align">পেমেন্ট<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" name="payment" required="required" />
+                        </div>
+                        @error('payment')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -133,6 +143,26 @@
                         @enderror
                     </div>
 
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">অবস্থা<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <div id="gender" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-secondary" data-toggle-class="btn-primary"
+                                    data-toggle-passive-class="btn-default">
+                                    <input type="radio" name="status" value="delivered" class="join-btn"> &nbsp;
+                                    Delivered &nbsp;
+                                </label>
+                                <label class="btn btn-primary" data-toggle-class="btn-primary"
+                                    data-toggle-passive-class="btn-default">
+                                    <input type="radio" name="status" value="booking" class="join-btn"> Booking
+                                </label>
+                            </div>
+                        </div>
+                        @error('status')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
@@ -163,7 +193,7 @@
 
     <script>
         $(document).ready(function(){
-            $('select[name="cow"]').on('change', function(){
+            $('select[name="cow_id"]').on('change', function(){
                 var id = $(this).val();
 
                 if(id != null){

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Cow;
+use App\Models\Buyer;
 use Illuminate\Http\Request;
+use App\Service\BalanceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -36,9 +38,64 @@ class CowController extends Controller
 
     public function sellCreate()
     {
-        $cows = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('flag', '0')->get();
+        $cows   = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('flag', '0')->get();
+        $buyers = Buyer::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('status', '1')->get();
 
-        return view('cow.sell_cow', compact('cows'));
+        return view('cow.sell_cow', compact('cows', 'buyers'));
+    }
+
+    public function sellStore(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'cow_id'    => ['required'],
+                'buyer_id'  => ['required'],
+                'price'     => ['required'],
+                'payment'   => ['required'],
+                'sell_date' => ['required'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $cowSellObj = new CowSell;
+            $price      = $request->input('price');
+            $payment    = $request->input('payment');
+            $buyerId    = $request->input('buyer_id');
+
+            $due = $price - $payment;
+
+            $cowSellObj->branch_id   = session('branch_id');
+            $cowSellObj->cow_id      = $request->input('cow_id');
+            $cowSellObj->buyer_id    = $buyerId;
+            $cowSellObj->price       = $price;
+            $cowSellObj->payment     = $payment;
+            $cowSellObj->due         = ($due > 0) ? $due : 0;
+            $cowSellObj->sell_date   = $request->input('sell_date');
+            $cowSellObj->description = $request->input('description');
+            $cowSellObj->status      = $request->input('status');
+            $cowSellObj->created_at  = Carbon::now();
+
+            $res = $cowSellObj->save();
+
+            DB::commit();
+            if($res){
+                if($due > 0){
+                    $balanceServiceObj = new BalanceService;
+
+                    $balanceServiceObj->balanceUpdate($buyerId, $due);
+                }
+                return redirect()->back()->with('message', 'Sell Created');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 
     /**

@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('cow_sells', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('branch_id')->constrained('branches')
+                ->onUpdate('cascade')->onDelete()->nullable();
+            $table->foreignId('cow_id')->constrained('cows')
+                ->onUpdate('cascade')->onDelete()->nullable();
+            $table->foreignId('buyer_id')->constrained('buyers')
+                ->onUpdate('cascade')->onDelete()->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('payment')->nullable();
+            $table->integer('due')->nullable();
+            $table->timestamp('sell_date')->nullable();
+            $table->string('description', 250)->nullable();
+            $table->string('status', 50)->nullable();
+            $table->string('flag', 10)->default('0')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
