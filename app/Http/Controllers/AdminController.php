@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cow;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,9 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('welcome');
+        $cows = Cow::where('branch_id', session('branch_id'))->count();
+
+        return view('welcome', compact('cows'));
     }
 
     public function branch()

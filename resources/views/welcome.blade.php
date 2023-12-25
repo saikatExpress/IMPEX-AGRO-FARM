@@ -22,7 +22,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Total Cow</h2>
-                        <p>{{ numberCountingFormat(20) }}</p>
+                        <p>{{ numberCountingFormat(($cows > 0) ? $cows : '0') }}</p>
                     </div>
                 </div>
             </div>

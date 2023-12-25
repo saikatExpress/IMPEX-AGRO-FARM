@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
@@ -49,6 +50,13 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/role/update', [RoleController::class, 'update'])->name('role.update');
     Route::get('/role/delete/{id}', [RoleController::class, 'destroy']);
     Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions');
+
+    // For Cow Route
+    Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');
+    Route::get('/cow/create', [CowController::class, 'create'])->name('cow.create');
+    Route::post('/cow/store', [CowController::class, 'store'])->name('cow.store');
+    Route::post('/cow/update', [CowController::class, 'update'])->name('cow.edit');
+    Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
 
 
     // Logout Route

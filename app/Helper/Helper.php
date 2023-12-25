@@ -14,3 +14,12 @@ function numberCountingFormat($n, $precision = 1)
 
     return $format;
 }
+
+function dateTimeFormat($date)
+{
+    $dateString    = $date;
+    $date          = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
+    $formattedDate = $date->format('d M, y');
+
+    return $formattedDate;
+}

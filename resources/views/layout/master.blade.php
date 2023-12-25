@@ -31,6 +31,12 @@
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('asset/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
 
+    {{-- <link href="{{ asset('asset/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet"> --}}
+
     <!-- Custom Theme Style -->
     <link href="{{ asset('asset/build/css/custom.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('custom/css/style.css') }}">
@@ -121,7 +127,7 @@
                                 <li><a><i class="fa fa-bar-chart-o"></i> পশু ক্রয়/বিক্রয় <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="chartjs.html">ক্রয়</a></li>
+                                        <li><a href="{{ route('cow.create') }}">ক্রয়</a></li>
                                         <li><a href="chartjs2.html">বিক্রয়</a></li>
                                         <li><a href="morisjs.html">বাকী সংগ্রহ</a></li>
                                     </ul>
@@ -382,6 +388,21 @@
 
     <script src="{{ asset('asset/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
     <script src="{{ asset('asset/vendors/starrr/dist/starrr.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+    <script src="{{ asset('asset/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/jszip/dist/jszip.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('asset/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('asset/build/js/custom.min.js') }}"></script>
 
