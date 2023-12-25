@@ -124,7 +124,7 @@
                                 <li><a><i class="fa fa-table"></i> দুধ বিবরণী <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="tables.html">প্রাপ্ত দুধ</a></li>
+                                        <li><a href="{{ route('milk.create') }}">প্রাপ্ত দুধ</a></li>
                                         <li><a href="tables_dynamic.html">দুধ বিক্রয়</a></li>
                                         <li><a href="tables_dynamic.html">বাকী সংগ্রহ</a></li>
                                     </ul>

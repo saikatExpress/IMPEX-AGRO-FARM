@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CowController;
+use App\Http\Controllers\MilkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
@@ -51,6 +52,8 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/role/update', [RoleController::class, 'update'])->name('role.update');
     Route::get('/role/delete/{id}', [RoleController::class, 'destroy']);
     Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions');
+
+    Route::get('/milk/create', [MilkController::class, 'create'])->name('milk.create');
 
     // For Cow Route
     Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');
