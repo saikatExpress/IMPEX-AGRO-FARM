@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Cow;
 use App\Models\Staff;
+use App\Models\Buyer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,6 +43,11 @@ class Branch extends Model
     }
 
     public function cows()
+    {
+        return $this->hasMany(Cow::class);
+    }
+
+    public function buyers()
     {
         return $this->hasMany(Cow::class);
     }

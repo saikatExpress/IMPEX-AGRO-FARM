@@ -102,7 +102,7 @@
                                 <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্রেতা <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{ route('staff.us') }}">ক্রেতা যুক্ত</a></li>
+                                        <li><a href="{{ route('buyer.us') }}">ক্রেতা যুক্ত</a></li>
                                         <li><a href="form_advanced.html">ক্রেতা তালিকা</a></li>
                                         <li><a href="form_wizards.html">ক্রেতা বাকি</a></li>
                                     </ul>

@@ -42,7 +42,7 @@
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">দাম<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="price" required="required" />
+                            <input class="form-control" name="price" type="text" required="required" />
                         </div>
                         @error('price')
                             <span class="text-danger">{{ $message }}</span>

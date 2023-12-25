@@ -6,6 +6,7 @@ use App\Http\Controllers\CowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BranchController;
@@ -59,6 +60,13 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/cow/update', [CowController::class, 'update'])->name('cow.edit');
     Route::get('/get/cow/info/{id}', [CowController::class, 'cowInfo']);
     Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
+
+    // For Buyer Route
+    Route::get('/buyer/list', [BuyerController::class, 'index'])->name('buyer.list');
+    Route::get('/buyer/create', [BuyerController::class, 'create'])->name('buyer.us');
+    Route::post('/buyer/edit', [BuyerController::class, 'update'])->name('buyer.edit');
+    Route::post('/buyer/store', [BuyerController::class, 'store'])->name('buyer.store');
+    Route::get('/buyer/delete/{id}', [BuyerController::class, 'destroy']);
 
 
     // Logout Route
