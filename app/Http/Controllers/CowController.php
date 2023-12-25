@@ -34,6 +34,13 @@ class CowController extends Controller
         return view('cow.create_cow');
     }
 
+    public function sellCreate()
+    {
+        $cows = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('flag', '0')->get();
+
+        return view('cow.sell_cow', compact('cows'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -79,6 +86,13 @@ class CowController extends Controller
     public function show(Cow $cow)
     {
         //
+    }
+
+    public function cowInfo($id)
+    {
+        $cow = Cow::where('branch_id', session('branch_id'))->where('id', $id)->first();
+
+        return response()->json($cow);
     }
 
     /**

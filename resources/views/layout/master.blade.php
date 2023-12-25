@@ -98,6 +98,17 @@
                                 </li>
                                 {{-- HR Menu List --}}
 
+                                {{-- HR Menu List --}}
+                                <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্রেতা <span
+                                            class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('staff.us') }}">ক্রেতা যুক্ত</a></li>
+                                        <li><a href="form_advanced.html">ক্রেতা তালিকা</a></li>
+                                        <li><a href="form_wizards.html">ক্রেতা বাকি</a></li>
+                                    </ul>
+                                </li>
+                                {{-- HR Menu List --}}
+
                                 {{-- Beef Menu List --}}
                                 <li><a><i class="fa fa-desktop"></i> মাংস বিবরণী <span
                                             class="fa fa-chevron-down"></span></a>
@@ -128,7 +139,7 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('cow.create') }}">ক্রয়</a></li>
-                                        <li><a href="chartjs2.html">বিক্রয়</a></li>
+                                        <li><a href="{{ route('cow.sell') }}">বিক্রয়</a></li>
                                         <li><a href="morisjs.html">বাকী সংগ্রহ</a></li>
                                     </ul>
                                 </li>

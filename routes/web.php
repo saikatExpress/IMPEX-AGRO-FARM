@@ -54,8 +54,10 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     // For Cow Route
     Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');
     Route::get('/cow/create', [CowController::class, 'create'])->name('cow.create');
+    Route::get('/cow/sell', [CowController::class, 'sellCreate'])->name('cow.sell');
     Route::post('/cow/store', [CowController::class, 'store'])->name('cow.store');
     Route::post('/cow/update', [CowController::class, 'update'])->name('cow.edit');
+    Route::get('/get/cow/info/{id}', [CowController::class, 'cowInfo']);
     Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
 
 
