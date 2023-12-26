@@ -127,9 +127,9 @@
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">প্রাপ্ত মাংস</a></li>
-                                        <li><a href="media_gallery.html">মাংস বিক্রয়</a></li>
-                                        <li><a href="typography.html">বাকি সংগ্রহ</a></li>
+                                        <li><a href="{{ route('beef.create') }}">প্রাপ্ত মাংস</a></li>
+                                        <li><a href="{{ route('beef.sell') }}">মাংস বিক্রয়</a></li>
+                                        <li><a href="{{ route('sell.collect') }}">বাকি সংগ্রহ</a></li>
                                     </ul>
                                 </li>
                                 {{-- Beef Menu List --}}

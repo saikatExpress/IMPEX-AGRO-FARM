@@ -3,6 +3,10 @@
     <div class="row" style="display: inline-block;">
         <div class="tile_count">
 
+            <div class="welcome_text">
+                <h2>Welocme To {{ $branchName->branch_name . ' Branch'}}</h2>
+            </div>
+
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
@@ -61,7 +65,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Total Expense</h2>
-                        <p>{{ numberCountingFormat(7000) }}</p>
+                        <p>{{ numberCountingFormat(7000) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>
@@ -73,7 +77,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Today Sold Milk</h2>
-                        <p>{{ numberCountingFormat(120) }}</p>
+                        <p>{{ numberCountingFormat(120) . ' Ltr' }}</p>
                     </div>
                 </div>
             </div>
@@ -84,7 +88,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Today Beef</h2>
-                        <p>{{ numberCountingFormat(70) }}</p>
+                        <p>{{ numberCountingFormat($totalBeef) . ' Kg' }}</p>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CowController;
+use App\Http\Controllers\BeefController;
 use App\Http\Controllers\MilkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -51,6 +52,15 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     // For Staff Route
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.us');
     Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
+
+    //For Beef Route
+    Route::get('/beef/create', [BeefController::class, 'create'])->name('beef.create');
+    Route::post('/beef/store', [BeefController::class, 'store'])->name('beef.store');
+    Route::post('/beef/sell/count', [BeefController::class, 'beefSellCount'])->name('beef.sell_count');
+    Route::get('/beef/sell', [BeefController::class, 'beefSell'])->name('beef.sell');
+    Route::get('/beef/sell/list', [BeefController::class, 'sellListIndex'])->name('beef.sell_list');
+    Route::get('/beef/sell/collect', [BeefController::class, 'show'])->name('sell.collect');
+    Route::post('/sell/update', [BeefController::class, 'sellUpdate'])->name('sell.edit');
 
     // For Role Route
     Route::get('/role/list', [RoleController::class, 'index'])->name('role.list');

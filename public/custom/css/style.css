@@ -113,3 +113,14 @@ body {
 .branch_body {
     height: 400px;
 }
+
+.welcome_text{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.welcome_text h2{
+    font-weight: bold;
+    color: darkblue;
+    font-size: 2rem;
+}

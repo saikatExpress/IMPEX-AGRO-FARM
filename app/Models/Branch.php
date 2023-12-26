@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Models\Cow;
+use App\Models\Beef;
 use App\Models\Staff;
 use App\Models\Buyer;
 use App\Models\CowSell;
+use App\Models\BeefSell;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -56,5 +58,15 @@ class Branch extends Model
     public function cowSells()
     {
         return $this->hasMany(CowSell::class);
+    }
+
+    public function beefs()
+    {
+        return $this->hasMany(Beef::class);
+    }
+
+    public function beefSells()
+    {
+        return $this->hasMany(BeefSell::class);
     }
 }
