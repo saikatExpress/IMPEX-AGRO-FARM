@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Buyer;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Service\BalanceService;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,9 @@ class CowController extends Controller
      */
     public function create()
     {
-        return view('cow.create_cow');
+        $categories = Category::where('status', '1')->get();
+
+        return view('cow.create_cow', compact('categories'));
     }
 
     public function sellCreate()

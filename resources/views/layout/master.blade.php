@@ -108,7 +108,7 @@
                                 </li>
                                 {{-- HR Menu List --}}
 
-                                {{-- HR Menu List --}}
+                                {{-- Buyer Menu List --}}
                                 <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্রেতা <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -117,11 +117,15 @@
                                         <li><a href="form_wizards.html">ক্রেতা বাকি</a></li>
                                     </ul>
                                 </li>
-                                {{-- HR Menu List --}}
+                                {{-- Buyer Menu List --}}
 
                                 {{-- Beef Menu List --}}
-                                <li><a><i class="fa fa-desktop"></i> মাংস বিবরণী <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a>
+                                        <i class="fa fa-desktop"></i>
+                                        মাংস বিবরণী
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="general_elements.html">প্রাপ্ত মাংস</a></li>
                                         <li><a href="media_gallery.html">মাংস বিক্রয়</a></li>

@@ -54,8 +54,9 @@
                         <div class="col-md-6 col-sm-6">
                             <select name="type" id="" class="form-control">
                                 <option value="" selected disabled>select</option>
-                                <option value="cow">Cow</option>
-                                <option value="bull">Bull</option>
+                                @foreach ($categories as $key => $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('type')
