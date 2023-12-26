@@ -85,6 +85,16 @@
                                     </ul>
                                 </li>
 
+                                {{-- Category Menu List --}}
+                                <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্যাটাগরি <span
+                                            class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('category.create') }}">ক্যাটাগরি যুক্ত</a></li>
+                                        <li><a href="{{ route('category.list') }}">ক্যাটাগরি তালিকা</a></li>
+                                    </ul>
+                                </li>
+                                {{-- Category Menu List --}}
+
                                 {{-- HR Menu List --}}
                                 <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> মানব সম্পদ <span
                                             class="fa fa-chevron-down"></span></a>

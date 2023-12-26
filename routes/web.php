@@ -11,6 +11,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,13 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     //User Route
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+
+    // For Category Route
+    Route::get('/catgeory/list', [CategoryController::class, 'index'])->name('category.list');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::post('/category/update', [CategoryController::class, 'update'])->name('category.edit');
+    Route::get('/category/delete/{id}', [CategoryController::class, 'destroy']);
 
     // For Branch Route
     Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create');
@@ -71,7 +79,6 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/buyer/edit', [BuyerController::class, 'update'])->name('buyer.edit');
     Route::post('/buyer/store', [BuyerController::class, 'store'])->name('buyer.store');
     Route::get('/buyer/delete/{id}', [BuyerController::class, 'destroy']);
-
 
     // Logout Route
     Route::get('/logout', [AuthController::class, 'logout']);
