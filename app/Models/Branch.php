@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cow;
+use App\Models\Cost;
 use App\Models\Beef;
 use App\Models\Staff;
 use App\Models\Buyer;
@@ -68,5 +69,10 @@ class Branch extends Model
     public function beefSells()
     {
         return $this->hasMany(BeefSell::class);
+    }
+
+    public function costs()
+    {
+        return $this->hasMany(Cost::class);
     }
 }

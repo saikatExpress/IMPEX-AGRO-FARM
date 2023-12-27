@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,4 +25,10 @@ class Expense extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    //Relation Start
+    public function costs()
+    {
+        return $this->hasMany(Cost::class);
+    }
 }

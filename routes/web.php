@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\CostController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CategoryController;
@@ -81,6 +82,11 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/expense/store', [ExpenseController::class, 'store'])->name('expense.store');
     Route::post('/expense/edit', [ExpenseController::class, 'update'])->name('expense.edit');
     Route::get('/expense/delete/{id}', [ExpenseController::class, 'destroy']);
+
+    // For Cost Route
+    Route::get('/cost/list', [CostController::class, 'index'])->name('cost.list');
+    Route::get('/cost/create', [CostController::class, 'create'])->name('cost.create');
+    Route::post('/cost/store', [CostController::class, 'store'])->name('cost.store');
 
     // For Cow Route
     Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');

@@ -162,7 +162,7 @@
                                 <li><a><i class="fa fa-clone"></i>ফার্মের খরচ <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="fixed_sidebar.html">খরচের তালিকা</a></li>
+                                        <li><a href="{{ route('cost.list') }}">খরচের তালিকা</a></li>
                                         <li><a href="{{ route('expense.type') }}"> খরচের ধরণ </a></li>
                                     </ul>
                                 </li>
