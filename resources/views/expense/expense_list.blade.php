@@ -5,7 +5,7 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <a class="btn btn-sm btn-primary" href="{{ route('category.create') }}">Add Category</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('expense.type') }}">Add Expense</a>
                 </div>
             </div>
 
@@ -18,7 +18,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h2>Category List</h2>
+                    <h2>Expense List</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link">
@@ -59,12 +59,12 @@
 
                                     <tbody>
 
-                                        @if (count($categories) > 0)
-                                            @foreach ($categories as $key => $category)
+                                        @if (count($expenses) > 0)
+                                            @foreach ($expenses as $key => $expense)
                                                 <tr class="list-item">
-                                                    <td>{{ ucfirst($category->name) }}</td>
+                                                    <td>{{ ucfirst($expense->name) }}</td>
                                                     <td>
-                                                        @if ($category->status == '1')
+                                                        @if ($expense->status == '1')
                                                             Active
                                                         @else
                                                             Deactive
@@ -72,10 +72,10 @@
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary editBtn" data-toggle="modal" data-target="#myModal"
-                                                        data-id="{{ $category->id }}" data-name="{{ $category->name }}" data-status="{{ $category->status }}">
+                                                        data-id="{{ $expense->id }}" data-name="{{ $expense->name }}" data-status="{{ $expense->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $category->id }}">
+                                                        <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $expense->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -109,9 +109,9 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                <form class="" action="{{ route('category.edit') }}" method="post" novalidate>
+                <form class="" action="{{ route('expense.edit') }}" method="post" novalidate>
                     @csrf
-                    <input type="hidden" name="category_id">
+                    <input type="hidden" name="expense_id">
 
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
@@ -160,7 +160,7 @@
     <script>
         $(document).ready(function() {
             $('.deleteButton').click(function() {
-                var categoryId = $(this).data('id');
+                var expenseId = $(this).data('id');
                 var listItem = $(this).closest(
                     '.list-item'); // Adjust the selector based on your HTML structure
 
@@ -178,7 +178,7 @@
                         // If the user confirms, send an AJAX request to delete the pigeon
                         $.ajax({
                             type: 'GET',
-                            url: '/category/delete/' + categoryId,
+                            url: '/expense/delete/' + expenseId,
                             success: function(response) {
                                 // Remove the deleted item from the DOM
                                 listItem.remove();
@@ -217,16 +217,16 @@
     <script>
         $(document).ready(function(){
             $('.editBtn').click(function(){
-                const categoryData = {
+                const expesneData = {
                     id: $(this).data('id'),
                     name: $(this).data('name'),
                     status: $(this).data('status'),
                 };
 
                 // Set values to form fields
-                $('input[name="category_id"]').val(categoryData.id);
-                $('input[name="name"]').val(categoryData.name);
-                $('select[name="status"]').val(categoryData.status);
+                $('input[name="expense_id"]').val(expesneData.id);
+                $('input[name="name"]').val(expesneData.name);
+                $('select[name="status"]').val(expesneData.status);
 
                 // Open the modal
                 $('#myModal').modal('show');

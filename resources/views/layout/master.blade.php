@@ -163,7 +163,7 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="fixed_sidebar.html">খরচের তালিকা</a></li>
-                                        <li><a href="fixed_footer.html"> খরচের ধরণ </a></li>
+                                        <li><a href="{{ route('expense.type') }}"> খরচের ধরণ </a></li>
                                     </ul>
                                 </li>
                             </ul>

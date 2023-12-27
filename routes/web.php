@@ -12,6 +12,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,15 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/role/delete/{id}', [RoleController::class, 'destroy']);
     Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions');
 
+    // For Milk Route
     Route::get('/milk/create', [MilkController::class, 'create'])->name('milk.create');
+
+    // For Expense Route
+    Route::get('/expense/list', [ExpenseController::class, 'index'])->name('expense.list');
+    Route::get('/expense/type', [ExpenseController::class, 'expenseType'])->name('expense.type');
+    Route::post('/expense/store', [ExpenseController::class, 'store'])->name('expense.store');
+    Route::post('/expense/edit', [ExpenseController::class, 'update'])->name('expense.edit');
+    Route::get('/expense/delete/{id}', [ExpenseController::class, 'destroy']);
 
     // For Cow Route
     Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');
