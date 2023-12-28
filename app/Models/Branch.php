@@ -8,6 +8,7 @@ use App\Models\Beef;
 use App\Models\Staff;
 use App\Models\Buyer;
 use App\Models\CowSell;
+use App\Models\Invoice;
 use App\Models\BeefSell;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -74,5 +75,10 @@ class Branch extends Model
     public function costs()
     {
         return $this->hasMany(Cost::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 }

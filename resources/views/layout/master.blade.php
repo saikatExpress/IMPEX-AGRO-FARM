@@ -137,6 +137,20 @@
                                 </li>
                                 {{-- Beef Menu List --}}
 
+                                {{-- Invoice Menu List --}}
+                                <li>
+                                    <a>
+                                        <i class="fa fa-desktop"></i>
+                                        ইনভয়েস
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('invoice.create') }}">নতুন ইনভয়েস</a></li>
+                                        <li><a href="{{ route('beef.sell') }}"> ইনভয়েস তালিকা </a></li>
+                                    </ul>
+                                </li>
+                                {{-- Invoice Menu List --}}
+
                                 {{-- Milk Menu List --}}
                                 <li><a><i class="fa fa-table"></i> দুধ বিবরণী <span
                                             class="fa fa-chevron-down"></span></a>

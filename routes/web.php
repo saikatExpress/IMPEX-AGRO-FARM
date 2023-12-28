@@ -13,6 +13,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CategoryController;
@@ -105,6 +106,9 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/cow/sell/collect', [CowController::class, 'sellCollect'])->name('cow_sell.collect');
     Route::get('/get/cow/info/{id}', [CowController::class, 'cowInfo']);
     Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
+
+    // For Invoice Controller
+    Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
 
     // For Buyer Route
     Route::get('/buyer/list', [BuyerController::class, 'index'])->name('buyer.list');

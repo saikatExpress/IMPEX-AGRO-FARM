@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beefs', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('branch_id')->constrained('branches')
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();
-            $table->timestamp('date')->nullable();
-            $table->string('cow_id', 100)->nullable();
-            $table->string('total_beef', 100)->nullable();
+            $table->integer('invoice_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('beefs');
+        Schema::dropIfExists('invoices');
     }
 };

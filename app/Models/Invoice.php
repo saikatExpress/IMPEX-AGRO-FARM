@@ -6,31 +6,27 @@ use App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Beef extends Model
+class Invoice extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'branch_id',
-        'date',
-        'cow_id',
-        'total_beef',
+        'invoice_id',
     ];
 
     protected $casts = [
         'id'         => 'integer',
         'branch_id'  => 'integer',
-        'date'       => 'datetime',
-        'cow_id'     => 'string',
-        'total_beef' => 'string',
+        'invoice_id' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
 
-    //Relation Start
+    // Relation Start
     public function branch()
     {
-        return $this->belongsTo(Branch::class, 'branch_id', 'id');
+        return $this->belongsTo(Branch::class,'branch_id', 'id');
     }
 }

@@ -75,6 +75,16 @@
                             @enderror
                         </div>
 
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea name="description" id="" cols="10" rows="5" class="form-control"></textarea>
+                            </div>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="ln_solid">
                             <div class="form-group">
                                 <div class="col-md-6 offset-md-3">
