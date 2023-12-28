@@ -1,5 +1,21 @@
 @extends('layout.master')
 @section('content')
+
+    <div class="row">
+        <div class="col-2">
+            <select name="" class="form-control language_switcher" id="">
+            <option value="">{{ Config::get('language')[App::getLocale()] }}</option>
+            @foreach (Config::get('language') as $lang => $language)
+                @if ($lang != App::getLocale())
+                    <option value="{{ $lang }}">
+                        <a href="">{{ $language }}</a>
+                    </option>
+                @endif
+            @endforeach
+        </select>
+        </div>
+    </div>
+
     <div class="row" style="display: inline-block;">
         <div class="tile_count">
 
@@ -13,7 +29,7 @@
                         <img src="{{ asset('custom/logos/dd-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Total Staff</h2>
+                        <h2>{{ __('translate.staffs') }}</h2>
                         <p>{{ numberCountingFormat(7) }}</p>
                     </div>
                 </div>
@@ -106,4 +122,34 @@
             </div>
         </div>
     </div>
+
+    <!-- jQuery Slim CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+
+    <script>
+        $("body").on('change', '.language_switcher', function(event){
+            event.preventDefault();
+            var lang = $(this).val();
+            var url = "{{ route('lang.switch', ':lang') }}"
+            url = url.replace(':lang', lang);
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function(response) {
+                    if (response.success) {
+                        console.log("Language changed successfully", response);
+                        window.location.reload();
+                    } else {
+                        console.log("Language change failed", response.message);
+                        window.location.reload();
+                    }
+                },
+                error: function(error) {
+                    console.log("Error changing language", error);
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
 @endsection

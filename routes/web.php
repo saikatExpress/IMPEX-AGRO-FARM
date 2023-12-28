@@ -8,12 +8,13 @@ use App\Http\Controllers\MilkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CostController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\CostController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +105,9 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/buyer/edit', [BuyerController::class, 'update'])->name('buyer.edit');
     Route::post('/buyer/store', [BuyerController::class, 'store'])->name('buyer.store');
     Route::get('/buyer/delete/{id}', [BuyerController::class, 'destroy']);
+
+    // For Languge Route
+    Route::get('lang/{lang}', [LanguageController::class, 'languageChange'])->name('lang.switch');
 
     // Logout Route
     Route::get('/logout', [AuthController::class, 'logout']);
