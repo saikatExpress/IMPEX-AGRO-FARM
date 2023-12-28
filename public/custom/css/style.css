@@ -124,3 +124,9 @@ body {
     color: darkblue;
     font-size: 2rem;
 }
+
+.staff-image{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}

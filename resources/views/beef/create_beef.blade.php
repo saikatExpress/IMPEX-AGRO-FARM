@@ -41,6 +41,16 @@
                         <span class="section">Beef Info</span>
 
                         <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">তারিখ<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="date" type="date" required="required" />
+                            </div>
+                            @error('date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">গরু<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <select multiple class="form-control chosen-select" name="cow_id[]">

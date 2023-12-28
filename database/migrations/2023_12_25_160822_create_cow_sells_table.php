@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('cow_sells', function (Blueprint $table) {
             $table->id();
             $table->foreignId('branch_id')->constrained('branches')
-                ->onUpdate('cascade')->onDelete()->nullable();
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->foreignId('cow_id')->constrained('cows')
-                ->onUpdate('cascade')->onDelete()->nullable();
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->foreignId('buyer_id')->constrained('buyers')
-                ->onUpdate('cascade')->onDelete()->nullable();
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->integer('price')->nullable();
             $table->integer('payment')->nullable();
             $table->integer('due')->nullable();

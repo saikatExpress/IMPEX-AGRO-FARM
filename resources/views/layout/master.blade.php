@@ -100,7 +100,7 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('staff.us') }}">স্টাফ যুক্ত</a></li>
-                                        <li><a href="form_advanced.html">স্টাফ তালিকা</a></li>
+                                        <li><a href="{{ route('staff.list') }}">স্টাফ তালিকা</a></li>
                                         <li><a href="form_validation.html">ব্যাবহারকারীদের তালিকা</a></li>
                                         <li><a href="{{ route('user.create') }}">ব্যাবহারকারী যুক্ত</a></li>
                                         <li><a href="form_wizards.html">স্টাফ বেতন</a></li>
@@ -109,11 +109,14 @@
                                 {{-- HR Menu List --}}
 
                                 {{-- Buyer Menu List --}}
-                                <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্রেতা <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a>
+                                        <i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্রেতা
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('buyer.us') }}">ক্রেতা যুক্ত</a></li>
-                                        <li><a href="form_advanced.html">ক্রেতা তালিকা</a></li>
+                                        <li><a href="{{ route('buyer.list') }}">ক্রেতা তালিকা</a></li>
                                         <li><a href="form_wizards.html">ক্রেতা বাকি</a></li>
                                     </ul>
                                 </li>
@@ -258,7 +261,7 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('asset/images/img.jpg') }}" alt="">Palash Saha
+                                    <img src="{{ asset('asset/images/img.jpg') }}" alt="">{{ auth()->user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">

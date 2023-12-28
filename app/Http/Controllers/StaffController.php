@@ -21,7 +21,9 @@ class StaffController extends Controller
      */
     public function index()
     {
-        //
+        $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
+
+        return view('staff.staff_list', compact('staffs'));
     }
 
     /**

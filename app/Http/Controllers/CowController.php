@@ -24,7 +24,7 @@ class CowController extends Controller
      */
     public function index()
     {
-        $cows = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
+        $cows = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->latest()->get();
 
         return view('cow.cow_list', compact('cows'));
     }
@@ -42,7 +42,7 @@ class CowController extends Controller
     public function sellCreate()
     {
         $cows   = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('flag', '0')->get();
-        $buyers = Buyer::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('status', '1')->get();
+        $buyers = Buyer::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('status', '1')->latest()->get();
 
         return view('cow.sell_cow', compact('cows', 'buyers'));
     }
@@ -71,14 +71,12 @@ class CowController extends Controller
             $payment    = $request->input('payment');
             $buyerId    = $request->input('buyer_id');
 
-            $due = $price - $payment;
-
             $cowSellObj->branch_id   = session('branch_id');
             $cowSellObj->cow_id      = $request->input('cow_id');
             $cowSellObj->buyer_id    = $buyerId;
             $cowSellObj->price       = $price;
             $cowSellObj->payment     = $payment;
-            $cowSellObj->due         = ($due > 0) ? $due : 0;
+            $cowSellObj->due         = $request->input('due');
             $cowSellObj->sell_date   = $request->input('sell_date');
             $cowSellObj->description = $request->input('description');
             $cowSellObj->status      = $request->input('status');

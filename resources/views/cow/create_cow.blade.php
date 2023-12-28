@@ -17,7 +17,7 @@
 
         <div class="x_panel">
             <div class="x_title">
-                <h2>This cow save in <small>branch {{ session('branch_id') }}</small></h2>
+                <h2>This cow save in <small style="font-weight: bold; color:#000;">Branch : {{ session('branch_id') }}</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>

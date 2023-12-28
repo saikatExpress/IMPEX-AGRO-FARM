@@ -27,6 +27,10 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+Route::get('/link', function () {
+    Artisan::call('storage:link');
+});
+
 Route::get('/', [AuthController::class, 'create'])->name('login.us');
 Route::post('login/store', [AuthController::class, 'store'])->name('login.store');
 
@@ -53,6 +57,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/branch/store', [BranchController::class, 'store'])->name('branch.store');
 
     // For Staff Route
+    Route::get('/staff/list', [StaffController::class, 'index'])->name('staff.list');
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.us');
     Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
 
