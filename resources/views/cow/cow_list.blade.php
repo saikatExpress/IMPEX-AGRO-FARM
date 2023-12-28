@@ -65,6 +65,7 @@
                                             <th>Weight</th>
                                             <th>Color</th>
                                             <th>Buy date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -88,6 +89,17 @@
                                                     <td>{{ $cow->weight . ' kg' }}</td>
                                                     <td>{{ ucfirst($cow->color) }}</td>
                                                     <td>{{ dateTimeFormat($cow->buy_date) }}</td>
+                                                    <td>
+                                                        @if ($cow->flag == '1')
+                                                            <label for="" class="btn btn-sm btn-warning">
+                                                                Sold
+                                                            </label>
+                                                        @else
+                                                            <label for="" class="btn btn-sm btn-primary">
+                                                                Stock
+                                                            </label>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
                                                             data-target="#myModal" data-id="{{ $cow->id }}"

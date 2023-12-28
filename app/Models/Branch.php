@@ -7,6 +7,7 @@ use App\Models\Cost;
 use App\Models\Beef;
 use App\Models\Staff;
 use App\Models\Buyer;
+use App\Models\Income;
 use App\Models\CowSell;
 use App\Models\Account;
 use App\Models\Invoice;
@@ -86,5 +87,10 @@ class Branch extends Model
     public function accounts()
     {
         return $this->hasMany(Account::class);
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class);
     }
 }

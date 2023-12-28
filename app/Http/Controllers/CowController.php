@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Buyer;
 use App\Models\CowSell;
+use App\Models\Income;
 use App\Models\Expense;
 use App\Models\Account;
 use App\Models\Category;
@@ -93,8 +94,11 @@ class CowController extends Controller
 
             DB::commit();
             if($res){
+                $lastInsertedId    = $cowSellObj->id;
+                $this->incomeBalanceUpdate($lastInsertedId, $payment, $due);
                 if($due >= 0){
                     $balanceServiceObj = new BalanceService;
+
                     $this->cowFlagUpdate($cowId);
                     $balanceServiceObj->balanceUpdate($buyerId, $due);
                 }
@@ -111,6 +115,22 @@ class CowController extends Controller
         $cow = Cow::find($id);
         if($cow){
             $cow->update(['flag' => '1']);
+        }
+    }
+
+    public function incomeBalanceUpdate($lastInsertedId, $payment, $due)
+    {
+        $incomeObj = new Income;
+
+        $incomeObj->branch_id = session('branch_id');
+        $incomeObj->sell_id   = $lastInsertedId;
+        $incomeObj->amount    = $payment;
+        $incomeObj->due       = $due;
+
+        $res = $incomeObj->save();
+
+        if($res){
+            return true;
         }
     }
 

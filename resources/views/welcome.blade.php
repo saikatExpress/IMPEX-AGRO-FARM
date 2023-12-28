@@ -80,7 +80,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>মোট আয়</h2>
-                        <p>{{ numberCountingFormat(0) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($incomes) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>
@@ -117,6 +117,18 @@
                     <div class="dashboard_item">
                         <h2>মোট খরচ</h2>
                         <p>{{ numberCountingFormat($totalCost) . ' Tk' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4  tile_stats_count">
+                <div class="d-flex custom-col">
+                    <div class="dashboard_menu">
+                        <img src="https://cdn-icons-png.flaticon.com/128/10761/10761983.png" alt="cow image">
+                    </div>
+                    <div class="dashboard_item">
+                        <h2>মোট বাকি</h2>
+                        <p>{{ numberCountingFormat($dues) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>
