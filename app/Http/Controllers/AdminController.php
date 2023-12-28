@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Cost;
+use App\Models\Staff;
 use App\Models\Beef;
 use App\Models\Branch;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class AdminController extends Controller
 
         $permanetCost = Cost::where('branch_id', session('branch_id'))->where('expense_type', 2)->sum('cost_amount');
 
-        return view('welcome', compact('cows', 'totalBeef', 'branchName', 'permanetCost'));
+        $staffs = Staff::where('branch_id', session('branch_id'))->where('status', 1)->count();
+
+        return view('welcome', compact('cows', 'totalBeef', 'branchName', 'permanetCost', 'staffs'));
     }
 
     protected function beefCount($beefsForToday)

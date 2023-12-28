@@ -29,7 +29,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>{{ __('translate.staffs') }}</h2>
-                        <p>{{ numberCountingFormat(7) }}</p>
+                        <p>{{ numberCountingFormat($staffs) }}</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Total Calf</h2>
-                        <p>{{ numberCountingFormat(7) }}</p>
+                        <p>{{ numberCountingFormat(0) }}</p>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Total Sold Milk</h2>
-                        <p>{{ numberCountingFormat(1023) }}</p>
+                        <p>{{ numberCountingFormat(0) . ' Ltr' }}</p>
                     </div>
                 </div>
             </div>
@@ -79,8 +79,8 @@
                         <img src="{{ asset('custom/logos/expense.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Total Expense</h2>
-                        <p>{{ numberCountingFormat(7000) . ' Tk' }}</p>
+                        <h2>মোট আয়</h2>
+                        <p>{{ numberCountingFormat(0) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,19 @@
                         <img src="{{ asset('custom/logos/expense.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Permanent Cost</h2>
+                        <h2>ফার্ম খরচ</h2>
+                        <p>{{ numberCountingFormat(0) . ' Tk' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4  tile_stats_count">
+                <div class="d-flex custom-col">
+                    <div class="dashboard_menu">
+                        <img src="{{ asset('custom/logos/expense.png') }}" alt="cow image">
+                    </div>
+                    <div class="dashboard_item">
+                        <h2>স্থায়ী খরচ</h2>
                         <p>{{ numberCountingFormat($permanetCost) . ' Tk' }}</p>
                     </div>
                 </div>
@@ -104,7 +116,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Today Sold Milk</h2>
-                        <p>{{ numberCountingFormat(120) . ' Ltr' }}</p>
+                        <p>{{ numberCountingFormat(0) . ' Ltr' }}</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +126,7 @@
                         <img src="{{ asset('custom/logos/beef-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Today Beef</h2>
+                        <h2>আজকের গোশত</h2>
                         <p>{{ numberCountingFormat($totalBeef) . ' Kg' }}</p>
                     </div>
                 </div>
@@ -126,8 +138,8 @@
                         <img src="{{ asset('custom/logos/ezgif-2-a0ef486006-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Today Collected</h2>
-                        <p>{{ numberCountingFormat(80) }}</p>
+                        <h2>আজকের আয়</h2>
+                        <p>{{ numberCountingFormat(0) }}</p>
                     </div>
                 </div>
             </div>

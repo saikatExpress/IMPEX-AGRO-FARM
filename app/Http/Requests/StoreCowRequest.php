@@ -22,15 +22,15 @@ class StoreCowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price'     => ['required', 'integer'],
-            'type'      => ['required'],
-            'tag'       => ['required'],
-            'caste'     => ['required'],
-            'weight'    => ['required'],
-            'transport' => ['required'],
-            'hasil'     => ['required'],
-            'color'     => ['required'],
-            'buy_date'  => ['required'],
+            'price'       => ['required', 'integer'],
+            'category_id' => ['required'],
+            'tag'         => ['required'],
+            'caste'       => ['required'],
+            'weight'      => ['required'],
+            'transport'   => ['required'],
+            'hasil'       => ['required'],
+            'color'       => ['required'],
+            'buy_date'    => ['required'],
         ];
     }
 }

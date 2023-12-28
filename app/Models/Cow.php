@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Branch;
 use App\Models\CowSell;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,12 +15,13 @@ class Cow extends Model
     protected $fillable = [
         'branch_id',
         'price',
-        'type',
+        'category_id',
         'tag',
         'caste',
         'weight',
         'transport',
         'hasil',
+        'total',
         'color',
         'buy_date',
         'age',
@@ -32,12 +34,13 @@ class Cow extends Model
         'id'          => 'integer',
         'branch_id'   => 'integer',
         'price'       => 'integer',
-        'type'        => 'string',
+        'category_id' => 'integer',
         'tag'         => 'string',
         'caste'       => 'string',
         'weight'      => 'string',
         'transport'   => 'integer',
         'hasil'       => 'integer',
+        'total'       => 'integer',
         'color'       => 'string',
         'buy_date'    => 'datetime',
         'age'         => 'string',
@@ -58,5 +61,10 @@ class Cow extends Model
     public function cowSells()
     {
         return $this->hasMany(CowSell::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Buyer;
 use App\Models\CowSell;
+use App\Models\Expense;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Service\BalanceService;
@@ -36,8 +37,9 @@ class CowController extends Controller
     public function create()
     {
         $categories = Category::where('status', '1')->get();
+        $expenseType = Expense::all();
 
-        return view('cow.create_cow', compact('categories'));
+        return view('cow.create_cow', compact('categories', 'expenseType'));
     }
 
     public function sellCreate()
@@ -120,14 +122,21 @@ class CowController extends Controller
 
             $cowObj = new Cow;
 
+            $price     = $request->input('price');
+            $transport = $request->input('transport');
+            $hasil     = $request->input('hasil');
+
+            $total = $price + $total + $price;
+
             $cowObj->branch_id   = session('branch_id');
-            $cowObj->price       = $request->input('price');
-            $cowObj->type        = $request->input('type');
+            $cowObj->price       = $price;
+            $cowObj->category_id = $request->input('category_id');
             $cowObj->tag         = $request->input('tag');
             $cowObj->caste       = $request->input('caste');
             $cowObj->weight      = $request->input('weight');
-            $cowObj->transport   = $request->input('transport');
-            $cowObj->hasil       = $request->input('hasil');
+            $cowObj->transport   = $transport;
+            $cowObj->hasil       = $hasil;
+            $cowObj->total       = $total;
             $cowObj->color       = $request->input('color');
             $cowObj->buy_date    = $request->input('buy_date');
             $cowObj->age         = $request->input('age');

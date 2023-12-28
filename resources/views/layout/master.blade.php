@@ -86,8 +86,12 @@
                                 </li>
 
                                 {{-- Category Menu List --}}
-                                <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্যাটাগরি <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a>
+                                        <i style="margin-right:8px;" class="fa-solid fa-list"></i>
+                                        ক্যাটাগরি
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('category.create') }}">ক্যাটাগরি যুক্ত</a></li>
                                         <li><a href="{{ route('category.list') }}">ক্যাটাগরি তালিকা</a></li>
@@ -96,8 +100,8 @@
                                 {{-- Category Menu List --}}
 
                                 {{-- HR Menu List --}}
-                                <li><a><i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> মানব সম্পদ <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li><a><i style="font-size: 1.2rem; margin-right:8px;" class="fa-solid fa-user"></i>
+                                        মানব সম্পদ <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('staff.us') }}">স্টাফ যুক্ত</a></li>
                                         <li><a href="{{ route('staff.list') }}">স্টাফ তালিকা</a></li>
@@ -111,7 +115,7 @@
                                 {{-- Buyer Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-user"></i> ক্রেতা
+                                        <i style="margin-right:8px;" class="fa-solid fa-money-check"></i> ক্রেতা
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
                                     <ul class="nav child_menu">
@@ -125,7 +129,7 @@
                                 {{-- Beef Menu List --}}
                                 <li>
                                     <a>
-                                        <i class="fa fa-desktop"></i>
+                                        <i style="margin-right:8px;" class="fa-solid fa-hippo"></i>
                                         মাংস বিবরণী
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -140,7 +144,7 @@
                                 {{-- Invoice Menu List --}}
                                 <li>
                                     <a>
-                                        <i class="fa-solid fa-file-invoice"></i>
+                                        <i style="margin-right:8px;" class="fa-solid fa-file-invoice"></i>
                                         ইনভয়েস
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -162,12 +166,17 @@
                                 </li>
                                 {{-- Milk Menu List --}}
 
-                                <li><a href=""> <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                <li><a href=""> <i style="font-size: 1.2rem;"
+                                            class="fa-solid fa-bowl-food"></i>
                                         পশু খাদ্য</a></li>
 
                                 {{-- Animal Sell Menu List --}}
-                                <li><a><i class="fa fa-bar-chart-o"></i> পশু ক্রয়/বিক্রয় <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a>
+                                        <i style="margin-right:8px;" class="fa-brands fa-sellcast"></i> পশু
+                                        ক্রয়/বিক্রয়
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('cow.create') }}">ক্রয়</a></li>
                                         <li><a href="{{ route('cow.sell') }}">বিক্রয়</a></li>
@@ -176,8 +185,11 @@
                                 </li>
                                 {{-- Animal Sell Menu List --}}
 
-                                <li><a><i class="fa fa-clone"></i>ফার্মের খরচ <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a><i style="margin-right:8px;"
+                                            class="fa-solid fa-circle-dollar-to-slot"></i>ফার্মের খরচ
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('cost.list') }}">খরচের তালিকা</a></li>
                                         <li><a href="{{ route('expense.type') }}"> খরচের ধরণ </a></li>
@@ -275,7 +287,8 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('asset/images/img.jpg') }}" alt="">{{ auth()->user()->name }}
+                                    <img src="{{ asset('asset/images/img.jpg') }}"
+                                        alt="">{{ auth()->user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">

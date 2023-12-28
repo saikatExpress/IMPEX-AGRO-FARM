@@ -16,12 +16,14 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained('branches')
                 ->onUpdate('cascade')->onUpdate('cascade')->nullable();
             $table->integer('price')->nullable();
-            $table->string('type', 20)->nullable();
+            $table->foreignId('category_id')->constrained('categories')
+                    ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->string('tag', 200)->nullable();
             $table->string('caste', 200)->nullable();
             $table->string('weight', 200)->nullable();
             $table->integer('transport')->nullable();
             $table->integer('hasil')->nullable();
+            $table->integer('total')->nullable();
             $table->string('color', 200)->nullable();
             $table->timestamp('buy_date')->nullable();
             $table->string('age', 100)->nullable();

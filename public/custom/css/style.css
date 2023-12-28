@@ -45,6 +45,11 @@ body {
     height: 75px;
 }
 
+.dashboard_item h2 {
+    font-weight: bold;
+    color: #000;
+}
+
 .custom-col {
     background-color: #fff;
     padding: 5px;
@@ -114,18 +119,18 @@ body {
     height: 400px;
 }
 
-.welcome_text{
+.welcome_text {
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
 
-.welcome_text h2{
+.welcome_text h2 {
     font-weight: bold;
     color: darkblue;
     font-size: 2rem;
 }
 
-.staff-image{
+.staff-image {
     width: 70px;
     height: 70px;
     border-radius: 50%;
