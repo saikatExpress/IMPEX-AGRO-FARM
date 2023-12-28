@@ -89,6 +89,18 @@
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
+                        <img src="{{ asset('custom/logos/expense.png') }}" alt="cow image">
+                    </div>
+                    <div class="dashboard_item">
+                        <h2>Permanent Cost</h2>
+                        <p>{{ numberCountingFormat($permanetCost) . ' Tk' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4  tile_stats_count">
+                <div class="d-flex custom-col">
+                    <div class="dashboard_menu">
                         <img src="{{ asset('custom/logos/ezgif-2-e34d9fb6d1-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
