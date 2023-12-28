@@ -140,7 +140,7 @@
                                 {{-- Invoice Menu List --}}
                                 <li>
                                     <a>
-                                        <i class="fa fa-desktop"></i>
+                                        <i class="fa-solid fa-file-invoice"></i>
                                         ইনভয়েস
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
