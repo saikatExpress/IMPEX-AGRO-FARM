@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-2">
             <select name="" class="form-control language_switcher" id="">
                 <option value="">{{ Config::get('language')[App::getLocale()] }}</option>
@@ -13,7 +13,7 @@
                 @endforeach
             </select>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row" style="display: inline-block;">
         <div class="tile_count">
@@ -92,7 +92,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>ফার্ম খরচ</h2>
-                        <p>{{ numberCountingFormat(0) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($farmCosts + $farm1Cost) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cost;
+use App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,11 @@ class Expense extends Model
 
     //Relation Start
     public function costs()
+    {
+        return $this->hasMany(Cost::class);
+    }
+
+    public function accounts()
     {
         return $this->hasMany(Cost::class);
     }

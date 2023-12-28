@@ -8,6 +8,7 @@ use App\Models\Beef;
 use App\Models\Staff;
 use App\Models\Buyer;
 use App\Models\CowSell;
+use App\Models\Account;
 use App\Models\Invoice;
 use App\Models\BeefSell;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -80,5 +81,10 @@ class Branch extends Model
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
     }
 }

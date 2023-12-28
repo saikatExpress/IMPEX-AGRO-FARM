@@ -26,7 +26,8 @@
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -73,11 +74,17 @@
                                                     <td>{{ number_format($cost->cost_amount, 2) }}</td>
                                                     <td>{{ $cost->description }}</td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal" data-target="#myModal"
-                                                        data-id="{{ $cost->id }}" data-name="{{ $cost->name }}" data-status="{{ $cost->status }}">
+                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
+                                                            data-target="#myModal" data-id="{{ $cost->id }}"
+                                                            data-amount="{{ $cost->cost_amount }}"
+                                                            data-name="{{ $cost->name }}"
+                                                            data-description="{{ $cost->description }}"
+                                                            data-type="{{ $cost->expense_type }}"
+                                                            data-status="{{ $cost->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $cost->id }}">
+                                                        <button class="btn btn-sm btn-danger deleteButton"
+                                                            data-id="{{ $cost->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -103,53 +110,91 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Info</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
+                <!-- Modal body -->
+                <div class="modal-body">
 
-                <form class="" action="{{ route('category.edit') }}" method="post" novalidate>
-                    @csrf
-                    <input type="hidden" name="category_id">
-
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="name" type="text" required="required" />
+                    <form class="" action="{{ route('cost.edit') }}" method="post" novalidate>
+                        @csrf
+                        <span class="section">Cost Info</span>
+                        <input type="hidden" name="cost_id">
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">খরচ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="name" type="text" required="required" />
+                            </div>
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <select name="status" id="" class="form-control">
-                                <option value="" selected disabled>select</option>
-                                <option value="1">Active</option>
-                                <option value="0">Deactive</option>
-                            </select>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">খরচের ধরণ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="expense_type" class="form-control" id="">
+                                    <option value="" disabled selected>Select</option>
+                                    @foreach ($expenses as $key => $expense)
+                                        <option value="{{ $expense->id }}">{{ $expense->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('expense_type')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="ln_solid">
-                        <div class="form-group">
-                            <div class="col-md-6 offset-md-3">
-                                <button type='submit' class="btn btn-primary">Update</button>
-                                <button type='reset' class="btn btn-success">Reset</button>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">খরচের পরিমাণ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="cost_amount" placeholder="in taka *" type="text"
+                                    required="required" />
+                            </div>
+                            @error('cost_amount')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">তারিখ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="cost_date" type="date" required="required" />
+                            </div>
+                            @error('cost_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea name="description" class="form-control" id="" cols="10" rows="5"
+                                    required="required"></textarea>
+                            </div>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Update</button>
+                                    <button type='reset' class="btn btn-success">Reset</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-            </div>
+                </div>
 
             </div>
         </div>
@@ -217,18 +262,22 @@
     </script>
 
     <script>
-        $(document).ready(function(){
-            $('.editBtn').click(function(){
-                const categoryData = {
+        $(document).ready(function() {
+            $('.editBtn').click(function() {
+                const costData = {
                     id: $(this).data('id'),
                     name: $(this).data('name'),
-                    status: $(this).data('status'),
+                    amount: $(this).data('amount'),
+                    type: $(this).data('type'),
+                    description: $(this).data('description'),
                 };
 
                 // Set values to form fields
-                $('input[name="category_id"]').val(categoryData.id);
-                $('input[name="name"]').val(categoryData.name);
-                $('select[name="status"]').val(categoryData.status);
+                $('input[name="cost_id"]').val(costData.id);
+                $('input[name="name"]').val(costData.name);
+                $('input[name="cost_amount"]').val(costData.amount);
+                $('select[name="expense_type"]').val(costData.type);
+                $('textarea[name="description"]').val(costData.description);
 
                 // Open the modal
                 $('#myModal').modal('show');

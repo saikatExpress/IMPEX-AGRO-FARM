@@ -50,6 +50,11 @@ body {
     color: #000;
 }
 
+.list_title {
+    color: #000;
+    font-weight: bold;
+}
+
 .custom-col {
     background-color: #fff;
     padding: 5px;

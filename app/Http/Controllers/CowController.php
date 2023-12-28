@@ -7,6 +7,7 @@ use App\Models\Cow;
 use App\Models\Buyer;
 use App\Models\CowSell;
 use App\Models\Expense;
+use App\Models\Account;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Service\BalanceService;
@@ -126,7 +127,7 @@ class CowController extends Controller
             $transport = $request->input('transport');
             $hasil     = $request->input('hasil');
 
-            $total = $price + $total + $price;
+            $total = $price + $transport + $hasil;
 
             $cowObj->branch_id   = session('branch_id');
             $cowObj->price       = $price;
@@ -149,7 +150,15 @@ class CowController extends Controller
 
             DB::commit();
             if($res){
-                return redirect()->back()->with('message', 'Cow Created successfully');
+                $balanceServiceObj = new BalanceService;
+
+                $lastInsertedId = $cowObj->id;
+                $expenseType    = $request->input('expense_type');
+
+                $result = $balanceServiceObj->accountDecrement($lastInsertedId,$expenseType, $total);
+                if($result == true){
+                    return redirect()->back()->with('message', 'Cow Created successfully');
+                }
             }
 
         } catch (\Exception $e) {

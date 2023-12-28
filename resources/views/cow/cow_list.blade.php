@@ -18,7 +18,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h2>Cow List</h2>
+                    <h2 class="list_title">Cow List</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link">
@@ -27,7 +27,8 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -53,7 +54,11 @@
                                     <thead>
                                         <tr>
                                             <th>Branch</th>
+                                            <th>Tag</th>
                                             <th>Price</th>
+                                            <th>Transport</th>
+                                            <th>Hasil</th>
+                                            <th>Total</th>
                                             <th>Type</th>
                                             <th>Caste</th>
                                             <th>Age</th>
@@ -67,34 +72,47 @@
 
                                     <tbody>
 
-                                    @if (count($cows) > 0)
-                                        @foreach ($cows as $key => $cow)
-                                        <tr class="list-item">
-                                            <td>{{ $cow->branch->branch_name }}</td>
-                                            <td>{{ number_format($cow->price, 2) }}</td>
-                                            <td>{{ ucfirst($cow->type) }}</td>
-                                            <td>{{ ucfirst($cow->caste) }}</td>
-                                            <td>{{ $cow->age . ' year' }}</td>
-                                            <td>{{ $cow->weight . ' kg' }}</td>
-                                            <td>{{ ucfirst($cow->color) }}</td>
-                                            <td>{{ dateTimeFormat($cow->buy_date) }}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
-                                                data-target="#myModal" data-id="{{ $cow->id }}" data-tag="{{ $cow->tag }}" data-hasil="{{ $cow->hasil }}"
-                                                data-color="{{ $cow->color }}" data-age="{{ $cow->age }}" data-description="{{ $cow->description }}"
-                                                data-caste="{{ $cow->caste }}" data-weight="{{ $cow->weight }}" data-transport="{{ $cow->transport }}"
-                                                data-price="{{ $cow->price }}" data-type="{{ $cow->type }}" data-buy_date="{{ $cow->buy_date }}">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $cow->id }}">
-                                                <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    @else
-                                        <p>There is no data</p>
-                                    @endif
+                                        @if (count($cows) > 0)
+                                            @foreach ($cows as $key => $cow)
+                                                <tr class="list-item">
+                                                    <td>{{ $cow->branch->branch_name }}</td>
+                                                    <td style="color:#000; font-weight:bold;">{{ $cow->tag }}</td>
+                                                    <td>{{ number_format($cow->price, 2) }}</td>
+                                                    <td>{{ number_format($cow->transport, 2) }}</td>
+                                                    <td>{{ number_format($cow->hasil, 2) }}</td>
+                                                    <td>{{ number_format($cow->total, 2) }}</td>
+                                                    <td>{{ ucfirst($cow->type) }}</td>
+                                                    <td>{{ ucfirst($cow->caste) }}</td>
+                                                    <td>{{ $cow->age . ' year' }}</td>
+                                                    <td>{{ $cow->weight . ' kg' }}</td>
+                                                    <td>{{ ucfirst($cow->color) }}</td>
+                                                    <td>{{ dateTimeFormat($cow->buy_date) }}</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
+                                                            data-target="#myModal" data-id="{{ $cow->id }}"
+                                                            data-tag="{{ $cow->tag }}"
+                                                            data-hasil="{{ $cow->hasil }}"
+                                                            data-color="{{ $cow->color }}"
+                                                            data-age="{{ $cow->age }}"
+                                                            data-description="{{ $cow->description }}"
+                                                            data-caste="{{ $cow->caste }}"
+                                                            data-weight="{{ $cow->weight }}"
+                                                            data-transport="{{ $cow->transport }}"
+                                                            data-price="{{ $cow->price }}"
+                                                            data-type="{{ $cow->type }}"
+                                                            data-buy_date="{{ $cow->buy_date }}">
+                                                            <i class="fa-regular fa-pen-to-square"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-danger deleteButton"
+                                                            data-id="{{ $cow->id }}">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <p>There is no data</p>
+                                        @endif
 
                                     </tbody>
                                 </table>
@@ -109,193 +127,212 @@
 
     <!-- Modal -->
     <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-        <div class="modal-header">
-            <h4 class="modal-title">Edit Info</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-
-            <form class="" action="{{ route('cow.edit') }}" method="post" novalidate>
-                @csrf
-                <input type="hidden" name="cow_id">
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">দাম<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" name="price" required="required" />
-                    </div>
-                    @error('price')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">ধরণ<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <select name="type" id="" class="form-control">
-                            <option value="" selected disabled>select</option>
-                            <option value="cow">Cow</option>
-                            <option value="bull">Bull</option>
-                        </select>
-                    </div>
-                    @error('type')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
 
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর ট্যাগ<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" class='optional' name="tag" data-validate-length-range="5,15" type="text" />
-                    </div>
-                    @error('tag')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                    <form class="" action="{{ route('cow.edit') }}" method="post" novalidate>
+                        @csrf
+                        <input type="hidden" name="cow_id">
 
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর জাত<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" name="caste" class='email' required="required" type="text" />
-                    </div>
-                    @error('caste')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর ওজন<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" type="number" class='email' name="weight" data-validate-linked='email' required='required' />
-                    </div>
-                    @error('weight')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">পরিবহন খরচ <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" type="number" class='number' name="transport" data-validate-minmax="10" required='required'>
-                    </div>
-                    @error('transport')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">হাসিল <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" type="number" class='number' name="hasil" data-validate-minmax="10" required='required'>
-                    </div>
-                    @error('hasil')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর রঙ <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" type="text" class='number' name="color" data-validate-minmax="10" required='required'>
-                    </div>
-                    @error('color')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রয় তারিখ<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" class='date' type="date" name="buy_date" required='required'>
-                    </div>
-                    @error('buy_date')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর বয়স<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input class="form-control" name="age" class='email' required="required" type="text" />
-                    </div>
-                    @error('age')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="field item form-group">
-                    <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6">
-                        <textarea class="form-control" name='description'></textarea>
-                    </div>
-                    @error('description')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="ln_solid">
-                    <div class="form-group">
-                        <div class="col-md-6 offset-md-3">
-                            <button type='submit' class="btn btn-primary">Update</button>
-                            <button type='reset' class="btn btn-success">Reset</button>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">দাম<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="price" required="required" />
+                            </div>
+                            @error('price')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ধরণ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="type" id="" class="form-control">
+                                    <option value="" selected disabled>select</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="bull">Bull</option>
+                                </select>
+                            </div>
+                            @error('type')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর ট্যাগ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" class='optional' name="tag"
+                                    data-validate-length-range="5,15" type="text" />
+                            </div>
+                            @error('tag')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর জাত<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="caste" class='email' required="required"
+                                    type="text" />
+                            </div>
+                            @error('caste')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর ওজন<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="number" class='email' name="weight"
+                                    data-validate-linked='email' required='required' />
+                            </div>
+                            @error('weight')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">পরিবহন খরচ <span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="number" class='number' name="transport"
+                                    data-validate-minmax="10" required='required'>
+                            </div>
+                            @error('transport')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">হাসিল <span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="number" class='number' name="hasil"
+                                    data-validate-minmax="10" required='required'>
+                            </div>
+                            @error('hasil')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর রঙ <span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" class='number' name="color"
+                                    data-validate-minmax="10" required='required'>
+                            </div>
+                            @error('color')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রয় তারিখ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" class='date' type="date" name="buy_date"
+                                    required='required'>
+                            </div>
+                            @error('buy_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরুর বয়স<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="age" class='email' required="required"
+                                    type="text" />
+                            </div>
+                            @error('age')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea class="form-control" name='description'></textarea>
+                            </div>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Update</button>
+                                    <button type='reset' class="btn btn-success">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-            </form>
 
-        </div>
-
+            </div>
         </div>
     </div>
-    </div>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.deleteButton').click(function() {
-            var cowId = $(this).data('id');
-            var listItem = $(this).closest(
-                '.list-item'); // Adjust the selector based on your HTML structure
+    <script>
+        $(document).ready(function() {
+            $('.deleteButton').click(function() {
+                var cowId = $(this).data('id');
+                var listItem = $(this).closest(
+                    '.list-item'); // Adjust the selector based on your HTML structure
 
-            // Use SweetAlert to confirm the deletion
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You won\'t be able to revert this!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If the user confirms, send an AJAX request to delete the pigeon
-                    $.ajax({
-                        type: 'GET',
-                        url: '/cow/delete/' + cowId,
-                        success: function(response) {
-                            // Remove the deleted item from the DOM
-                            listItem.remove();
+                // Use SweetAlert to confirm the deletion
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If the user confirms, send an AJAX request to delete the pigeon
+                        $.ajax({
+                            type: 'GET',
+                            url: '/cow/delete/' + cowId,
+                            success: function(response) {
+                                // Remove the deleted item from the DOM
+                                listItem.remove();
 
-                            // Show a success message
-                            Swal.fire('Deleted!', response.message, 'success');
-                        },
-                        error: function(error) {
-                            // Show an error message
-                            Swal.fire('Error!', error.responseJSON.message,
-                                'error');
-                        }
-                    });
-                }
+                                // Show a success message
+                                Swal.fire('Deleted!', response.message, 'success');
+                            },
+                            error: function(error) {
+                                // Show an error message
+                                Swal.fire('Error!', error.responseJSON.message,
+                                    'error');
+                            }
+                        });
+                    }
+                });
             });
         });
-    });
     </script>
 
     <script>
@@ -314,41 +351,41 @@
         });
     </script>
 
-  <script>
-    $(document).ready(function(){
-      $('.editBtn').click(function(){
-        const cowData = {
-              id: $(this).data('id'),
-              price: $(this).data('price'),
-              type: $(this).data('type'),
-              tag: $(this).data('tag'),
-              caste: $(this).data('caste'),
-              weight: $(this).data('weight'),
-              transport: $(this).data('transport'),
-              hasil: $(this).data('hasil'),
-              color: $(this).data('color'),
-              buy_date: $(this).data('buy_date'),
-              age: $(this).data('age'),
-              description: $(this).data('description')
-          };
+    <script>
+        $(document).ready(function() {
+            $('.editBtn').click(function() {
+                const cowData = {
+                    id: $(this).data('id'),
+                    price: $(this).data('price'),
+                    type: $(this).data('type'),
+                    tag: $(this).data('tag'),
+                    caste: $(this).data('caste'),
+                    weight: $(this).data('weight'),
+                    transport: $(this).data('transport'),
+                    hasil: $(this).data('hasil'),
+                    color: $(this).data('color'),
+                    buy_date: $(this).data('buy_date'),
+                    age: $(this).data('age'),
+                    description: $(this).data('description')
+                };
 
-          // Set values to form fields
-          $('input[name="cow_id"]').val(cowData.id);
-          $('input[name="price"]').val(cowData.price);
-          $('select[name="type"]').val(cowData.type);
-          $('input[name="tag"]').val(cowData.tag);
-          $('input[name="caste"]').val(cowData.caste);
-          $('input[name="weight"]').val(cowData.weight);
-          $('input[name="transport"]').val(cowData.transport);
-          $('input[name="hasil"]').val(cowData.hasil);
-          $('input[name="color"]').val(cowData.color);
-          $('input[name="buy_date"]').val(cowData.buy_date);
-          $('input[name="age"]').val(cowData.age);
-          $('textarea[name="description"]').val(cowData.description);
+                // Set values to form fields
+                $('input[name="cow_id"]').val(cowData.id);
+                $('input[name="price"]').val(cowData.price);
+                $('select[name="type"]').val(cowData.type);
+                $('input[name="tag"]').val(cowData.tag);
+                $('input[name="caste"]').val(cowData.caste);
+                $('input[name="weight"]').val(cowData.weight);
+                $('input[name="transport"]').val(cowData.transport);
+                $('input[name="hasil"]').val(cowData.hasil);
+                $('input[name="color"]').val(cowData.color);
+                $('input[name="buy_date"]').val(cowData.buy_date);
+                $('input[name="age"]').val(cowData.age);
+                $('textarea[name="description"]').val(cowData.description);
 
-          // Open the modal
-          $('#myModal').modal('show');
-      });
-    });
-  </script>
+                // Open the modal
+                $('#myModal').modal('show');
+            });
+        });
+    </script>
 @endsection

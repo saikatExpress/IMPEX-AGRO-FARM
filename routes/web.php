@@ -95,6 +95,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/cost/list', [CostController::class, 'index'])->name('cost.list');
     Route::get('/cost/create', [CostController::class, 'create'])->name('cost.create');
     Route::post('/cost/store', [CostController::class, 'store'])->name('cost.store');
+    Route::post('/cost/edit', [CostController::class, 'update'])->name('cost.edit');
 
     // For Cow Route
     Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');

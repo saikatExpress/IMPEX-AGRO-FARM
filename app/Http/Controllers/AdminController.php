@@ -8,6 +8,7 @@ use App\Models\Cost;
 use App\Models\Staff;
 use App\Models\Beef;
 use App\Models\Branch;
+use App\Models\Account;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -26,10 +27,13 @@ class AdminController extends Controller
         $branchName = Branch::where('id', session('branch_id'))->first();
 
         $permanetCost = Cost::where('branch_id', session('branch_id'))->where('expense_type', 2)->sum('cost_amount');
+        $farm1Cost = Cost::where('branch_id', session('branch_id'))->where('expense_type', 1)->sum('cost_amount');
 
         $staffs = Staff::where('branch_id', session('branch_id'))->where('status', 1)->count();
 
-        return view('welcome', compact('cows', 'totalBeef', 'branchName', 'permanetCost', 'staffs'));
+        $farmCosts = Account::where('branch_id', session('branch_id'))->where('expense_type', 1)->sum('amount');
+
+        return view('welcome', compact('cows', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts', 'farm1Cost'));
     }
 
     protected function beefCount($beefsForToday)

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Cost;
 use App\Models\Expense;
 use Illuminate\Http\Request;
+use App\Service\BalanceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,9 +23,11 @@ class CostController extends Controller
      */
     public function index()
     {
-        $costs = Cost::with('branch:id,branch_name', 'expenseTypes:id,name')->where('branch_id', session('branch_id'))->get();
+        $costs = Cost::with('branch:id,branch_name', 'expenseTypes:id,name')->where('branch_id', session('branch_id'))->latest()->get();
 
-        return view('cost.cost_list', compact('costs'));
+        $expenses = Expense::all();
+
+        return view('cost.cost_list', compact('costs', 'expenses'));
     }
 
     /**
@@ -47,10 +50,13 @@ class CostController extends Controller
 
             $costObj = new Cost;
 
+            $costAmount = $request->input('cost_amount');
+            $expenseType = $request->input('expense_type');
+
             $costObj->branch_id    = session('branch_id');
             $costObj->name         = $request->input('name');
-            $costObj->expense_type = $request->input('expense_type');
-            $costObj->cost_amount  = $request->input('cost_amount');
+            $costObj->expense_type = $expenseType;
+            $costObj->cost_amount  = $costAmount;
             $costObj->cost_date    = $request->input('cost_date');
             $costObj->description  = $request->input('description');
             $costObj->status       = '1';
@@ -89,7 +95,36 @@ class CostController extends Controller
      */
     public function update(UpdateCostRequest $request, Cost $cost)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $costId = $request->input('cost_id');
+            $cost = Cost::where('branch_id', session('branch_id'))->where('id', $costId)->first();
+
+            if(!$cost){
+                return redirect()->back()->with('message', 'Sorry! Not found this data');
+            }
+
+            $data = [
+                'name'         => $request->input('name'),
+                'expense_type' => $request->input('expense_type'),
+                'cost_amount'  => $request->input('cost_amount'),
+                'cost_date'    => $request->input('cost_date'),
+                'description'  => $request->input('description'),
+                'updated_at'   => Carbon::now(),
+            ];
+
+            $res = $cost->update($data);
+
+            DB::commit();
+            if($res){
+                return redirect()->back()->with('message', 'Update Successfully');
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 
     /**

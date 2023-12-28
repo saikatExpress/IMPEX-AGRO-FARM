@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Models\Cost;
 use App\Models\Buyer;
+use App\Models\Account;
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,5 +29,20 @@ class BalanceService
         }
 
         return false;
+    }
+
+    public function accountDecrement($lastInsertedId,$expenseType, $total)
+    {
+        $accountObj = new Account;
+
+        $accountObj->buy_id       = $lastInsertedId;
+        $accountObj->branch_id    = session('branch_id');
+        $accountObj->expense_type = $expenseType;
+        $accountObj->amount       = $total;
+
+        $res = $accountObj->save();
+        if($res){
+            return true;
+        }
     }
 }
