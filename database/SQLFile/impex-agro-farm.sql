@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 28, 2023 at 06:52 PM
+-- Generation Time: Dec 28, 2023 at 09:49 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `impex-agro-farm`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `id` bigint UNSIGNED NOT NULL,
+  `buy_id` int NOT NULL,
+  `branch_id` bigint UNSIGNED NOT NULL,
+  `expense_type` bigint UNSIGNED NOT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `flag` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `buy_id`, `branch_id`, `expense_type`, `amount`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 22000.00, '0', NULL, '2023-12-28 20:52:00', '2023-12-28 21:34:31'),
+(2, 2, 1, 1, 31000.00, '0', NULL, '2023-12-28 20:53:02', '2023-12-28 21:35:36'),
+(3, 3, 1, 1, 31500.00, '0', NULL, '2023-12-28 20:53:55', '2023-12-28 21:33:41'),
+(4, 4, 1, 1, 44000.00, '0', NULL, '2023-12-28 21:38:42', '2023-12-28 21:38:42');
 
 -- --------------------------------------------------------
 
@@ -83,9 +111,9 @@ CREATE TABLE `branches` (
 --
 
 INSERT INTO `branches` (`id`, `branch_name`, `slug`, `branch_email`, `branch_address`, `branch_image`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Uttara', 'uttara', 'uttara@gmail.com', 'Uttara,Dhaka,Bangladesh', '1703407639.jpg', '1', '0', NULL, '2023-12-23 20:47:20', '2023-12-23 20:47:20'),
-(2, 'Gazipur', 'gazipur', 'gazipur@gmail.com', 'Gazipur,Dhaka,Bangladesh', '1703407731.webp', '1', '0', NULL, '2023-12-23 20:48:51', '2023-12-23 20:48:51'),
-(3, 'Malibagh', 'malibagh', 'malibagh@gmail.com', 'Malibagh,Dhaka,Bangladesh', '1703407822.jpg', '1', '0', NULL, '2023-12-23 20:50:22', '2023-12-23 20:50:22');
+(1, 'Uttara', 'uttara', 'uttara@gmail.com', 'Uttara,Dhaka,Bangladesh', '1703407639.jpg', '1', '0', NULL, '2023-12-23 08:47:20', '2023-12-23 08:47:20'),
+(2, 'Gazipur', 'gazipur', 'gazipur@gmail.com', 'Gazipur,Dhaka,Bangladesh', '1703407731.webp', '1', '0', NULL, '2023-12-23 08:48:51', '2023-12-23 08:48:51'),
+(3, 'Malibagh', 'malibagh', 'malibagh@gmail.com', 'Malibagh,Dhaka,Bangladesh', '1703407822.jpg', '1', '0', NULL, '2023-12-23 08:50:22', '2023-12-23 08:50:22');
 
 -- --------------------------------------------------------
 
@@ -107,6 +135,15 @@ CREATE TABLE `buyers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `buyers`
+--
+
+INSERT INTO `buyers` (`id`, `branch_id`, `name`, `phone_number`, `address`, `balance`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Jahid Islam', '01513657914', 'Netrakona Boro Bazar', '00', '1', '0', NULL, '2023-12-28 21:36:35', '2023-12-28 21:36:35'),
+(2, 1, 'Mosabbir Rahman', '01913617913', 'Segun Bagicha', '0', '1', '0', NULL, '2023-12-28 21:37:06', '2023-12-28 21:37:06'),
+(3, 1, 'Masum Billah', '01523617914', 'Nakalpara,Dhaka', '0', '1', '0', NULL, '2023-12-28 21:37:30', '2023-12-28 21:37:30');
+
 -- --------------------------------------------------------
 
 --
@@ -127,11 +164,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'গরু', '1', NULL, '2023-12-26 00:49:58', '2023-12-28 17:54:12'),
-(2, 'মহিষ', '1', NULL, '2023-12-26 00:50:23', '2023-12-28 17:53:28'),
-(3, 'ষাড়', '1', NULL, '2023-12-26 00:50:42', '2023-12-28 17:53:52'),
-(4, 'ভেড়া', '1', NULL, '2023-12-26 00:50:59', '2023-12-28 17:54:20'),
-(5, 'ছাগল', '1', NULL, '2023-12-26 00:51:06', '2023-12-28 17:54:02');
+(1, 'গরু', '1', NULL, '2023-12-25 12:49:58', '2023-12-28 05:54:12'),
+(2, 'মহিষ', '1', NULL, '2023-12-25 12:50:23', '2023-12-28 05:53:28'),
+(3, 'ষাড়', '1', NULL, '2023-12-25 12:50:42', '2023-12-28 05:53:52'),
+(4, 'ভেড়া', '1', NULL, '2023-12-25 12:50:59', '2023-12-28 05:54:20'),
+(5, 'ছাগল', '1', NULL, '2023-12-25 12:51:06', '2023-12-28 05:54:02'),
+(6, 'বাছুর', '1', NULL, '2023-12-28 13:20:29', '2023-12-28 13:20:29');
 
 -- --------------------------------------------------------
 
@@ -154,6 +192,15 @@ CREATE TABLE `costs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `costs`
+--
+
+INSERT INTO `costs` (`id`, `branch_id`, `name`, `expense_type`, `cost_amount`, `cost_date`, `description`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'গরুর খাবার', 1, 2000.00, '2023-12-25 18:00:00', 'গরুর ভুষি ১৫ কেজি (সর্দার ম্যানসন)', '1', '0', NULL, '2023-12-28 20:56:15', '2023-12-28 20:57:13'),
+(2, 1, 'শেডের টিন', 2, 5000.00, '2023-12-17 18:00:00', 'গরুর শেডের ৫ বান টিন (মোরগ মার্কা)', '1', '0', NULL, '2023-12-28 20:58:19', '2023-12-28 21:01:01'),
+(3, 1, 'শেডের লোহা,রড', 2, 6000.00, '2023-12-24 18:00:00', 'লোহা ১৫ কেজি,রড ৫ মণ (মেসার্স রহমান ট্রেডার্স)', '1', '0', NULL, '2023-12-28 20:59:58', '2023-12-28 20:59:58');
+
 -- --------------------------------------------------------
 
 --
@@ -164,12 +211,13 @@ CREATE TABLE `cows` (
   `id` bigint UNSIGNED NOT NULL,
   `branch_id` bigint UNSIGNED NOT NULL,
   `price` int DEFAULT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` bigint UNSIGNED NOT NULL,
   `tag` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `caste` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `weight` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `transport` int DEFAULT NULL,
   `hasil` int DEFAULT NULL,
+  `total` int DEFAULT NULL,
   `color` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `buy_date` timestamp NULL DEFAULT NULL,
   `age` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -180,6 +228,16 @@ CREATE TABLE `cows` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cows`
+--
+
+INSERT INTO `cows` (`id`, `branch_id`, `price`, `category_id`, `tag`, `caste`, `weight`, `transport`, `hasil`, `total`, `color`, `buy_date`, `age`, `description`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 21000, 3, 'GF45BMN', 'Physian', '76', 500, 500, 22000, 'Red Yellow', '2023-12-25 18:00:00', '1', 'This is red cow', '1', '0', NULL, '2023-12-28 20:52:00', '2023-12-28 21:34:31'),
+(2, 1, 30000, 3, 'Y7654UY', 'Australian', '120', 500, 500, 31000, 'Black', '2023-12-26 18:00:00', '1', 'This Black Bull', '1', '0', NULL, '2023-12-28 20:53:01', '2023-12-28 21:35:36'),
+(3, 1, 30500, 3, 'GF65UY', 'Physian', '98', 500, 500, 31500, 'Red', '2023-12-28 18:00:00', '2', 'This red bull', '1', '0', NULL, '2023-12-28 20:53:55', '2023-12-28 21:33:41'),
+(4, 1, 43000, 3, '45GF23', 'Physian', '76', 400, 600, 44000, 'Red', '2023-12-24 18:00:00', '1', 'This is physian cow', '1', '0', NULL, '2023-12-28 21:38:42', '2023-12-28 21:38:42');
 
 -- --------------------------------------------------------
 
@@ -225,8 +283,8 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`id`, `name`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'ফার্ম খরচ', '1', '0', NULL, '2023-12-28 17:50:31', '2023-12-28 17:50:31'),
-(2, 'স্থায়ী খরচ', '1', '0', NULL, '2023-12-28 17:50:49', '2023-12-28 17:50:49');
+(1, 'ফার্ম খরচ', '1', '0', NULL, '2023-12-28 05:50:31', '2023-12-28 05:50:31'),
+(2, 'স্থায়ী খরচ', '1', '0', NULL, '2023-12-28 05:50:49', '2023-12-28 05:50:49');
 
 -- --------------------------------------------------------
 
@@ -277,23 +335,24 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_12_23_105155_create_branches_table', 1),
-(6, '2023_12_23_105156_create_staff_table', 1),
-(7, '2023_12_24_123144_create_sessions_table', 1),
-(8, '2023_12_24_180030_create_permission_tables', 1),
-(9, '2023_12_25_061318_create_cows_table', 1),
-(10, '2023_12_25_160821_create_buyers_table', 1),
-(11, '2023_12_25_160822_create_cow_sells_table', 1),
-(12, '2023_12_25_200246_create_milks_table', 1),
-(13, '2023_12_26_121244_create_categories_table', 1),
+(2, '2014_10_12_000001_create_categories_table', 1),
+(3, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(4, '2019_08_19_000000_create_failed_jobs_table', 1),
+(5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(6, '2023_12_23_105155_create_branches_table', 1),
+(7, '2023_12_23_105156_create_staff_table', 1),
+(8, '2023_12_24_123144_create_sessions_table', 1),
+(9, '2023_12_24_180030_create_permission_tables', 1),
+(10, '2023_12_25_061318_create_cows_table', 1),
+(11, '2023_12_25_160821_create_buyers_table', 1),
+(12, '2023_12_25_160822_create_cow_sells_table', 1),
+(13, '2023_12_25_200246_create_milks_table', 1),
 (14, '2023_12_26_134638_create_beefs_table', 1),
 (15, '2023_12_26_181230_create_beef_sells_table', 1),
 (16, '2023_12_27_180413_create_expenses_table', 1),
 (17, '2023_12_27_184808_create_costs_table', 1),
-(18, '2023_12_28_180128_create_invoices_table', 1);
+(18, '2023_12_28_180128_create_invoices_table', 1),
+(19, '2023_12_29_005652_create_accounts_table', 1);
 
 -- --------------------------------------------------------
 
@@ -369,14 +428,14 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'user list', 'web', '2023-12-28 10:54:32', '2023-12-28 10:54:32'),
-(2, 'create user', 'web', '2023-12-28 10:54:32', '2023-12-28 10:54:32'),
-(3, 'edit user', 'web', '2023-12-28 10:54:33', '2023-12-28 10:54:33'),
-(4, 'delete user', 'web', '2023-12-28 10:54:33', '2023-12-28 10:54:33'),
-(5, 'role list', 'web', '2023-12-28 10:54:33', '2023-12-28 10:54:33'),
-(6, 'create role', 'web', '2023-12-28 10:54:33', '2023-12-28 10:54:33'),
-(7, 'edit role', 'web', '2023-12-28 10:54:33', '2023-12-28 10:54:33'),
-(8, 'delete role', 'web', '2023-12-28 10:54:33', '2023-12-28 10:54:33');
+(1, 'user list', 'web', '2023-12-28 20:48:52', '2023-12-28 20:48:52'),
+(2, 'create user', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53'),
+(3, 'edit user', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53'),
+(4, 'delete user', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53'),
+(5, 'role list', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53'),
+(6, 'create role', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53'),
+(7, 'edit role', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53'),
+(8, 'delete role', 'web', '2023-12-28 20:48:53', '2023-12-28 20:48:53');
 
 -- --------------------------------------------------------
 
@@ -416,7 +475,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'web', '2023-12-28 10:54:32', '2023-12-28 10:54:32');
+(1, 'admin', 'web', '2023-12-28 20:48:52', '2023-12-28 20:48:52');
 
 -- --------------------------------------------------------
 
@@ -511,12 +570,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone_number`, `email_verified_at`, `password`, `status`, `role`, `flag`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '01713617913', NULL, '$2y$12$1HY2tn4wHysWZ0jD1M0PyepUFQN22YEGNuiqQoKT3vehL49gBxYT2', '1', NULL, '0', NULL, '2023-12-28 10:54:32', NULL),
-(2, 'Super Admin', 'superadmin@gmail.com', '01613617913', NULL, '$2y$12$1HY2tn4wHysWZ0jD1M0PyepUFQN22YEGNuiqQoKT3vehL49gBxYT2', '1', NULL, '0', NULL, '2023-12-28 10:54:32', NULL);
+(1, 'Admin', 'admin@gmail.com', '01713617913', NULL, '$2y$12$V.1B606g7WBT0P0/T74JsuXp1IZ/mXdtHgh/6jqCAidJZq/aA0Nma', '1', NULL, '0', NULL, '2023-12-28 20:48:52', NULL),
+(2, 'Super Admin', 'superadmin@gmail.com', '01613617913', NULL, '$2y$12$V.1B606g7WBT0P0/T74JsuXp1IZ/mXdtHgh/6jqCAidJZq/aA0Nma', '1', NULL, '0', NULL, '2023-12-28 20:48:52', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `accounts_branch_id_foreign` (`branch_id`),
+  ADD KEY `accounts_expense_type_foreign` (`expense_type`);
 
 --
 -- Indexes for table `beefs`
@@ -564,7 +631,8 @@ ALTER TABLE `costs`
 --
 ALTER TABLE `cows`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cows_branch_id_foreign` (`branch_id`);
+  ADD KEY `cows_branch_id_foreign` (`branch_id`),
+  ADD KEY `cows_category_id_foreign` (`category_id`);
 
 --
 -- Indexes for table `cow_sells`
@@ -684,6 +752,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `beefs`
 --
 ALTER TABLE `beefs`
@@ -705,25 +779,25 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `buyers`
 --
 ALTER TABLE `buyers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `costs`
 --
 ALTER TABLE `costs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cows`
 --
 ALTER TABLE `cows`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cow_sells`
@@ -753,7 +827,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `milks`
@@ -796,6 +870,13 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD CONSTRAINT `accounts_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `accounts_expense_type_foreign` FOREIGN KEY (`expense_type`) REFERENCES `expenses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `beefs`
 --
 ALTER TABLE `beefs`
@@ -824,7 +905,8 @@ ALTER TABLE `costs`
 -- Constraints for table `cows`
 --
 ALTER TABLE `cows`
-  ADD CONSTRAINT `cows_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `cows_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cows_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cow_sells`

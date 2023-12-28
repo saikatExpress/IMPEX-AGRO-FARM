@@ -26,7 +26,8 @@
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -71,13 +72,15 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal" data-target="#myModal"
-                                                        data-id="{{ $expense->id }}" data-name="{{ $expense->name }}" data-status="{{ $expense->status }}">
+                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
+                                                            data-target="#myModal" data-id="{{ $expense->id }}"
+                                                            data-name="{{ $expense->name }}"
+                                                            data-status="{{ $expense->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $expense->id }}">
+                                                        {{-- <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $expense->id }}">
                                                             <i class="fa-solid fa-trash"></i>
-                                                        </button>
+                                                        </button> --}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -101,53 +104,55 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Info</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
+                <!-- Modal body -->
+                <div class="modal-body">
 
-                <form class="" action="{{ route('expense.edit') }}" method="post" novalidate>
-                    @csrf
-                    <input type="hidden" name="expense_id">
+                    <form class="" action="{{ route('expense.edit') }}" method="post" novalidate>
+                        @csrf
+                        <input type="hidden" name="expense_id">
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="name" type="text" required="required" />
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="name" type="text" required="required" />
+                            </div>
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <select name="status" id="" class="form-control">
-                                <option value="" selected disabled>select</option>
-                                <option value="1">Active</option>
-                                <option value="0">Deactive</option>
-                            </select>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="status" id="" class="form-control">
+                                    <option value="" selected disabled>select</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Deactive</option>
+                                </select>
+                            </div>
+                            @error('status')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="ln_solid">
-                        <div class="form-group">
-                            <div class="col-md-6 offset-md-3">
-                                <button type='submit' class="btn btn-primary">Update</button>
-                                <button type='reset' class="btn btn-success">Reset</button>
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Update</button>
+                                    <button type='reset' class="btn btn-success">Reset</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-            </div>
+                </div>
 
             </div>
         </div>
@@ -215,8 +220,8 @@
     </script>
 
     <script>
-        $(document).ready(function(){
-            $('.editBtn').click(function(){
+        $(document).ready(function() {
+            $('.editBtn').click(function() {
                 const expesneData = {
                     id: $(this).data('id'),
                     name: $(this).data('name'),

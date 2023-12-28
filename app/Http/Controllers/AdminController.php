@@ -33,7 +33,9 @@ class AdminController extends Controller
 
         $farmCosts = Account::where('branch_id', session('branch_id'))->where('expense_type', 1)->sum('amount');
 
-        return view('welcome', compact('cows', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts', 'farm1Cost'));
+        $totalCost = $permanetCost + $farm1Cost + $farmCosts;
+
+        return view('welcome', compact('cows', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts', 'totalCost', 'farm1Cost'));
     }
 
     protected function beefCount($beefsForToday)

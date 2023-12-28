@@ -112,6 +112,18 @@
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
+                        <img src="https://cdn-icons-png.flaticon.com/128/10761/10761983.png" alt="cow image">
+                    </div>
+                    <div class="dashboard_item">
+                        <h2>মোট খরচ</h2>
+                        <p>{{ numberCountingFormat($totalCost) . ' Tk' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4  tile_stats_count">
+                <div class="d-flex custom-col">
+                    <div class="dashboard_menu">
                         <img src="{{ asset('custom/logos/ezgif-2-e34d9fb6d1-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">

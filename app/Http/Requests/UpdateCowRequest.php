@@ -23,7 +23,7 @@ class UpdateCowRequest extends FormRequest
     {
         return [
             'price'       => ['required'],
-            'type'        => ['required'],
+            'category_id' => ['required'],
             'tag'         => ['required'],
             'caste'       => ['required'],
             'weight'      => ['required'],

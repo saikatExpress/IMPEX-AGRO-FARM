@@ -55,11 +55,11 @@
                                         <tr>
                                             <th>Branch</th>
                                             <th>Tag</th>
+                                            <th>Category</th>
                                             <th>Price</th>
                                             <th>Transport</th>
                                             <th>Hasil</th>
                                             <th>Total</th>
-                                            <th>Type</th>
                                             <th>Caste</th>
                                             <th>Age</th>
                                             <th>Weight</th>
@@ -77,11 +77,12 @@
                                                 <tr class="list-item">
                                                     <td>{{ $cow->branch->branch_name }}</td>
                                                     <td style="color:#000; font-weight:bold;">{{ $cow->tag }}</td>
+                                                    <td style="color:#000; font-weight:bold;">{{ $cow->category->name }}
+                                                    </td>
                                                     <td>{{ number_format($cow->price, 2) }}</td>
                                                     <td>{{ number_format($cow->transport, 2) }}</td>
                                                     <td>{{ number_format($cow->hasil, 2) }}</td>
                                                     <td>{{ number_format($cow->total, 2) }}</td>
-                                                    <td>{{ ucfirst($cow->type) }}</td>
                                                     <td>{{ ucfirst($cow->caste) }}</td>
                                                     <td>{{ $cow->age . ' year' }}</td>
                                                     <td>{{ $cow->weight . ' kg' }}</td>
@@ -91,6 +92,7 @@
                                                         <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
                                                             data-target="#myModal" data-id="{{ $cow->id }}"
                                                             data-tag="{{ $cow->tag }}"
+                                                            data-category_id="{{ $cow->category_id }}"
                                                             data-hasil="{{ $cow->hasil }}"
                                                             data-color="{{ $cow->color }}"
                                                             data-age="{{ $cow->age }}"
@@ -157,13 +159,14 @@
                             <label class="col-form-label col-md-3 col-sm-3  label-align">ধরণ<span
                                     class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <select name="type" id="" class="form-control">
+                                <select name="category_id" id="" class="form-control">
                                     <option value="" selected disabled>select</option>
-                                    <option value="cow">Cow</option>
-                                    <option value="bull">Bull</option>
+                                    @foreach ($categories as $key => $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            @error('type')
+                            @error('category_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -357,7 +360,7 @@
                 const cowData = {
                     id: $(this).data('id'),
                     price: $(this).data('price'),
-                    type: $(this).data('type'),
+                    categoryId: $(this).data('category_id'),
                     tag: $(this).data('tag'),
                     caste: $(this).data('caste'),
                     weight: $(this).data('weight'),
@@ -372,7 +375,7 @@
                 // Set values to form fields
                 $('input[name="cow_id"]').val(cowData.id);
                 $('input[name="price"]').val(cowData.price);
-                $('select[name="type"]').val(cowData.type);
+                $('select[name="category_id"]').val(cowData.categoryId);
                 $('input[name="tag"]').val(cowData.tag);
                 $('input[name="caste"]').val(cowData.caste);
                 $('input[name="weight"]').val(cowData.weight);

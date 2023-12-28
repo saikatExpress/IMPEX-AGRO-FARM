@@ -27,9 +27,10 @@ class CowController extends Controller
      */
     public function index()
     {
-        $cows = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->latest()->get();
+        $categories = Category::all();
+        $cows        = Cow::with('branch:id,branch_name', 'category:id,name')->where('branch_id', session('branch_id'))->latest()->get();
 
-        return view('cow.cow_list', compact('cows'));
+        return view('cow.cow_list', compact('cows', 'categories'));
     }
 
     /**
@@ -205,8 +206,26 @@ class CowController extends Controller
         try {
             DB::beginTransaction();
 
-            $cowId = $request->input('cow_id');
-            $validatedData = $request->validated();
+            $cowId     = $request->input('cow_id');
+            $price     = $request->input('price');
+            $transport = $request->input('transport');
+            $hasil     = $request->input('hasil');
+            $total     = $price + $transport + $hasil;
+
+            $validatedData = [
+                'price'       => $price,
+                'category_id' => $request->input('category_id'),
+                'tag'         => $request->input('tag'),
+                'caste'       => $request->input('caste'),
+                'weight'      => $request->input('weight'),
+                'transport'   => $transport,
+                'hasil'       => $hasil,
+                'total'       => $total,
+                'color'       => $request->input('color'),
+                'buy_date'    => $request->input('buy_date'),
+                'age'         => $request->input('age'),
+                'description' => $request->input('description'),
+            ];
 
             $cow = Cow::find($cowId);
             if (!$cow) {
@@ -217,12 +236,27 @@ class CowController extends Controller
 
             DB::commit();
             if ($res) {
+                $this->accountUpdate($cowId,$total);
                 return redirect()->back()->with('message', 'Update successfully');
             }
 
         } catch (\Exception $e) {
             DB::rollback();
             info($e);
+        }
+    }
+
+    public function accountUpdate($cowId, $total)
+    {
+        $accountObj = new Account;
+
+        $account = $accountObj->where('buy_id', $cowId)->where('branch_id', session('branch_id'))->first();
+
+        if($account){
+            $res = $account->update(['amount' => $total]);
+            if($res){
+                return true;
+            }
         }
     }
 
