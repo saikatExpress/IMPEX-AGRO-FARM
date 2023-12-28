@@ -1,18 +1,17 @@
 @extends('layout.master')
 @section('content')
-
     <div class="row">
         <div class="col-2">
             <select name="" class="form-control language_switcher" id="">
-            <option value="">{{ Config::get('language')[App::getLocale()] }}</option>
-            @foreach (Config::get('language') as $lang => $language)
-                @if ($lang != App::getLocale())
-                    <option value="{{ $lang }}">
-                        <a href="">{{ $language }}</a>
-                    </option>
-                @endif
-            @endforeach
-        </select>
+                <option value="">{{ Config::get('language')[App::getLocale()] }}</option>
+                @foreach (Config::get('language') as $lang => $language)
+                    @if ($lang != App::getLocale())
+                        <option value="{{ $lang }}">
+                            <a href="">{{ $language }}</a>
+                        </option>
+                    @endif
+                @endforeach
+            </select>
         </div>
     </div>
 
@@ -20,7 +19,7 @@
         <div class="tile_count">
 
             <div class="welcome_text">
-                <h2>Welocme To {{ $branchName->branch_name . ' Branch'}}</h2>
+                <h2>Welocme To {{ $branchName->branch_name . ' Branch' }}</h2>
             </div>
 
             <div class="col-md-3 col-sm-4  tile_stats_count">
@@ -42,7 +41,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>Total Cow</h2>
-                        <p>{{ numberCountingFormat(($cows > 0) ? $cows : '0') }}</p>
+                        <p>{{ numberCountingFormat($cows > 0 ? $cows : '0') }}</p>
                     </div>
                 </div>
             </div>
@@ -139,7 +138,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
 
     <script>
-        $("body").on('change', '.language_switcher', function(event){
+        $("body").on('change', '.language_switcher', function(event) {
             event.preventDefault();
             var lang = $(this).val();
             var url = "{{ route('lang.switch', ':lang') }}"
