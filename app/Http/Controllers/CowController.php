@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Buyer;
+use App\Models\CowSell;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Service\BalanceService;
@@ -67,16 +68,18 @@ class CowController extends Controller
             }
 
             $cowSellObj = new CowSell;
+            $cowId      = $request->input('cow_id');
             $price      = $request->input('price');
             $payment    = $request->input('payment');
             $buyerId    = $request->input('buyer_id');
+            $due        = $request->input('due');
 
             $cowSellObj->branch_id   = session('branch_id');
-            $cowSellObj->cow_id      = $request->input('cow_id');
+            $cowSellObj->cow_id      = $cowId;
             $cowSellObj->buyer_id    = $buyerId;
             $cowSellObj->price       = $price;
             $cowSellObj->payment     = $payment;
-            $cowSellObj->due         = $request->input('due');
+            $cowSellObj->due         = $due;
             $cowSellObj->sell_date   = $request->input('sell_date');
             $cowSellObj->description = $request->input('description');
             $cowSellObj->status      = $request->input('status');
@@ -86,9 +89,9 @@ class CowController extends Controller
 
             DB::commit();
             if($res){
-                if($due > 0){
+                if($due >= 0){
                     $balanceServiceObj = new BalanceService;
-
+                    $this->cowFlagUpdate($cowId);
                     $balanceServiceObj->balanceUpdate($buyerId, $due);
                 }
                 return redirect()->back()->with('message', 'Sell Created');
@@ -96,6 +99,14 @@ class CowController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             info($e);
+        }
+    }
+
+    public function cowFlagUpdate($id)
+    {
+        $cow = Cow::find($id);
+        if($cow){
+            $cow->update(['flag' => '1']);
         }
     }
 
@@ -136,6 +147,13 @@ class CowController extends Controller
             DB::rollback();
             info($e);
         }
+    }
+
+    public function sellCollect()
+    {
+        $dueCollect = CowSell::with('branch:id,branch_name', 'buyer:id,name', 'cow:id,tag')->where('branch_id', session('branch_id'))->where('due', '>', 0)->get();
+
+        return view('cow.sell_collect', compact('dueCollect'));
     }
 
     /**

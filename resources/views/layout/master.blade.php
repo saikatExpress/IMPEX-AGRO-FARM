@@ -101,7 +101,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('staff.us') }}">স্টাফ যুক্ত</a></li>
                                         <li><a href="{{ route('staff.list') }}">স্টাফ তালিকা</a></li>
-                                        <li><a href="form_validation.html">ব্যাবহারকারীদের তালিকা</a></li>
+                                        <li><a href="{{ route('user.list') }}">ব্যাবহারকারীদের তালিকা</a></li>
                                         <li><a href="{{ route('user.create') }}">ব্যাবহারকারী যুক্ত</a></li>
                                         <li><a href="form_wizards.html">স্টাফ বেতন</a></li>
                                     </ul>
@@ -157,7 +157,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('cow.create') }}">ক্রয়</a></li>
                                         <li><a href="{{ route('cow.sell') }}">বিক্রয়</a></li>
-                                        <li><a href="morisjs.html">বাকী সংগ্রহ</a></li>
+                                        <li><a href="{{ route('cow_sell.collect') }}">বাকী সংগ্রহ</a></li>
                                     </ul>
                                 </li>
                                 {{-- Animal Sell Menu List --}}

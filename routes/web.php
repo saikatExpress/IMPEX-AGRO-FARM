@@ -43,6 +43,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     //User Route
+    Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 
     // For Category Route
@@ -101,6 +102,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/cow/sell/store', [CowController::class, 'sellStore'])->name('sell.store');
     Route::post('/cow/store', [CowController::class, 'store'])->name('cow.store');
     Route::post('/cow/update', [CowController::class, 'update'])->name('cow.edit');
+    Route::get('/cow/sell/collect', [CowController::class, 'sellCollect'])->name('cow_sell.collect');
     Route::get('/get/cow/info/{id}', [CowController::class, 'cowInfo']);
     Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
 

@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Models\Buyer;
+use Illuminate\Support\Facades\DB;
+
 
 class BalanceService
 {
@@ -18,7 +20,7 @@ class BalanceService
             $balance = $buyer->balance;
             $newBalance = $balance + $due;
 
-            $res = DB::table('buyers')->where('branch_id', session('branch_id'))->where('id', $id)->update(['due' => $newBalance]);
+            $res = DB::table('buyers')->where('branch_id', session('branch_id'))->where('id', $id)->update(['balance' => $newBalance]);
             if($res){
                 return true;
             }
