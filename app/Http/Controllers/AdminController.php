@@ -10,6 +10,7 @@ use App\Models\Beef;
 use App\Models\Income;
 use App\Models\Branch;
 use App\Models\Account;
+use App\Models\BeefSell;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -39,7 +40,10 @@ class AdminController extends Controller
         $incomes = Income::where('branch_id', session('branch_id'))->sum('amount');
         $dues = Income::where('branch_id', session('branch_id'))->sum('due');
 
-        return view('welcome', compact('dues','cows', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts','incomes', 'totalCost', 'farm1Cost'));
+        $beefSellAmount = BeefSell::where('branch_id', session('branch_id'))->sum('payment');
+        $todayIncome = BeefSell::where('branch_id', session('branch_id'))->whereDate('created_at', $currentDate)->sum('payment');
+
+        return view('welcome', compact('dues','cows', 'todayIncome', 'beefSellAmount', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts','incomes', 'totalCost', 'farm1Cost'));
     }
 
     protected function beefCount($beefsForToday)

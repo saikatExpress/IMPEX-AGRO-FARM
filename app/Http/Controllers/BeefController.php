@@ -57,6 +57,7 @@ class BeefController extends Controller
             $beefObj = new Beef;
 
             $beefObj->branch_id  = session('branch_id');
+            $beefObj->date       = $request->input('date');
             $beefObj->cow_id     = implode(',', $cowIds);
             $beefObj->total_beef = $request->input('total_beef');
 
@@ -216,6 +217,103 @@ class BeefController extends Controller
         return true;
     }
 
+    public function beefSellUpdate(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'name'         => ['required'],
+                'quantity'     => ['required'],
+                'price'        => ['required'],
+                'payment'      => ['required'],
+                'due'          => ['required'],
+                'phone_number' => ['required'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $updateData = [
+                'name'     => $request->input('name'),
+                'quantity' => $request->input('quantity'),
+                'price'    => $request->input('price'),
+                'payment'  => $request->input('payment'),
+                'due'      => $request->input('due'),
+            ];
+
+            $sellId   = $request->input('sell_id');
+            $quantity = $request->input('quantity');
+            $payment  = $request->input('payment');
+            $due      = $request->input('due');
+
+            $beefSell  = BeefSell::find($sellId);
+
+            if($beefSell){
+                $res = $beefSell->update($updateData);
+
+                DB::commit();
+                if($res){
+                    return redirect()->back()->with('message', 'Data update successfully');
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function beefSellStore(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'name'         => ['required'],
+                'due'          => ['required'],
+                'payment'      => ['required'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $sellId   = $request->input('sell_id');
+            $due      = $request->input('due');
+            $payment  = $request->input('payment');
+
+            $beefSell  = BeefSell::find($sellId);
+
+            if($beefSell){
+                $previousDue = $beefSell->due;
+                $newDue = $previousDue - $payment;
+                $previousPayment = $beefSell->payment;
+                $newPayment = $previousPayment + $payment;
+
+                $updateData = [
+                    'name'     => $request->input('name'),
+                    'due'      => $newDue,
+                    'payment'  => $newPayment,
+                ];
+
+                $res = $beefSell->update($updateData);
+
+                DB::commit();
+                if($res){
+                    return redirect()->back()->with('message', 'Payment update successfully');
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
     /**
      * Display the specified resource.
      */
@@ -245,8 +343,26 @@ class BeefController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Beef $beef)
+    public function destroy(Beef $beef, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $beefSell = BeefSell::find($id);
+
+            if(!$beefSell){
+                return response()->json(['message' => 'Data not Found.']);
+            }
+
+            $res = $beefSell->delete();
+
+            DB::commit();
+            if($res){
+                return response()->json(['message' => 'Data deleted successfully.']);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 28, 2023 at 09:49 PM
+-- Generation Time: Dec 29, 2023 at 09:59 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -47,7 +47,15 @@ INSERT INTO `accounts` (`id`, `buy_id`, `branch_id`, `expense_type`, `amount`, `
 (1, 1, 1, 1, 22000.00, '0', NULL, '2023-12-28 20:52:00', '2023-12-28 21:34:31'),
 (2, 2, 1, 1, 31000.00, '0', NULL, '2023-12-28 20:53:02', '2023-12-28 21:35:36'),
 (3, 3, 1, 1, 31500.00, '0', NULL, '2023-12-28 20:53:55', '2023-12-28 21:33:41'),
-(4, 4, 1, 1, 44000.00, '0', NULL, '2023-12-28 21:38:42', '2023-12-28 21:38:42');
+(4, 4, 1, 1, 44000.00, '0', NULL, '2023-12-28 21:38:42', '2023-12-28 21:38:42'),
+(5, 5, 1, 1, 44760.00, '0', NULL, '2023-12-29 16:03:11', '2023-12-29 16:03:11'),
+(6, 6, 1, 1, 24000.00, '0', NULL, '2023-12-29 16:04:18', '2023-12-29 16:04:18'),
+(7, 7, 1, 1, 31100.00, '0', NULL, '2023-12-29 16:05:01', '2023-12-29 16:05:01'),
+(8, 8, 1, 1, 34500.00, '0', NULL, '2023-12-29 16:15:34', '2023-12-29 16:15:34'),
+(9, 9, 1, 1, 21800.00, '0', NULL, '2023-12-29 16:16:42', '2023-12-29 16:16:42'),
+(10, 10, 1, 1, 30800.00, '0', NULL, '2023-12-29 16:17:23', '2023-12-29 16:17:23'),
+(11, 11, 1, 1, 41000.00, '0', NULL, '2023-12-29 16:18:07', '2023-12-29 16:18:07'),
+(12, 12, 1, 1, 23600.00, '0', NULL, '2023-12-29 16:18:42', '2023-12-29 16:18:42');
 
 -- --------------------------------------------------------
 
@@ -65,6 +73,13 @@ CREATE TABLE `beefs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `beefs`
+--
+
+INSERT INTO `beefs` (`id`, `branch_id`, `date`, `cow_id`, `total_beef`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, '2023-12-29 18:00:00', '5', '165', NULL, '2023-12-29 20:55:24', '2023-12-29 21:44:23');
 
 -- --------------------------------------------------------
 
@@ -85,6 +100,15 @@ CREATE TABLE `beef_sells` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `beef_sells`
+--
+
+INSERT INTO `beef_sells` (`id`, `branch_id`, `name`, `quantity`, `price`, `payment`, `due`, `phone_number`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Md. Nazmul Islam', '5', 650, 3000, 250, '01523617914', NULL, '2023-12-29 20:57:20', '2023-12-29 20:57:20'),
+(2, 1, 'Jahid Islam', '11', 650, 7150, 0, '01523617914', NULL, '2023-12-29 21:05:45', '2023-12-29 21:59:12'),
+(3, 1, 'Rahim Khan', '20', 650, 11000, 2000, '01523617914', NULL, '2023-12-29 21:44:23', '2023-12-29 21:48:28');
 
 -- --------------------------------------------------------
 
@@ -140,9 +164,9 @@ CREATE TABLE `buyers` (
 --
 
 INSERT INTO `buyers` (`id`, `branch_id`, `name`, `phone_number`, `address`, `balance`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Jahid Islam', '01513657914', 'Netrakona Boro Bazar', '00', '1', '0', NULL, '2023-12-28 21:36:35', '2023-12-28 21:36:35'),
-(2, 1, 'Mosabbir Rahman', '01913617913', 'Segun Bagicha', '0', '1', '0', NULL, '2023-12-28 21:37:06', '2023-12-28 21:37:06'),
-(3, 1, 'Masum Billah', '01523617914', 'Nakalpara,Dhaka', '0', '1', '0', NULL, '2023-12-28 21:37:30', '2023-12-28 21:37:30');
+(1, 1, 'Jahid Islam', '01513657914', 'Netrakona Boro Bazar', '0', '1', '0', NULL, '2023-12-28 21:36:35', '2023-12-28 21:36:35'),
+(2, 1, 'Mosabbir Rahman', '01913617913', 'Segun Bagicha', '10000', '1', '0', NULL, '2023-12-28 21:37:06', '2023-12-28 21:37:06'),
+(3, 1, 'Masum Billah', '01523617914', 'Nakalpara,Dhaka', '10000', '1', '0', NULL, '2023-12-28 21:37:30', '2023-12-28 21:37:30');
 
 -- --------------------------------------------------------
 
@@ -199,7 +223,7 @@ CREATE TABLE `costs` (
 INSERT INTO `costs` (`id`, `branch_id`, `name`, `expense_type`, `cost_amount`, `cost_date`, `description`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 1, 'গরুর খাবার', 1, 2000.00, '2023-12-25 18:00:00', 'গরুর ভুষি ১৫ কেজি (সর্দার ম্যানসন)', '1', '0', NULL, '2023-12-28 20:56:15', '2023-12-28 20:57:13'),
 (2, 1, 'শেডের টিন', 2, 5000.00, '2023-12-17 18:00:00', 'গরুর শেডের ৫ বান টিন (মোরগ মার্কা)', '1', '0', NULL, '2023-12-28 20:58:19', '2023-12-28 21:01:01'),
-(3, 1, 'শেডের লোহা,রড', 2, 6000.00, '2023-12-24 18:00:00', 'লোহা ১৫ কেজি,রড ৫ মণ (মেসার্স রহমান ট্রেডার্স)', '1', '0', NULL, '2023-12-28 20:59:58', '2023-12-28 20:59:58');
+(3, 1, 'শেডের লোহা,রড', 2, 5000.00, '2023-12-27 18:00:00', 'লোহা ১৫ কেজি,রড ৫ মণ (মেসার্স রহমান ট্রেডার্স)', '1', '0', NULL, '2023-12-28 20:59:58', '2023-12-28 21:50:49');
 
 -- --------------------------------------------------------
 
@@ -234,10 +258,18 @@ CREATE TABLE `cows` (
 --
 
 INSERT INTO `cows` (`id`, `branch_id`, `price`, `category_id`, `tag`, `caste`, `weight`, `transport`, `hasil`, `total`, `color`, `buy_date`, `age`, `description`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 21000, 3, 'GF45BMN', 'Physian', '76', 500, 500, 22000, 'Red Yellow', '2023-12-25 18:00:00', '1', 'This is red cow', '1', '0', NULL, '2023-12-28 20:52:00', '2023-12-28 21:34:31'),
-(2, 1, 30000, 3, 'Y7654UY', 'Australian', '120', 500, 500, 31000, 'Black', '2023-12-26 18:00:00', '1', 'This Black Bull', '1', '0', NULL, '2023-12-28 20:53:01', '2023-12-28 21:35:36'),
+(1, 1, 21000, 3, 'GF45BMN', 'Physian', '76', 500, 500, 22000, 'Red Yellow', '2023-12-25 18:00:00', '1', 'This is red cow', '1', '1', NULL, '2023-12-28 20:52:00', '2023-12-28 22:09:56'),
+(2, 1, 30000, 3, 'Y7654UY', 'Australian', '120', 500, 500, 31000, 'Black', '2023-12-26 18:00:00', '1', 'This Black Bull', '1', '1', NULL, '2023-12-28 20:53:01', '2023-12-28 22:17:23'),
 (3, 1, 30500, 3, 'GF65UY', 'Physian', '98', 500, 500, 31500, 'Red', '2023-12-28 18:00:00', '2', 'This red bull', '1', '0', NULL, '2023-12-28 20:53:55', '2023-12-28 21:33:41'),
-(4, 1, 43000, 3, '45GF23', 'Physian', '76', 400, 600, 44000, 'Red', '2023-12-24 18:00:00', '1', 'This is physian cow', '1', '0', NULL, '2023-12-28 21:38:42', '2023-12-28 21:38:42');
+(4, 1, 43000, 3, '45GF23', 'Physian', '76', 400, 600, 44000, 'Red', '2023-12-24 18:00:00', '1', 'This is physian cow', '1', '0', NULL, '2023-12-28 21:38:42', '2023-12-28 21:38:42'),
+(5, 1, 43760, 6, 'HJ654N', 'Physian', '12', 500, 500, 44760, 'Red', '2023-12-26 18:00:00', '1', 'This is Calf', '1', '1', NULL, '2023-12-29 16:03:10', '2023-12-29 16:03:10'),
+(6, 1, 23000, 2, 'GF%6445', 'Physian', '70', 500, 500, 24000, 'Maroon', '2023-12-03 18:00:00', '1', 'This is buffalo', '1', '0', NULL, '2023-12-29 16:04:18', '2023-12-29 16:04:18'),
+(7, 1, 30000, 3, 'GH67JG', 'Australian', '65', 600, 500, 31100, 'Black', '2023-12-07 18:00:00', '1', 'sddfssgfsdf', '1', '1', NULL, '2023-12-29 16:05:01', '2023-12-29 20:11:48'),
+(8, 1, 33500, 3, 'KDY6549VD', 'Physian', '75', 500, 500, 34500, 'Red Yellow', '2023-12-25 18:00:00', '1', 'DFDSFGDGFDGHFDH', '1', '0', NULL, '2023-12-29 16:15:34', '2023-12-29 16:15:34'),
+(9, 1, 21000, 6, 'LK987GF', 'Physian', '45', 500, 300, 21800, 'Red', '2023-12-17 18:00:00', '1', 'DFDSDSGFGGF', '1', '0', NULL, '2023-12-29 16:16:42', '2023-12-29 16:16:42'),
+(10, 1, 30000, 2, 'HG36DS', 'Physian', '56', 400, 400, 30800, 'Black', '2023-12-20 18:00:00', '1', 'FDSDSFTGDFFGFDG', '1', '0', NULL, '2023-12-29 16:17:23', '2023-12-29 16:17:23'),
+(11, 1, 40000, 3, 'H78DF3G', 'Australian', '59', 500, 500, 41000, 'Red Yellow', '2023-12-25 18:00:00', '1', 'FDGDFDGFG', '1', '0', NULL, '2023-12-29 16:18:07', '2023-12-29 16:18:07'),
+(12, 1, 23000, 6, 'GF%6445', 'Physian', '45', 300, 300, 23600, 'Maroon', '2023-12-06 18:00:00', '1', 'GFDGHRTTYUTU', '1', '0', NULL, '2023-12-29 16:18:42', '2023-12-29 16:18:42');
 
 -- --------------------------------------------------------
 
@@ -261,6 +293,15 @@ CREATE TABLE `cow_sells` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cow_sells`
+--
+
+INSERT INTO `cow_sells` (`id`, `branch_id`, `cow_id`, `buyer_id`, `price`, `payment`, `due`, `sell_date`, `description`, `status`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 3, 50000, 50000, 0, '2023-12-17 18:00:00', 'This is red cow', '1', '0', NULL, '2023-12-28 22:09:56', '2023-12-29 20:48:38'),
+(2, 1, 2, 1, 70000, 70000, 0, '2023-12-24 18:00:00', 'This Black Bull', '0', '0', NULL, '2023-12-28 22:17:23', '2023-12-28 22:17:23'),
+(3, 1, 7, 2, 80000, 70000, 10000, '2023-12-24 18:00:00', 'This is Red Cow', '1', '0', NULL, '2023-12-29 20:11:48', '2023-12-29 20:11:48');
 
 -- --------------------------------------------------------
 
@@ -301,6 +342,33 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incomes`
+--
+
+CREATE TABLE `incomes` (
+  `id` bigint UNSIGNED NOT NULL,
+  `branch_id` bigint UNSIGNED NOT NULL,
+  `sell_id` int DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `due` decimal(10,2) DEFAULT NULL,
+  `flag` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `incomes`
+--
+
+INSERT INTO `incomes` (`id`, `branch_id`, `sell_id`, `amount`, `due`, `flag`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 50000.00, 0.00, '0', NULL, '2023-12-28 22:09:56', '2023-12-29 20:48:38'),
+(2, 1, 2, 70000.00, 0.00, '0', NULL, '2023-12-28 22:17:23', '2023-12-28 22:17:23'),
+(3, 1, 3, 70000.00, 10000.00, '0', NULL, '2023-12-29 20:11:48', '2023-12-29 20:11:48');
 
 -- --------------------------------------------------------
 
@@ -352,7 +420,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2023_12_27_180413_create_expenses_table', 1),
 (17, '2023_12_27_184808_create_costs_table', 1),
 (18, '2023_12_28_180128_create_invoices_table', 1),
-(19, '2023_12_29_005652_create_accounts_table', 1);
+(19, '2023_12_29_005652_create_accounts_table', 1),
+(20, '2023_12_29_035602_create_incomes_table', 2);
 
 -- --------------------------------------------------------
 
@@ -657,6 +726,13 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `incomes`
+--
+ALTER TABLE `incomes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `incomes_branch_id_foreign` (`branch_id`);
+
+--
 -- Indexes for table `invoices`
 --
 ALTER TABLE `invoices`
@@ -755,19 +831,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `beefs`
 --
 ALTER TABLE `beefs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `beef_sells`
 --
 ALTER TABLE `beef_sells`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `branches`
@@ -797,13 +873,13 @@ ALTER TABLE `costs`
 -- AUTO_INCREMENT for table `cows`
 --
 ALTER TABLE `cows`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `cow_sells`
 --
 ALTER TABLE `cow_sells`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `expenses`
@@ -818,6 +894,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `incomes`
+--
+ALTER TABLE `incomes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
@@ -827,7 +909,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `milks`
@@ -915,6 +997,12 @@ ALTER TABLE `cow_sells`
   ADD CONSTRAINT `cow_sells_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_sells_buyer_id_foreign` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_sells_cow_id_foreign` FOREIGN KEY (`cow_id`) REFERENCES `cows` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `incomes`
+--
+ALTER TABLE `incomes`
+  ADD CONSTRAINT `incomes_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `invoices`

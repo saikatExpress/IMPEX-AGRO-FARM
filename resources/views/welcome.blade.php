@@ -80,7 +80,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>মোট আয়</h2>
-                        <p>{{ numberCountingFormat($incomes) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($incomes + $beefSellAmount) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>আজকের আয়</h2>
-                        <p>{{ numberCountingFormat(0) }}</p>
+                        <p>{{ numberCountingFormat($todayIncome) }}</p>
                     </div>
                 </div>
             </div>

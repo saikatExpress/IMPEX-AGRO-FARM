@@ -71,6 +71,9 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/beef/sell/list', [BeefController::class, 'sellListIndex'])->name('beef.sell_list');
     Route::get('/beef/sell/collect', [BeefController::class, 'show'])->name('sell.collect');
     Route::post('/sell/update', [BeefController::class, 'sellUpdate'])->name('sell.edit');
+    Route::post('/beef/sell/store', [BeefController::class, 'beefSellStore'])->name('beef_sell.store');
+    Route::post('/beef/sell/update', [BeefController::class, 'beefSellUpdate'])->name('beef.sell_edit');
+    Route::get('/beef/sell/delete/{id}', [BeefController::class, 'destroy']);
 
     // For Role Route
     Route::get('/role/list', [RoleController::class, 'index'])->name('role.list');
@@ -104,9 +107,14 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/cow/sell/store', [CowController::class, 'sellStore'])->name('sell.store');
     Route::post('/cow/store', [CowController::class, 'store'])->name('cow.store');
     Route::post('/cow/update', [CowController::class, 'update'])->name('cow.edit');
+    Route::get('/sell/cow/list', [CowController::class, 'sellIndex'])->name('cow_sell.list');
+    Route::post('/sell/edit', [CowController::class, 'sellEdit'])->name('cow_sell.edit');
+    Route::post('/payment/store', [CowController::class, 'paymentStore'])->name('payment.store');
     Route::get('/cow/sell/collect', [CowController::class, 'sellCollect'])->name('cow_sell.collect');
+    Route::get('/cow/sell/invoice/{id}', [CowController::class, 'sellInvoice'])->name('sell.invoice');
     Route::get('/get/cow/info/{id}', [CowController::class, 'cowInfo']);
     Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
+    Route::get('/sell/cow/delete/{id}', [CowController::class, 'sellDestroy']);
 
     // For Invoice Controller
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');

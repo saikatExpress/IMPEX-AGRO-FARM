@@ -34,6 +34,17 @@ class CowController extends Controller
         return view('cow.cow_list', compact('cows', 'categories'));
     }
 
+    public function sellIndex()
+    {
+        $sellList = CowSell::with('branch:id,branch_name', 'buyer:id,name','cow:id,tag,category_id', 'cow.category:id,name')->where('branch_id', session('branch_id'))->latest()->get();
+        $cows     = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
+        $buyers   = Buyer::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('status', '1')->latest()->get();
+
+        // return $sellList;
+
+        return view('cow.sell_list', compact('sellList', 'cows', 'buyers'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -195,6 +206,61 @@ class CowController extends Controller
         return view('cow.sell_collect', compact('dueCollect'));
     }
 
+    public function paymentStore(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'payment' => ['required'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $sellId = $request->input('sell_id');
+            $payment = $request->input('payment');
+
+            $sellInfo = CowSell::where('branch_id', session('branch_id'))->find($sellId);
+
+            if($sellInfo){
+                $due = $sellInfo->due;
+                $previousPayment = $sellInfo->payment;
+
+                $newDue     = $due - $payment;
+                $newPayment = $previousPayment + $payment;
+
+                $res = $sellInfo->update(['payment' => $newPayment, 'due' => $newDue]);
+
+                if($res){
+                    $incomeData = Income::where('branch_id', session('branch_id'))->where('sell_id', $sellId)->first();
+                    // return $incomeData;
+
+                    if($incomeData){
+                        $incomeAmount    = $incomeData->amount;
+                        $newIncomeAmount = $incomeAmount + $payment;
+                        $incomeDue       = $incomeData->due;
+                        $newIncomeDue    = $incomeDue - $payment;
+
+                        $data = Income::where('branch_id', session('branch_id'))->where('sell_id', $sellId)->update(['amount' => $newIncomeAmount, 'due' => $newIncomeDue]);
+
+                        if($data){
+                            DB::commit();
+                            return redirect()->back()->with('message', 'Payment created successfully');
+                        }
+                    }
+                }
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
     /**
      * Display the specified resource.
      */
@@ -216,6 +282,88 @@ class CowController extends Controller
     public function edit(Cow $cow)
     {
         //
+    }
+
+    public function sellEdit(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'cow_id'    => ['required'],
+                'buyer_id'  => ['required'],
+                'price'     => ['required'],
+                'payment'   => ['required'],
+                'due'       => ['required'],
+                'sell_date' => ['required'],
+                'status'    => ['required'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $updateData = [
+                'cow_id'    => $request->input('cow_id'),
+                'buyer_id'  => $request->input('buyer_id'),
+                'price'     => $request->input('price'),
+                'payment'   => $request->input('payment'),
+                'due'       => $request->input('due'),
+                'sell_date' => $request->input('sell_date'),
+                'status'    => $request->input('status'),
+            ];
+
+            $sellId  = $request->input('sell_id');
+            $payment = $request->input('payment');
+            $due     = $request->input('due');
+            $cowSell = CowSell::find($sellId);
+
+            if($cowSell){
+                $res = $cowSell->update($updateData);
+
+                DB::commit();
+
+                if($res){
+                    $response = $this->incomeDataUpdate($sellId, $payment, $due);
+                    if($response == true){
+                        return redirect()->back()->with('message', 'Data update successfully');
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function incomeDataUpdate($sellId, $payment, $due)
+    {
+        $incomeData = Income::where('branch_id', session('branch_id'))->where('sell_id', $sellId)->first();
+
+        if($incomeData){
+            $res = $incomeData->update(['amount' => $payment, 'due' => $due, 'updated_at' => Carbon::now()]);
+            if($res){
+                return true;
+            }
+        }
+    }
+
+    public function sellInvoice($id)
+    {
+        $cowSellInfo = CowSell::with('branch:id,branch_name', 'buyer','cow:id,tag,category_id', 'cow.category:id,name')->where('branch_id', session('branch_id'))->where('id', $id)->first();
+
+        // return $cowSellInfo;
+
+        if($cowSellInfo){
+            $buyerId = $cowSellInfo->buyer->id;
+
+            $cows = CowSell::with('branch:id,branch_name', 'buyer:id,name,phone_number','cow:id,tag,category_id', 'cow.category:id,name')->where('branch_id', session('branch_id'))->where('buyer_id', $buyerId)->where('due', '>', 0)->get();
+
+            return view('invoice.invoice', compact('cowSellInfo', 'cows'));
+        }
+
     }
 
     /**
@@ -299,6 +447,29 @@ class CowController extends Controller
             DB::commit();
             if($res){
                 return response()->json(['message' => 'Cow deleted successfully.']);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function sellDestroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $cow = CowSell::find($id);
+
+            if(!$cow){
+                return response()->json(['message' => 'Data not Found.']);
+            }
+
+            $res = $cow->delete();
+
+            DB::commit();
+            if($res){
+                return response()->json(['message' => 'Data deleted successfully.']);
             }
         } catch (\Exception $e) {
             DB::rollback();

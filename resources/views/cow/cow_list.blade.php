@@ -61,9 +61,7 @@
                                             <th>Hasil</th>
                                             <th>Total</th>
                                             <th>Caste</th>
-                                            <th>Age</th>
                                             <th>Weight</th>
-                                            <th>Color</th>
                                             <th>Buy date</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -85,9 +83,7 @@
                                                     <td>{{ number_format($cow->hasil, 2) }}</td>
                                                     <td>{{ number_format($cow->total, 2) }}</td>
                                                     <td>{{ ucfirst($cow->caste) }}</td>
-                                                    <td>{{ $cow->age . ' year' }}</td>
                                                     <td>{{ $cow->weight . ' kg' }}</td>
-                                                    <td>{{ ucfirst($cow->color) }}</td>
                                                     <td>{{ dateTimeFormat($cow->buy_date) }}</td>
                                                     <td>
                                                         @if ($cow->flag == '1')
@@ -121,6 +117,10 @@
                                                             data-id="{{ $cow->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
+                                                        <a href="" class="btn btn-sm btn-warning deleteButton"
+                                                            data-id="{{ $cow->id }}">
+                                                            <i class="fa-solid fa-file-invoice"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach

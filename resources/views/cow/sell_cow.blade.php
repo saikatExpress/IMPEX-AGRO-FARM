@@ -11,7 +11,7 @@
 
             <div class="page_header">
                 <div style="width: 15%;" class="page_header_menu">
-                    <a class="btn btn-sm btn-primary" href="{{ route('cow.list') }}">Sell List</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('cow_sell.list') }}">Sell List</a>
                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">
                         Add Buyer
                     </button>
@@ -20,12 +20,14 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>This cow sell from <small style="font-weight: bold; color:#000;">Branch : {{ session('branch_id') }}</small></h2>
+                    <h2>This cow sell from <small style="font-weight: bold; color:#000;">Branch :
+                            {{ session('branch_id') }}</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Settings 1</a>
                                 <a class="dropdown-item" href="#">Settings 2</a>
@@ -43,7 +45,8 @@
                         <span class="section">Cow Sell Info</span>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরু<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গরু<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <select name="cow_id" id="" class="form-control" required="required">
                                     <option value="" selected disabled>Select</option>
@@ -58,7 +61,8 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতা<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতা<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <select name="buyer_id" id="" class="form-control" required="required">
                                     <option value="" selected disabled>Select</option>
@@ -73,7 +77,8 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">মূল্য<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">মূল্য<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <input class="form-control" name="price" required="required" />
                             </div>
@@ -83,7 +88,8 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">পেমেন্ট<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">পেমেন্ট<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <input class="form-control" name="payment" required="required" />
                             </div>
@@ -93,7 +99,8 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">বাকি<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">বাকি<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <input class="form-control" name="due" required="required" />
                             </div>
@@ -103,9 +110,11 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">ট্যাগ<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ট্যাগ<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" class='optional' name="tag" data-validate-length-range="5,15" type="text" />
+                                <input class="form-control" class='optional' name="tag"
+                                    data-validate-length-range="5,15" type="text" />
                             </div>
                             @error('tag')
                                 <span class="text-danger">{{ $message }}</span>
@@ -113,9 +122,11 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">জাত<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">জাত<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" name="caste" class='email' required="required" type="text" />
+                                <input class="form-control" name="caste" class='email' required="required"
+                                    type="text" />
                             </div>
                             @error('caste')
                                 <span class="text-danger">{{ $message }}</span>
@@ -123,9 +134,11 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">গায়ের রঙ <span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">গায়ের রঙ <span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" class='number' name="color" data-validate-minmax="10" required='required'>
+                                <input class="form-control" type="text" class='number' name="color"
+                                    data-validate-minmax="10" required='required'>
                             </div>
                             @error('color')
                                 <span class="text-danger">{{ $message }}</span>
@@ -133,9 +146,11 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিক্রয় তারিখ<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিক্রয় তারিখ<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" class='date' type="date" name="sell_date" required='required'>
+                                <input class="form-control" class='date' type="date" name="sell_date"
+                                    required='required'>
                             </div>
                             @error('sell_date')
                                 <span class="text-danger">{{ $message }}</span>
@@ -143,7 +158,8 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">অবস্থা<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">অবস্থা<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 ">
                                 <div id="gender" class="btn-group" data-toggle="buttons">
                                     <label class="btn btn-secondary" data-toggle-class="btn-primary"
@@ -163,7 +179,8 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">বিবরণ<span
+                                    class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <textarea class="form-control" name='description'></textarea>
                             </div>
@@ -191,73 +208,80 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Add Buyer</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Buyer</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form class="" action="{{ route('buyer.store') }}" method="post" novalidate>
-                    @csrf
-                    <span class="section">Buyer Info</span>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form class="" action="{{ route('buyer.store') }}" method="post" novalidate>
+                        @csrf
+                        <span class="section">Buyer Info</span>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতার নাম<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="name" type="text" required="required" />
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতার নাম<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="name" type="text" required="required" />
+                            </div>
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">ফোন নাম্বার<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="phone_number" class='email' required="required" type="text" />
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ফোন নাম্বার<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="phone_number" class='email' required="required"
+                                    type="text" />
+                            </div>
+                            @error('phone_number')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('phone_number')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতার ঠিকানা<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" type="text" class='email' name="address" data-validate-linked='email' required='required' />
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতার ঠিকানা<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" class='email' name="address"
+                                    data-validate-linked='email' required='required' />
+                            </div>
+                            @error('address')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('address')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতার ব্যালেন্স <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" type="number" class='number' name="balance" data-validate-minmax="10" required='required'>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ক্রেতার ব্যালেন্স <span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="number" class='number' name="balance"
+                                    data-validate-minmax="10" required='required'>
+                            </div>
+                            @error('balance')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('balance')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="ln_solid">
-                        <div class="form-group">
-                            <div class="col-md-6 offset-md-3">
-                                <button type='submit' class="btn btn-primary">Submit</button>
-                                <button type='reset' class="btn btn-success">Reset</button>
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Submit</button>
+                                    <button type='reset' class="btn btn-success">Reset</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
 
             </div>
         </div>
@@ -270,7 +294,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 
     <script>
         // $(".chosen-select").chosen({
@@ -279,23 +303,24 @@
     </script>
 
     <script>
-        $(document).ready(function(){
-            $('select[name="cow_id"]').on('change', function(){
+        $(document).ready(function() {
+            $('select[name="cow_id"]').on('change', function() {
                 var id = $(this).val();
 
-                if(id != null){
+                if (id != null) {
                     $.ajax({
                         url: '/get/cow/info/' + id,
                         type: 'GET',
-                        success: function(response){
-                            $('select[name="cow"]').val(response.id);  // Assuming 'id' is the field you want to set in the dropdown
+                        success: function(response) {
+                            $('select[name="cow"]').val(response
+                            .id); // Assuming 'id' is the field you want to set in the dropdown
                             $('select[name="type"]').val(response.type);
                             $('input[name="tag"]').val(response.tag);
                             $('input[name="caste"]').val(response.caste);
                             $('input[name="color"]').val(response.color);
                             $('textarea[name="description"]').val(response.description);
                         },
-                        error: function(error){
+                        error: function(error) {
                             console.log(error);
                         }
                     });
@@ -305,24 +330,23 @@
     </script>
 
     <script>
-		function hideshow(){
-			var password = document.getElementById("password1");
-			var slash = document.getElementById("slash");
-			var eye = document.getElementById("eye");
+        function hideshow() {
+            var password = document.getElementById("password1");
+            var slash = document.getElementById("slash");
+            var eye = document.getElementById("eye");
 
-			if(password.type === 'password'){
-				password.type = "text";
-				slash.style.display = "block";
-				eye.style.display = "none";
-			}
-			else{
-				password.type = "password";
-				slash.style.display = "none";
-				eye.style.display = "block";
-			}
+            if (password.type === 'password') {
+                password.type = "text";
+                slash.style.display = "block";
+                eye.style.display = "none";
+            } else {
+                password.type = "password";
+                slash.style.display = "none";
+                eye.style.display = "block";
+            }
 
-		}
-	</script>
+        }
+    </script>
 
     <script>
         // initialize a validator instance from the "FormValidator" constructor.
@@ -347,12 +371,11 @@
             if (this.checked)
                 $('form .alert').remove();
         }).prop('checked', false);
-
     </script>
 
     <script>
-        $(document).ready(function(){
-            $('input[name="payment"]').on('input', function(){
+        $(document).ready(function() {
+            $('input[name="payment"]').on('input', function() {
                 var price = $('input[name="price"]').val();
                 var payment = $('input[name="payment"]').val();
 

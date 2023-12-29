@@ -5,7 +5,7 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <a class="btn btn-sm btn-primary" href="{{ route('category.create') }}">Add Category</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('cow.sell') }}">Add Sell</a>
                 </div>
             </div>
 
@@ -26,7 +26,8 @@
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -70,22 +71,27 @@
                                                     <td>{{ ucfirst($sellDue->branch->branch_name) }}</td>
                                                     <td>{{ number_format($sellDue->price, 2) }}</td>
                                                     <td>{{ number_format($sellDue->payment, 2) }}</td>
-                                                    <td style="font-weight: bold;color:red;">{{ number_format($sellDue->due, 2) }}</td>
+                                                    <td style="font-weight: bold;color:red;">
+                                                        {{ number_format($sellDue->due, 2) }}</td>
                                                     <td>
                                                         @if ($sellDue->status == '1')
-                                                            <label for="" class="btn btn-sm btn-warning">Booking</label>
+                                                            <label for=""
+                                                                class="btn btn-sm btn-warning">Booking</label>
                                                         @else
-                                                            <label for="" class="btn btn-sm btn-primary">Delivered</label>
+                                                            <label for=""
+                                                                class="btn btn-sm btn-primary">Delivered</label>
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal" data-target="#myModal"
-                                                        data-id="{{ $sellDue->id }}" data-name="{{ $sellDue->name }}" data-status="{{ $sellDue->status }}">
+                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
+                                                            data-target="#myModal" data-id="{{ $sellDue->id }}"
+                                                            data-status="{{ $sellDue->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $sellDue->id }}">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
+                                                        <a href="{{ route('sell.invoice', ['id' => $sellDue->id]) }}"
+                                                            class="btn btn-sm btn-secondary">
+                                                            <i class="fa-solid fa-file-invoice"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -109,56 +115,42 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Info</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Payment Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
+                <!-- Modal body -->
+                <div class="modal-body">
 
-                <form class="" action="{{ route('category.edit') }}" method="post" novalidate>
-                    @csrf
-                    <input type="hidden" name="category_id">
+                    <form class="" action="{{ route('payment.store') }}" method="post" novalidate>
+                        @csrf
+                        <input type="hidden" name="sell_id">
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="name" type="text" required="required" />
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Amount<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="payment" type="text" required="required" />
+                            </div>
+                            @error('payment')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <select name="status" id="" class="form-control">
-                                <option value="" selected disabled>select</option>
-                                <option value="1">Active</option>
-                                <option value="0">Deactive</option>
-                            </select>
-                        </div>
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="ln_solid">
                         <div class="form-group">
                             <div class="col-md-6 offset-md-3">
-                                <button type='submit' class="btn btn-primary">Update</button>
+                                <button type='submit' class="btn btn-primary">Paid</button>
                                 <button type='reset' class="btn btn-success">Reset</button>
                             </div>
                         </div>
-                    </div>
+                </div>
                 </form>
 
             </div>
 
-            </div>
         </div>
+    </div>
     </div>
 
     <!-- jQuery library -->
@@ -223,18 +215,14 @@
     </script>
 
     <script>
-        $(document).ready(function(){
-            $('.editBtn').click(function(){
-                const categoryData = {
+        $(document).ready(function() {
+            $('.editBtn').click(function() {
+                const sellData = {
                     id: $(this).data('id'),
-                    name: $(this).data('name'),
-                    status: $(this).data('status'),
                 };
 
                 // Set values to form fields
-                $('input[name="category_id"]').val(categoryData.id);
-                $('input[name="name"]').val(categoryData.name);
-                $('select[name="status"]').val(categoryData.status);
+                $('input[name="sell_id"]').val(sellData.id);
 
                 // Open the modal
                 $('#myModal').modal('show');
