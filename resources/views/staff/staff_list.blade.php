@@ -56,6 +56,8 @@
                                             <th>Image</th>
                                             <th>Salary</th>
                                             <th>Address</th>
+                                            <th>Email</th>
+                                            <th>Gender</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -73,8 +75,10 @@
                                                     <td>
                                                         <img class="staff-image" src="{{ asset('images/staffs/' . $staff->staff_image) }}" alt="">
                                                     </td>
-                                                    <td>{{ $staff->salary }}</td>
+                                                    <td>{{ number_format($staff->salary, 2) }}</td>
                                                     <td>{{ $staff->present_address }}</td>
+                                                    <td>{{ $staff->email }}</td>
+                                                    <td>{{ ucfirst($staff->gender) }}</td>
                                                     <td>
                                                         @if ($staff->status == '1')
                                                             Active
@@ -83,10 +87,9 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal" data-target="#myModal"
-                                                        data-id="{{ $staff->id }}" data-name="{{ $staff->name }}" data-status="{{ $staff->status }}">
+                                                        <a href="{{ route('staff.edit', ['id' => $staff->id]) }}" class="btn btn-sm btn-primary">
                                                             <i class="fa-regular fa-pen-to-square"></i>
-                                                        </button>
+                                                        </a>
                                                         <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $staff->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
@@ -107,63 +110,6 @@
 
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Info</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-
-                <form class="" action="{{ route('category.edit') }}" method="post" novalidate>
-                    @csrf
-                    <input type="hidden" name="category_id">
-
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="name" type="text" required="required" />
-                        </div>
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6">
-                            <select name="status" id="" class="form-control">
-                                <option value="" selected disabled>select</option>
-                                <option value="1">Active</option>
-                                <option value="0">Deactive</option>
-                            </select>
-                        </div>
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="ln_solid">
-                        <div class="form-group">
-                            <div class="col-md-6 offset-md-3">
-                                <button type='submit' class="btn btn-primary">Update</button>
-                                <button type='reset' class="btn btn-success">Reset</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-
             </div>
         </div>
     </div>

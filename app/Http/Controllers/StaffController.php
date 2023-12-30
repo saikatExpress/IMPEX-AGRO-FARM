@@ -22,7 +22,9 @@ class StaffController extends Controller
     public function index()
     {
         $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
-        return $staffs;
+
+        // return $staffs;
+
         return view('staff.staff_list', compact('staffs'));
     }
 
@@ -126,9 +128,11 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Staff $staff)
+    public function edit(Staff $staff, $id)
     {
-        //
+        $staff = Staff::where('branch_id', session('branch_id'))->where('id', $id)->first();
+
+        return view('staff.staff_edit', compact('staff'));
     }
 
     /**
@@ -136,7 +140,7 @@ class StaffController extends Controller
      */
     public function update(UpdateStaffRequest $request, Staff $staff)
     {
-        //
+
     }
 
     /**
