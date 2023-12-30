@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Branch;
+use App\Models\StaffSalary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -56,5 +57,10 @@ class Staff extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id', 'id');
+    }
+
+    public function staffSalaries()
+    {
+        return $this->hasMany(StaffSalary::class);
     }
 }

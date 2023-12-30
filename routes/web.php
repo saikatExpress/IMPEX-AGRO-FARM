@@ -62,7 +62,9 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/staff/list', [StaffController::class, 'index'])->name('staff.list');
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.us');
     Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');
+    Route::get('/staff/salary', [StaffController::class, 'salaryCreate'])->name('staff.salary');
     Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
+    Route::post('/salary/store', [StaffController::class, 'storeSalary'])->name('store.salary');
 
     //For Beef Route
     Route::get('/beef/create', [BeefController::class, 'create'])->name('beef.create');

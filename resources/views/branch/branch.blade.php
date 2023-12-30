@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Impex Agro Farm | Admin Dashboard</title>
+    <link rel="icon" href="{{ asset('custom/logos/751280420015239.png') }}" type="image/ico" />
 
     <!-- Bootstrap -->
     <link href="{{ asset('asset/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -17,7 +18,7 @@
 <body style="background-color: #595959">
     <div class="container">
         <div class="branch_container">
-            <h2 class="text-align">Choose A Branch</h2>
+            <h2 class="text-align">Impex Agro Farm</h2>
             @if (session('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
@@ -25,7 +26,7 @@
             @endif
             <div class="branch_body">
                 @foreach ($branches as $key => $branch)
-                    <div style="width: 80%;" class="card branch-card">
+                    <div class="card branch-card">
                         <div class="d-flex">
                             <div class="branch_image">
                                 <img src="{{ asset('custom/logos/Untitled-removebg-preview.png') }}" alt="">
@@ -33,7 +34,7 @@
                             <div class="branch_title">
                                 <a href="{{ route('select.branch', ['branch_id' => $branch->id]) }}">
                                     <h4 class="card-title">
-                                        {{ $branch->branch_name }}
+                                        {{ 'Branch : ' . $branch->id }}
                                     </h4>
                                     <h5 class="card-title_h5">
                                         {{ $branch->branch_address }}

@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <div class="col-md-12 col-sm-12 ">
+        <div class="col-sm-12 col-md-12 col-sm-12 ">
 
             @if (session('message'))
                 <div class="alert alert-success">

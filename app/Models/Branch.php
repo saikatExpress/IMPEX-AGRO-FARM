@@ -12,6 +12,7 @@ use App\Models\CowSell;
 use App\Models\Account;
 use App\Models\Invoice;
 use App\Models\BeefSell;
+use App\Models\StaffSalary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -92,5 +93,10 @@ class Branch extends Model
     public function incomes()
     {
         return $this->hasMany(Income::class);
+    }
+
+    public function staffSalaries()
+    {
+        return $this->hasMany(StaffSalary::class);
     }
 }

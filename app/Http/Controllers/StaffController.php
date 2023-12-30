@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\StaffSalary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -115,6 +116,34 @@ class StaffController extends Controller
             DB::rollback();
             info($e);
         }
+    }
+
+    public function storeSalary(Request $request)
+    {
+        return $request->all();
+        $request->validate([
+            'staff_id' => 'required|exists:staff,id',
+            'month' => 'required|integer|min:1|max:12',
+            'year' => 'required|integer|min:1900',
+            'amount' => 'required|numeric|min:0',
+        ]);
+
+        StaffSalary::create([
+            'staff_id' => $request->staff_id,
+            'month' => $request->month,
+            'year' => $request->year,
+            'amount' => $request->amount,
+            'paid_on' => now() // or you can get the payment date from the form if provided
+        ]);
+
+        return redirect()->back()->with('success', 'Salary stored successfully.');
+    }
+
+    public function salaryCreate()
+    {
+        $staffs = Staff::where('branch_id', session('branch_id'))->where('status', '1')->get();
+
+        return view('staff.create_salary', compact('staffs'));
     }
 
     /**

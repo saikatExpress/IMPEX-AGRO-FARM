@@ -76,6 +76,7 @@ body {
     margin-right: auto;
     display: block;
     margin-bottom: 0.5rem;
+    width: 80%
 }
 
 .branch_image {
@@ -140,3 +141,28 @@ body {
     height: 70px;
     border-radius: 50%;
 }
+
+@media (max-width: 768px) {
+        .branch_container{
+            width: 100%;
+        }
+
+        .branch-card{
+            width: 85%;
+        }
+
+        .branch_image img
+        {
+            width: 70px;
+            height: 70px;
+            padding: 5px 5px 5px;
+        }
+
+        .card-title_h5
+        {
+            color: rgb(5, 177, 5);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+    }
