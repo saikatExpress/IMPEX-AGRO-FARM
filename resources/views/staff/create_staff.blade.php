@@ -4,7 +4,7 @@
 
         <div class="page_header">
             <div class="page_header_menu">
-                <a class="btn btn-sm btn-primary" href="">Staff List</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('staff.list') }}">Staff List</a>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                         @csrf
                         <input type="hidden" value="{{ session('branch_id') }}" name="branch_id">
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Name <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">নাম <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -59,7 +59,19 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Father Name <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">বেসিক বেতন <span
+                                    class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="name" name="salary" class="form-control ">
+                            </div>
+                            @error('salary')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">বাবার নাম <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -71,7 +83,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Mother Name <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> মায়ের নাম <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -83,7 +95,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Email <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> ইমেইল <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -95,7 +107,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NID No<span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">জাতীয় পরিচয়পত্র<span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -108,8 +120,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Birth
-                                Certificate<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">জন্ম নিবন্ধন<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" id="last-name" name="birth_certificate" class="form-control">
@@ -120,8 +131,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Present
-                                Address<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">বর্তমান ঠিকানা<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" id="last-name" name="present_address" class="form-control">
@@ -132,8 +142,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Permanent
-                                Address<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">স্থায়ী ঠিকানা<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
                                 <input type="text" id="last-name" name="permanent_address" class="form-control">
@@ -144,7 +153,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Blood Group<span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">রক্তের গ্রুপ <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -166,7 +175,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">লিঙ্গ</label>
                             <div class="col-md-6 col-sm-6 ">
                                 <div id="gender" class="btn-group" data-toggle="buttons">
                                     <label class="btn btn-secondary" data-toggle-class="btn-primary"
@@ -186,7 +195,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">জন্ম তারিখ <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -208,7 +217,7 @@
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Staff Images <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">ছবি <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained('branches')
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->string('name', 250)->nullable();
+            $table->integer('salary')->nullable();
             $table->string('father_name', 250)->nullable();
             $table->string('mother_name', 250)->nullable();
             $table->string('email', 250)->nullable();

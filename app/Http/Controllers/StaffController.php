@@ -22,7 +22,7 @@ class StaffController extends Controller
     public function index()
     {
         $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
-
+        return $staffs;
         return view('staff.staff_list', compact('staffs'));
     }
 
@@ -74,6 +74,7 @@ class StaffController extends Controller
             }
 
             $name             = $request->input('name');
+            $salary           = $request->input('salary');
             $fatherName       = $request->input('father_name');
             $motherName       = $request->input('mother_name');
             $email            = $request->input('email');
@@ -87,6 +88,7 @@ class StaffController extends Controller
 
             $staffObj->branch_id         = session('branch_id');
             $staffObj->name              = $name;
+            $staffObj->salary            = $salary;
             $staffObj->father_name       = $fatherName;
             $staffObj->mother_name       = $motherName;
             $staffObj->email             = $email;

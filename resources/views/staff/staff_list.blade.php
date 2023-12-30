@@ -54,6 +54,7 @@
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Image</th>
+                                            <th>Salary</th>
                                             <th>Address</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -72,6 +73,7 @@
                                                     <td>
                                                         <img class="staff-image" src="{{ asset('images/staffs/' . $staff->staff_image) }}" alt="">
                                                     </td>
+                                                    <td>{{ $staff->salary }}</td>
                                                     <td>{{ $staff->present_address }}</td>
                                                     <td>
                                                         @if ($staff->status == '1')

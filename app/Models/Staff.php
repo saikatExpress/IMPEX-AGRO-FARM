@@ -13,6 +13,7 @@ class Staff extends Model
     protected $fillable = [
         'branch_id',
         'name',
+        'salary',
         'father_name',
         'mother_name',
         'email',
@@ -32,6 +33,7 @@ class Staff extends Model
         'id'                => 'integer',
         'branch_id'         => 'integer',
         'name'              => 'string',
+        'salary'            => 'integer',
         'father_name'       => 'string',
         'mother_name'       => 'string',
         'email'             => 'string',
