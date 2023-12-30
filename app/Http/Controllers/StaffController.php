@@ -37,6 +37,13 @@ class StaffController extends Controller
         return view('staff.create_staff');
     }
 
+    public function storeStaffSalary($id)
+    {
+        $staff = Staff::find($id);
+
+        return response()->json($staff);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

@@ -4,6 +4,8 @@
     <div class="container mt-5">
         <h2 style="color: #000; font-weight:bold;" class="mb-4">Salary Update</h2>
 
+        <h2 id="demo" style="display: none;">The Time is now</h2>
+
         <form action="{{ route('store.salary') }}" method="post">
             @csrf
             <table class="table table-bordered">
@@ -55,8 +57,35 @@
 
             $('.btn-primary').click(function(){
                 var id = $(this).data('id');
-                alert(id);
+                if(id){
+                    $.ajax({
+                        url: '/staff/salary/add/' + id,
+                        type: 'GET',
+                        success: function(response){
+                            console.log(response);
+                        }
+                    });
+                }
             });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                // Your function logic here
+                var d = new Date();
+
+                var month = d.getMonth()+1;
+                var day = d.getDate();
+
+                var output = d.getFullYear() + '/' +
+                    (month<10 ? '0' : '') + month + '/' +
+                    (day<10 ? '0' : '') + day;
+
+                $('#demo').text('Today : ' + output);
+                $('#demo').show();
+            }, 5000); // 60,000 milliseconds = 1 minute
         });
     </script>
 
