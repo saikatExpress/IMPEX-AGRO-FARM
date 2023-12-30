@@ -219,6 +219,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <img id="img" src="{{ asset('images/staffs/' . $staff->staff_image) }}" alt="{{ $staff->name }}">
                                 <button type="button" id="staffImage">Remove</button>
+                                <button type="button" style="display: none;" id="undoImage">Undo</button>
                             </div>
                         </div>
 
@@ -255,6 +256,15 @@
             $('#staffImage').click(function(){
                 $('#img').hide();
                 $('#immg1').show();
+                $('#staffImage').hide();
+                $('#undoImage').show();
+            });
+
+            $('#undoImage').click(function(){
+                $('#img').show();
+                $('#immg1').hide();
+                $('#staffImage').show();
+                $('#undoImage').hide();
             });
         });
     </script>
