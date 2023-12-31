@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Buyer;
+use App\Models\CowSell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,15 @@ class BuyerController extends Controller
         $buyers = Buyer::with('branch')->where('branch_id', session('branch_id'))->where('status', '1')->get();
 
         return view('buyer.buyer_list', compact('buyers'));
+    }
+
+    public function buyerDue()
+    {
+        $buyerDue = CowSell::with('branch:id,branch_address', 'buyer:id,name,balance')->where('branch_id', session('branch_id'))->where('due', '>', 0)->get();
+
+        // return $buyerDue;
+
+        return view('buyer.buyer_due', compact('buyerDue'));
     }
 
     /**

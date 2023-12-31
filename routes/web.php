@@ -132,6 +132,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/buyer/create', [BuyerController::class, 'create'])->name('buyer.us');
     Route::post('/buyer/edit', [BuyerController::class, 'update'])->name('buyer.edit');
     Route::post('/buyer/store', [BuyerController::class, 'store'])->name('buyer.store');
+    Route::get('/buyer/due', [BuyerController::class, 'buyerDue'])->name('buyer.due');
     Route::get('/buyer/delete/{id}', [BuyerController::class, 'destroy']);
 
     // For Languge Route

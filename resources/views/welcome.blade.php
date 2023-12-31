@@ -125,7 +125,7 @@
 
                 <div class="item-menu-info">
                     <p>
-                        {{ $incomes + $beefSellAmount . ' Tk' }}
+                        {{ number_format($incomes + $beefSellAmount, 2) . ' Tk' }}
                     </p>
                 </div>
             </div>
