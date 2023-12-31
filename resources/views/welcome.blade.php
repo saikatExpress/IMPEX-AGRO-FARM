@@ -19,7 +19,7 @@
         <div class="tile_count">
 
             <div class="welcome_text">
-                <h2>Welocme To {{ $branchName->branch_name . ' Branch' }}</h2>
+                <h2>Welocme To {{ $branchName->branch_address }}</h2>
             </div>
 
             <div class="col-md-3 col-sm-4  tile_stats_count">
@@ -28,21 +28,39 @@
                         <img src="{{ asset('custom/logos/dd-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>{{ __('translate.staffs') }}</h2>
+                        <h2>কর্মচারী</h2>
                         <p>{{ numberCountingFormat($staffs) }}</p>
                     </div>
+                </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ numberCountingFormat($staffs) }}
+                    </p>
                 </div>
             </div>
 
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
-                        <img src="{{ asset('custom/images/cow-removebg-preview.png') }}" alt="cow image">
+                        <img src="{{ asset('custom/logos/2395796.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Total Cow</h2>
+                        <h2>মোট পশু</h2>
                         <p>{{ numberCountingFormat($cows > 0 ? $cows : '0') }}</p>
                     </div>
+                </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ ($cows > 0) ? $cows : '0' }}
+                    </p>
                 </div>
             </div>
 
@@ -55,9 +73,18 @@
                             alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Total Calf</h2>
+                        <h2>মোট বাছুর</h2>
                         <p>{{ numberCountingFormat(0) }}</p>
                     </div>
+                </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        0
+                    </p>
                 </div>
             </div>
 
@@ -67,9 +94,18 @@
                         <img src="{{ asset('custom/logos/ezgif-2-e34d9fb6d1-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Total Sold Milk</h2>
+                        <h2>মোট দুধ</h2>
                         <p>{{ numberCountingFormat(0) . ' Ltr' }}</p>
                     </div>
+                </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ 0 . ' Ltr' }}
+                    </p>
                 </div>
             </div>
 
@@ -83,6 +119,15 @@
                         <p>{{ numberCountingFormat($incomes + $beefSellAmount) . ' Tk' }}</p>
                     </div>
                 </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ $incomes + $beefSellAmount . ' Tk' }}
+                    </p>
+                </div>
             </div>
 
             <div class="col-md-3 col-sm-4  tile_stats_count">
@@ -94,6 +139,15 @@
                         <h2>ফার্ম খরচ</h2>
                         <p>{{ numberCountingFormat($farmCosts + $farm1Cost + $staffSalaryAmount) . ' Tk' }}</p>
                     </div>
+                </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ number_format($farmCosts + $farm1Cost + $staffSalaryAmount, 2) . ' Tk' }}
+                    </p>
                 </div>
             </div>
 
@@ -107,9 +161,18 @@
                         <p>{{ numberCountingFormat($permanetCost) . ' Tk' }}</p>
                     </div>
                 </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ number_format($permanetCost, 2) . ' Tk' }}
+                    </p>
+                </div>
             </div>
 
-            <div class="col-md-3 col-sm-4  tile_stats_count">
+            {{-- <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
                         <img src="https://cdn-icons-png.flaticon.com/128/10761/10761983.png" alt="cow image">
@@ -119,7 +182,7 @@
                         <p>{{ numberCountingFormat($totalCost) . ' Tk' }}</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
@@ -128,8 +191,17 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>মোট বাকি</h2>
-                        <p>{{ numberCountingFormat($dues) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($dues + $beefDues) . ' Tk' }}</p>
                     </div>
+                </div>
+                <div class="item-foot-head">
+                    <button><i class="fa-solid fa-caret-down"></i></button>
+                </div>
+
+                <div class="item-menu-info">
+                    <p>
+                        {{ number_format($dues + $beefDues, 2) . ' Tk' }}
+                    </p>
                 </div>
             </div>
 
@@ -139,19 +211,37 @@
                         <img src="{{ asset('custom/logos/ezgif-2-e34d9fb6d1-removebg-preview.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
-                        <h2>Today Sold Milk</h2>
+                        <h2>আজকের দুধ</h2>
                         <p>{{ numberCountingFormat(0) . ' Ltr' }}</p>
+                    </div>
+                    <div class="item-foot-head">
+                        <button><i class="fa-solid fa-caret-down"></i></button>
+                    </div>
+
+                    <div class="item-menu-info">
+                        <p>
+                            0
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
-                        <img src="{{ asset('custom/logos/beef-removebg-preview.png') }}" alt="cow image">
+                        <img src="{{ asset('custom/logos/2749522.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
                         <h2>আজকের গোশত</h2>
                         <p>{{ numberCountingFormat($totalBeef) . ' Kg' }}</p>
+                    </div>
+                    <div class="item-foot-head">
+                        <button><i class="fa-solid fa-caret-down"></i></button>
+                    </div>
+
+                    <div class="item-menu-info">
+                        <p>
+                            {{ number_format($totalBeef, 2) }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -159,11 +249,41 @@
             <div class="col-md-3 col-sm-4  tile_stats_count">
                 <div class="d-flex custom-col">
                     <div class="dashboard_menu">
-                        <img src="{{ asset('custom/logos/ezgif-2-a0ef486006-removebg-preview.png') }}" alt="cow image">
+                        <img src="{{ asset('custom/logos/9967826.png') }}" alt="cow image">
                     </div>
                     <div class="dashboard_item">
                         <h2>আজকের আয়</h2>
                         <p>{{ numberCountingFormat($todayIncome) }}</p>
+                    </div>
+                    <div class="item-foot-head">
+                        <button><i class="fa-solid fa-caret-down"></i></button>
+                    </div>
+
+                    <div class="item-menu-info">
+                        <p>
+                            {{ number_format($todayIncome, 2) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4  tile_stats_count">
+                <div class="d-flex custom-col">
+                    <div class="dashboard_menu">
+                        <img src="{{ asset('custom/logos/9967826.png') }}" alt="cow image">
+                    </div>
+                    <div class="dashboard_item">
+                        <h2>কর্মচারীর বেতন</h2>
+                        <p>{{ numberCountingFormat($staffSalaryAmount) }}</p>
+                    </div>
+                    <div class="item-foot-head">
+                        <button><i class="fa-solid fa-caret-down"></i></button>
+                    </div>
+
+                    <div class="item-menu-info">
+                        <p>
+                            {{ number_format($staffSalaryAmount, 2) }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -196,6 +316,18 @@
                     console.log("Error changing language", error);
                     window.location.reload();
                 }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('.item-foot-head').click(function(){
+                // Find the corresponding .item-menu-info within the parent .tile_stats_count
+                var menuInfo = $(this).closest('.tile_stats_count').find('.item-menu-info');
+
+                // Toggle the visibility of the found .item-menu-info element
+                menuInfo.toggle();
             });
         });
     </script>
