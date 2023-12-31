@@ -22,8 +22,8 @@ class StoreMilkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'milk_date' => ['required'],
-            'quantity'  => ['required'],
+            // 'milk_date' => ['required'],
+            // 'quantity'  => ['required'],
         ];
     }
 }

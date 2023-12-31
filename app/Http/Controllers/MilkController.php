@@ -54,24 +54,18 @@ class MilkController extends Controller
         try {
             DB::beginTransaction();
 
-            $validated = $request->validated();
-
-            if(!$validated){
-                return response()->json(['status' => 'error', 'message' => $validator->errors()->first()], 422);
-            }
-
             $milkObj = new Milk;
 
             $milkObj->branch_id = session('branch_id');
             $milkObj->cow_id    = $id;
-            $milkObj->milk_date = $request->input('milk_date');
-            $milkObj->qauntity  = $request->input('qauntity');
+            $milkObj->milk_date = $request->input('date');
+            $milkObj->quantity  = $request->input('quantity');
 
             $res = $milkObj->save();
 
             DB::commit();
             if($res){
-                return redirect()->back()->with('message', 'Milk Saved');
+                return response()->json(['message' => 'Milk Store']);
             }
         } catch (\Exception $e) {
             DB::rollback();
