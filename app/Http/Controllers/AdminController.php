@@ -11,6 +11,7 @@ use App\Models\Income;
 use App\Models\Branch;
 use App\Models\Account;
 use App\Models\BeefSell;
+use App\Models\StaffSalary;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -42,8 +43,9 @@ class AdminController extends Controller
 
         $beefSellAmount = BeefSell::where('branch_id', session('branch_id'))->sum('payment');
         $todayIncome = BeefSell::where('branch_id', session('branch_id'))->whereDate('created_at', $currentDate)->sum('payment');
+        $staffSalaryAmount = StaffSalary::where('branch_id', session('branch_id'))->sum('amount');
 
-        return view('welcome', compact('dues','cows', 'todayIncome', 'beefSellAmount', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts','incomes', 'totalCost', 'farm1Cost'));
+        return view('welcome', compact('dues','cows', 'staffSalaryAmount', 'todayIncome', 'beefSellAmount', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts','incomes', 'totalCost', 'farm1Cost'));
     }
 
     protected function beefCount($beefsForToday)

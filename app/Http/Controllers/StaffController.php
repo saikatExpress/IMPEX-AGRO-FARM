@@ -37,11 +37,53 @@ class StaffController extends Controller
         return view('staff.create_staff');
     }
 
-    public function storeStaffSalary($id)
+    public function storeStaffSalary(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            // 'salary'      => 'required|numeric|min:' . $request->input('basic_salary'),
+            'salary_date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'message' => $validator->errors()->first()], 422);
+        }
+
+        $salaryDate = $request->input('salary_date');
+        $salary     = $request->input('salary');
+        $month      = $request->input('month');
+        $year       = $request->input('year');
+        $amount     = $request->input('salary');
+        $paidOn     = $request->input('salary_date');
+
+        $staffSalaryObj = new StaffSalary;
+
+        $staffSalaryObj->branch_id = session('branch_id');
+        $staffSalaryObj->staff_id  = $id;
+        $staffSalaryObj->month     = $month;
+        $staffSalaryObj->year      = $year;
+        $staffSalaryObj->amount    = $amount;
+        $staffSalaryObj->paid_on   = $paidOn;
+
+        $res = $staffSalaryObj->save();
+
+        if($res){
+            $result = $this->staffFlagUpdate($id);
+            if($result == true){
+                return response()->json(['message' => 'Salary Paid']);
+            }
+        }
+    }
+
+    protected function staffFlagUpdate($id)
     {
         $staff = Staff::find($id);
 
-        return response()->json($staff);
+        if($staff){
+            $res = $staff->update(['flag' => 1]);
+            if($res){
+                return true;
+            }
+        }
     }
 
     /**

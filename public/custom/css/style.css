@@ -142,6 +142,31 @@ body {
     border-radius: 50%;
 }
 
+.successMsg{
+    background-color: #15458e;
+    color: #fff;
+    position: absolute;
+    width: 15%;
+    left: 45%;
+    top: 20%;
+    height: 100px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+.successMsg h2{
+    text-align: center;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.successMsg span{
+    margin-left: 90%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
         .branch_container{
             width: 100%;

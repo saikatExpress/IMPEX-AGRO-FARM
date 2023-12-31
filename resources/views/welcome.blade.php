@@ -92,7 +92,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>ফার্ম খরচ</h2>
-                        <p>{{ numberCountingFormat($farmCosts + $farm1Cost) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($farmCosts + $farm1Cost + $staffSalaryAmount) . ' Tk' }}</p>
                     </div>
                 </div>
             </div>

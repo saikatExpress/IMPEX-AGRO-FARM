@@ -17,6 +17,7 @@ return new class extends Migration
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->foreignId('staff_id')->constrained('staff')
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->timestamp('salary_date')->nullable();
             $table->integer('month')->nullable();
             $table->integer('year')->nullable();
             $table->integer('amount')->nullable();

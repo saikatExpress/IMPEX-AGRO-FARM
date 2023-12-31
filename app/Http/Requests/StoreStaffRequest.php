@@ -22,8 +22,8 @@ class StoreStaffRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name'        => ['required'],
-            // 'father_name' => ['required'],
+            'name'   => ['required'],
+            'salary' => ['required', 'integer'],
         ];
     }
 }

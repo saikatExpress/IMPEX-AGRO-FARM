@@ -14,6 +14,7 @@ class StaffSalary extends Model
     protected $fillable = [
         'branch_id',
         'staff_id',
+        'salary_date',
         'month',
         'year',
         'amount',
@@ -21,16 +22,17 @@ class StaffSalary extends Model
     ];
 
     protected $casts = [
-        'id'         => 'integer',
-        'branch_id'  => 'integer',
-        'staff_id'   => 'integer',
-        'month'      => 'integer',
-        'year'       => 'integer',
-        'amount'     => 'integer',
-        'paid_on'    => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime',
+        'id'          => 'integer',
+        'branch_id'   => 'integer',
+        'staff_id'    => 'integer',
+        'salary_date' => 'datetime',
+        'month'       => 'integer',
+        'year'        => 'integer',
+        'amount'      => 'integer',
+        'paid_on'     => 'datetime',
+        'created_at'  => 'datetime',
+        'updated_at'  => 'datetime',
+        'deleted_at'  => 'datetime',
     ];
 
     // Relation Start
