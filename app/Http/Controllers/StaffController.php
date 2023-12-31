@@ -22,11 +22,20 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
+        $currentMonth = Carbon::now();
+
+        $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->whereDate('paid_on', $currentMonth)->get();
 
         // return $staffs;
 
         return view('staff.staff_list', compact('staffs'));
+    }
+
+    public function salaryIndex()
+    {
+        $salaries = StaffSalary::with('branch:id,branch_name', 'staff:id,name,salary')->get();
+
+        return view('staff.salary_list', compact('salaries'));
     }
 
     /**
@@ -193,6 +202,21 @@ class StaffController extends Controller
         $staffs = Staff::where('branch_id', session('branch_id'))->where('status', '1')->get();
 
         return view('staff.create_salary', compact('staffs'));
+    }
+
+    public function salaryReport()
+    {
+        return view('staff.salary_report_create');
+    }
+
+    public function salaryReportView(Request $request)
+    {
+        $month = $request->input('month');
+        $year  = $request->input('year');
+
+        $salaries = StaffSalary::where('branch_id', session('branch_id'))->where('month', $month)->where('year', $year)->get();
+
+        return view('staff.salary_report_view', compact('salaries'));
     }
 
     /**

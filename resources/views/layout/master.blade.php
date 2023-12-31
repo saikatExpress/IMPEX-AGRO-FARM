@@ -108,6 +108,7 @@
                                         <li><a href="{{ route('user.list') }}">ব্যাবহারকারীদের তালিকা</a></li>
                                         <li><a href="{{ route('user.create') }}">ব্যাবহারকারী যুক্ত</a></li>
                                         <li><a href="{{ route('staff.salary') }}">স্টাফ বেতন</a></li>
+                                        <li><a href="{{ route('salary.list') }}">বেতন তালিকা </a></li>
                                     </ul>
                                 </li>
                                 {{-- HR Menu List --}}
