@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BeefSell extends Model
+class MilkSell extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'branch_id',
         'name',
-        'sell_date',
+        'sale_date',
         'quantity',
         'price',
         'payment',
@@ -26,7 +25,7 @@ class BeefSell extends Model
         'id'           => 'integer',
         'branch_id'    => 'integer',
         'name'         => 'string',
-        'sell_date'    => 'datetime',
+        'sale_date'    => 'datetime',
         'quantity'     => 'string',
         'price'        => 'integer',
         'payment'      => 'integer',

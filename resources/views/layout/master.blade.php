@@ -79,7 +79,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('dashboard') }}">ড্যাশবোর্ড</a></li>
                                         <li><a href="{{ route('branch.create') }}">ব্রাঞ্চ</a></li>
-                                        <li><a href="{{ route('branch.create') }}">ব্রাঞ্চ তালিকা</a></li>
+                                        <li><a href="{{ route('branch.list') }}">ব্রাঞ্চ তালিকা</a></li>
                                         <li><a href="{{ route('role.create') }}">রোল</a></li>
                                         <li><a href="{{ route('role.list') }}">রোল তালিকা</a></li>
                                     </ul>
@@ -88,7 +88,7 @@
                                 {{-- Category Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px;" class="fa-solid fa-list"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-list"></i>
                                         ক্যাটাগরি
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -116,7 +116,7 @@
                                 {{-- Buyer Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px;" class="fa-solid fa-money-check"></i> ক্রেতা
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-money-check"></i> ক্রেতা
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
                                     <ul class="nav child_menu">
@@ -130,7 +130,7 @@
                                 {{-- Beef Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px;" class="fa-solid fa-hippo"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-hippo"></i>
                                         মাংস বিবরণী
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -143,7 +143,7 @@
                                 {{-- Beef Menu List --}}
 
                                 {{-- Invoice Menu List --}}
-                                <li>
+                                {{-- <li>
                                     <a>
                                         <i style="margin-right:8px;" class="fa-solid fa-file-invoice"></i>
                                         ইনভয়েস
@@ -153,15 +153,19 @@
                                         <li><a href="{{ route('invoice.create') }}">নতুন ইনভয়েস</a></li>
                                         <li><a href="{{ route('beef.sell') }}"> ইনভয়েস তালিকা </a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 {{-- Invoice Menu List --}}
 
                                 {{-- Milk Menu List --}}
-                                <li><a><i class="fa fa-table"></i> দুধ বিবরণী <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-cow"></i>
+                                        দুধ বিবরণী
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('milk.create') }}">প্রাপ্ত দুধ</a></li>
-                                        <li><a href="tables_dynamic.html">দুধ বিক্রয়</a></li>
+                                        <li><a href="{{ route('milk.sell') }}">দুধ বিক্রয়</a></li>
                                         <li><a href="tables_dynamic.html">বাকী সংগ্রহ</a></li>
                                     </ul>
                                 </li>
@@ -174,7 +178,7 @@
                                 {{-- Animal Sell Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px;" class="fa-brands fa-sellcast"></i> পশু
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-brands fa-sellcast"></i> পশু
                                         ক্রয়/বিক্রয়
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -187,7 +191,7 @@
                                 {{-- Animal Sell Menu List --}}
 
                                 <li>
-                                    <a><i style="margin-right:8px;"
+                                    <a><i style="margin-right:8px; font-size: 1.2rem;"
                                             class="fa-solid fa-circle-dollar-to-slot"></i>ফার্মের খরচ
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -202,8 +206,12 @@
                         <div class="menu_section">
                             <h3>Live On</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa-solid fa-hippo"></i> পশু মনিটরিং <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li>
+                                    <a>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-brands fa-watchman-monitoring"></i>
+                                        পশু মনিটরিং
+                                        <span class="fa fa-chevron-down"></span>
+                                        </a>
                                     <ul class="nav child_menu">
                                         <li><a href="e_commerce.html">রুটিন মনিটরিং</a></li>
                                         <li><a href="projects.html">ভ্যাকসিন মনিটরিং</a></li>
@@ -213,45 +221,39 @@
 
                                 <li>
                                     <a href="">
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
                                         পরিবেশক
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="">
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                    <a href="{{ route('cow.list') }}">
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-list"></i>
                                         পশুর তালিকা
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="">
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-list"></i>
                                         বাছুরের তালিকা
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="">
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-circle-info"></i>
                                         শেড বিবরণী
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="">
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-flag"></i>
                                         রিপোর্ট
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="">
-                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
-                                        ক্যাটালগ
-                                    </a>
-                                </li>
                             </ul>
                         </div>
 

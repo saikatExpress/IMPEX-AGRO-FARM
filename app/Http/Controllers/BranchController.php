@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Branch;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,9 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        $branches = Branch::where('status', 1)->where('flag', '0')->get();
+
+        return view('branch.branch_list', compact('branches'));
     }
 
     /**
@@ -120,14 +123,56 @@ class BranchController extends Controller
      */
     public function update(UpdateBranchRequest $request, Branch $branch)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $validateData = $request->validated();
+            $branchId     = $request->input('branch_id');
+            $branch       = Branch::find($branchId);
+
+            $validateData = [
+                'branch_name' => $request->input('branch_name'),
+                'slug'        => Str::slug($request->input('branch_name'), '-'),
+                'status'      => $request->input('status'),
+            ];
+
+            if($branch){
+                $res = $branch->update($validateData);
+
+                DB::commit();
+                if($res){
+                    return redirect()->back()->with('message', 'Branch Update successfully');
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Branch $branch)
+    public function destroy(Branch $branch, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $branch = Branch::find($id);
+
+            if(!$branch){
+                return response()->json(['message' => 'Branch not found']);
+            }
+
+            $res = $branch->delete();
+
+            DB::commit();
+            if($res){
+                return response()->json(['message' => 'Branch deleted']);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 }

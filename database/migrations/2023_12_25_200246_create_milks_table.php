@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('milks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('branch_id')->constrained('branches')
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('cow_id')->constrained('cows')
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->timestamp('milk_date')->nullable();
+            $table->decimal('quantity', 10,2)->nullable();
+            $table->integer('flag')->default(0)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

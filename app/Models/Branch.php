@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cow;
+use App\Models\Milk;
 use App\Models\Cost;
 use App\Models\Beef;
 use App\Models\Staff;
@@ -15,10 +16,11 @@ use App\Models\BeefSell;
 use App\Models\StaffSalary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Branch extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'branch_name',
@@ -98,5 +100,10 @@ class Branch extends Model
     public function staffSalaries()
     {
         return $this->hasMany(StaffSalary::class);
+    }
+
+    public function milks()
+    {
+        return $this->hasMany(Milk::class);
     }
 }

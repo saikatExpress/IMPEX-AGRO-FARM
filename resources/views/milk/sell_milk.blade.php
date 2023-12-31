@@ -11,13 +11,13 @@
 
         <div class="page_header">
             <div class="page_header_menu">
-                <a class="btn btn-sm btn-primary" href="{{ route('beef.sell_list') }}">Beef Sell List</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('beef.sell_list') }}">Milk Sell List</a>
             </div>
         </div>
 
         <div class="x_panel">
             <div class="x_title">
-                <h2>Beef Sell for <small style="font-weight: bold;color:#000;">Branch : {{ session('branch_id') }}</small></h2>
+                <h2>Milk Sell for <small style="font-weight: bold;color:#000;">Branch : {{ session('branch_id') }}</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -35,11 +35,11 @@
             </div>
             <div class="x_content">
 
-                <form class="" action="{{ route('beef.sell_count') }}" method="post" novalidate>
+                <form class="" action="{{ route('milk.sell_store') }}" method="post" novalidate>
                     @csrf
-                    <span class="section">
+                    {{-- <span class="section">
                         <h4 style="font-weight: bold; color:#000;">Today Beef : {{ $totalBeef . ' Kg'}}</h4>
-                    </span>
+                    </span> --}}
 
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">কাস্টমারের নাম<span class="required">*</span></label>
@@ -54,17 +54,17 @@
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">তারিখ<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="sell_date" type="text" required="required" />
+                            <input class="form-control" name="sale_date" type="date" required="required" />
                         </div>
-                        @error('sell_date')
+                        @error('sale_date')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="field item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3  label-align">গোশতের পরিমাণ<span class="required">*</span></label>
+                        <label class="col-form-label col-md-3 col-sm-3  label-align">দুধের পরিমাণ<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <input class="form-control" id="quantity" name="quantity" placeholder="in kg*" type="text" required="required" />
+                            <input class="form-control" id="quantity" name="quantity" placeholder="in ltr*" type="text" required="required" />
                         </div>
                         @error('quantity')
                             <span class="text-danger">{{ $message }}</span>
@@ -74,7 +74,7 @@
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">মূল্য<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <input class="form-control" id="price" name="price" placeholder="per kg*" type="text" required="required" />
+                            <input class="form-control" id="price" name="price" placeholder="per ltr*" type="text" required="required" />
                             <p id="bill" style="margin-bottom: 0; color:darkblue; font-weight:bold;"></p>
                         </div>
                         @error('price')
@@ -115,7 +115,7 @@
                     <div class="ln_solid">
                         <div class="form-group">
                             <div class="col-md-6 offset-md-3">
-                                <button type='submit' class="btn btn-primary">Submit</button>
+                                <button type='submit' class="btn btn-primary">Sell</button>
                                 <button type='reset' class="btn btn-success">Reset</button>
                             </div>
                         </div>

@@ -63,6 +63,11 @@ class Cow extends Model
         return $this->hasMany(CowSell::class);
     }
 
+    public function milks()
+    {
+        return $this->hasMany(Milk::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');

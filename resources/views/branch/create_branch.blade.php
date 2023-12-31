@@ -4,7 +4,7 @@
 
         <div class="page_header">
             <div class="page_header_menu">
-                <a class="btn btn-sm btn-primary" href="">Branch List</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('branch.list') }}">Branch List</a>
             </div>
         </div>
 

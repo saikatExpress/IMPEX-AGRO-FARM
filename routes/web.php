@@ -55,8 +55,11 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/category/delete/{id}', [CategoryController::class, 'destroy']);
 
     // For Branch Route
+    Route::get('/branch/list', [BranchController::class, 'index'])->name('branch.list');
     Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create');
     Route::post('/branch/store', [BranchController::class, 'store'])->name('branch.store');
+    Route::post('/branch/edit', [BranchController::class, 'update'])->name('branch.edit');
+    Route::get('/branch/delete/{id}', [BranchController::class, 'destroy']);
 
     // For Staff Route
     Route::get('/staff/list', [StaffController::class, 'index'])->name('staff.list');
@@ -94,6 +97,9 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     // For Milk Route
     Route::get('/milk/create', [MilkController::class, 'create'])->name('milk.create');
+    Route::post('/cow/milk/store/{id}', [MilkController::class, 'store']);
+    Route::get('/milk/sell', [MilkController::class, 'milkSellCreate'])->name('milk.sell');
+    Route::post('/sell/milk/store', [MilkController::class, 'milkSellStore'])->name('milk.sell_store');
 
     // For Expense Route
     Route::get('/expense/list', [ExpenseController::class, 'index'])->name('expense.list');

@@ -141,6 +141,7 @@ class BeefController extends Controller
 
             $beefSellObj->branch_id    = session('branch_id');
             $beefSellObj->name         = $request->input('name');
+            $beefSellObj->sell_date    = $request->input('sell_date');
             $beefSellObj->quantity     = $desiredQuantity;
             $beefSellObj->price        = $request->input('price');
             $beefSellObj->payment      = $request->input('payment');
