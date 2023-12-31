@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Staff;
 use App\Models\StaffSalary;
 use Illuminate\Http\Request;
@@ -22,9 +23,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $currentMonth = Carbon::now();
-
-        $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->whereDate('paid_on', $currentMonth)->get();
+        $staffs = Staff::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->get();
 
         // return $staffs;
 
@@ -33,7 +32,9 @@ class StaffController extends Controller
 
     public function salaryIndex()
     {
-        $salaries = StaffSalary::with('branch:id,branch_name', 'staff:id,name,salary')->get();
+        $currentMonth = Carbon::now();
+
+        $salaries = StaffSalary::with('branch:id,branch_name', 'staff:id,name,salary')->whereDate('paid_on', $currentMonth)->get();
 
         return view('staff.salary_list', compact('salaries'));
     }
@@ -222,9 +223,11 @@ class StaffController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Staff $staff)
+    public function show(Staff $staff, $id)
     {
-        //
+        $staff = Staff::where('branch_id', session('branch_id'))->where('id', $id)->first();
+
+        return view('staff.staff_profile', compact('staff'));
     }
 
     /**

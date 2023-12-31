@@ -62,6 +62,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/staff/list', [StaffController::class, 'index'])->name('staff.list');
     Route::get('/salary/list', [StaffController::class, 'salaryIndex'])->name('salary.list');
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.us');
+    Route::get('/staff/show/{id}', [StaffController::class, 'show'])->name('staff.view');
     Route::get('/salary/report', [StaffController::class, 'salaryReport'])->name('salary.report');
     Route::post('/salary/report/view', [StaffController::class, 'salaryReportView'])->name('salary.report_view');
     Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');

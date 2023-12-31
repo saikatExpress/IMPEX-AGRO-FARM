@@ -5,7 +5,7 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <a class="btn btn-sm btn-primary" href="{{ route('category.create') }}">Add Category</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('staff.us') }}">Add Staff</a>
                 </div>
             </div>
 
@@ -18,7 +18,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h2>Category List</h2>
+                    <h2>Staff List</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link">
@@ -71,7 +71,11 @@
                                             @foreach ($staffs as $key => $staff)
                                                 <tr class="list-item">
                                                     <td>{{ $sl }}</td>
-                                                    <td>{{ ucfirst($staff->name) }}</td>
+                                                    <td>
+                                                        <a href="{{ route('staff.view', ['id' => $staff->id]) }}">
+                                                            {{ ucfirst($staff->name) }}
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                         <img class="staff-image" src="{{ asset('images/staffs/' . $staff->staff_image) }}" alt="">
                                                     </td>
