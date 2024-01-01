@@ -49,7 +49,7 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="{{ route('dashboard') }}" class="site_title"> <img style="width: 30px; height:30px;"
-                                src="{{ asset('custom/logos/751280420015239.png') }}" alt="">
+                                src="{{ asset('custom/logos/d020d982-3924-421c-9ea8-95a920b2ed0d.jpg') }}" alt="">
                             <span>Impex Agro Farm</span></a>
                     </div>
 
@@ -215,7 +215,16 @@
                                     <ul class="nav child_menu">
                                         <li><a href="e_commerce.html">রুটিন মনিটরিং</a></li>
                                         <li><a href="projects.html">ভ্যাকসিন মনিটরিং</a></li>
-                                        <li><a href="project_detail.html">প্রেগনেন্সি মনিটরিং</a></li>
+                                        <li>
+                                            <a href="{{ route('pregnancy.monitoring') }}">
+                                                প্রেগনেন্সি মনিটরিং
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('semen.create') }}">
+                                                সিমেনের ধরণ
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
 

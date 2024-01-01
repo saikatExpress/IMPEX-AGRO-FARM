@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CostController;
+use App\Http\Controllers\SemenController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PregnancyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,6 +102,15 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/cow/milk/store/{id}', [MilkController::class, 'store']);
     Route::get('/milk/sell', [MilkController::class, 'milkSellCreate'])->name('milk.sell');
     Route::post('/sell/milk/store', [MilkController::class, 'milkSellStore'])->name('milk.sell_store');
+
+    // For Pregnancy Route
+    Route::get('/pregnancy/monitoring', [PregnancyController::class, 'create'])->name('pregnancy.monitoring');
+    Route::post('/pregnancy/store', [PregnancyController::class, 'store'])->name('pregnancy.store');
+
+    // For Semen Route
+    Route::get('/semen/list', [SemenController::class, 'index'])->name('semen.list');
+    Route::get('/semen/create', [SemenController::class, 'create'])->name('semen.create');
+    Route::post('/semen/store', [SemenController::class, 'store'])->name('semen.store');
 
     // For Expense Route
     Route::get('/expense/list', [ExpenseController::class, 'index'])->name('expense.list');

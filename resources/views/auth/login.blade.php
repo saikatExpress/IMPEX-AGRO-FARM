@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>IMPEX AGRO | Login</title>
-    <link rel="icon" href="{{ asset('asset/images/favicon.ico') }}" type="image/ico" />
+    <link rel="icon" href="{{ asset('custom/logos/751280420015239.png') }}" type="image/ico" />
 
     <!-- Bootstrap -->
     <link href="{{ asset('asset/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">

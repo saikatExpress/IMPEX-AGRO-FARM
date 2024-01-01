@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Branch;
 use App\Models\CowSell;
 use App\Models\Category;
+use App\Models\Pregnancy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -71,5 +72,10 @@ class Cow extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function pregnancies()
+    {
+        return $this->hasMany(Pregnancy::class);
     }
 }
