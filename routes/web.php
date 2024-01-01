@@ -13,6 +13,7 @@ use App\Http\Controllers\SemenController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ExpenseController;
@@ -162,6 +163,10 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     // For Languge Route
     Route::get('lang/{lang}', [LanguageController::class, 'languageChange'])->name('lang.switch');
+
+    // For Report Route
+    Route::get('/milk/sale/report', [ReportController::class, 'milkSaleReport'])->name('milk.sale_report');
+    Route::post('/show/milk/sale/report', [ReportController::class, 'milkSaleReportShow'])->name('show.milk_sale_report');
 
     // Logout Route
     Route::get('/logout', [AuthController::class, 'logout']);

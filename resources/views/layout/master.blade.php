@@ -263,9 +263,10 @@
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{ route('milk.create') }}">Milk Sale Report</a></li>
-                                        <li><a href="{{ route('milk.sell') }}">দুধ বিক্রয়</a></li>
-                                        <li><a href="{{ route('milk_sell.collect') }}">বাকী সংগ্রহ</a></li>
+                                        <li><a href="{{ route('milk.sale_report') }}">Milk Sale Report</a></li>
+                                        <li><a href="{{ route('milk.sell') }}">Cow Sell Report</a></li>
+                                        <li><a href="{{ route('milk.sell') }}">Farm Expense Report</a></li>
+                                        <li><a href="{{ route('milk_sell.collect') }}">Employee Salary Report</a></li>
                                     </ul>
                                 </li>
                             </ul>
