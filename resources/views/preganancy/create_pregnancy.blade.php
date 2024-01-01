@@ -73,9 +73,9 @@
                         <div class="col-md-6 col-sm-6">
                             <select name="semen_id" class="form-control" id="">
                                 <option value="" disabled selected>Select</option>
-                                <option value="automatic">Brahman</option>
-                                <option value="semen">Friesian</option>
-                                <option value="semen">Holstaien</option>
+                                @foreach ($semens as $key => $semen)
+                                    <option value="{{ $semen->id }}">{{ $semen->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('semen_id')
@@ -106,7 +106,7 @@
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">Semen Cost<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="semen_cost" type="date" required="required" />
+                            <input class="form-control" name="semen_cost" type="number" required="required" />
                         </div>
                         @error('semen_cost')
                             <span class="text-danger">{{ $message }}</span>
@@ -116,7 +116,17 @@
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">Other Cost<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6">
-                            <input class="form-control" name="other_cost" type="date" required="required" />
+                            <input class="form-control" name="other_cost" type="number" required="required" />
+                        </div>
+                        @error('other_cost')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3  label-align">Note<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <textarea name="" class="form-control" id="" cols="10" rows="5"></textarea>
                         </div>
                         @error('other_cost')
                             <span class="text-danger">{{ $message }}</span>
@@ -131,6 +141,80 @@
                             </div>
                         </div>
                     </div>
+                </form>
+
+                <form class="form-label-left input_mask">
+
+                    <div class="col-md-6 col-sm-6  form-group has-feedback">
+                        {{-- <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name"> --}}
+                        <select name="" id="inputSuccess2" class="form-control has-feedback-left">
+                            <option value="">dddd</option>
+                            <option value="">dddd</option>
+                            <option value="">dddd</option>
+                        </select>
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-6 col-sm-6  form-group has-feedback">
+                        <select name="cow_id" class="form-control has-feedback-left" id="inputSuccess2">
+                            <option value="" disabled selected>Select</option>
+                            @foreach ($cows as $key => $cow)
+                                <option value="{{ $cow->id }}">{{ $cow->tag }}</option>
+                            @endforeach
+                        </select>
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="ml-5">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae, voluptates.
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6  form-group has-feedback">
+                        <select name="pregnancy_type" class="form-control has-feedback-left" id="">
+                            <option value="" disabled selected>Select</option>
+                            <option value="automatic">Automatic</option>
+                            <option value="semen">By Collected Semen</option>
+                        </select>
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6  form-group has-feedback">
+                        <select name="semen_id" class="form-control has-feedback-left" id="">
+                            <option value="" disabled selected>Select</option>
+                            @foreach ($semens as $key => $semen)
+                                <option value="{{ $semen->id }}">{{ $semen->name }}</option>
+                            @endforeach
+                        </select>
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-md-3 col-sm-3 ">Semen Push Date <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 ">
+                            <input class="form-control" name="push_date" type="date" required="required" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-md-3 col-sm-3 ">Pregnancy Start Date <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 ">
+                            <input class="form-control" name="push_date" type="date" required="required" />
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group row">
+                        <div class="col-md-9 col-sm-9  offset-md-3">
+                            <button type="button" class="btn btn-primary">Cancel</button>
+                            <button class="btn btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+
                 </form>
 
             </div>

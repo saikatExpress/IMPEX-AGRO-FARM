@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cow;
+use App\Models\Semen;
 use App\Models\Pregnancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,8 +31,9 @@ class PregnancyController extends Controller
     public function create()
     {
         $cows = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('category_id', 1)->where('flag', '0')->get();
+        $semens = Semen::where('status', '1')->get();
 
-        return view('preganancy.create_pregnancy', compact('cows'));
+        return view('preganancy.create_pregnancy', compact('cows', 'semens'));
     }
 
     /**
