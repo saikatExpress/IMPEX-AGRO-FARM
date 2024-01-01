@@ -166,7 +166,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('milk.create') }}">প্রাপ্ত দুধ</a></li>
                                         <li><a href="{{ route('milk.sell') }}">দুধ বিক্রয়</a></li>
-                                        <li><a href="tables_dynamic.html">বাকী সংগ্রহ</a></li>
+                                        <li><a href="{{ route('milk_sell.collect') }}">বাকী সংগ্রহ</a></li>
                                     </ul>
                                 </li>
                                 {{-- Milk Menu List --}}
@@ -257,12 +257,17 @@
                                 </li>
 
                                 <li>
-                                    <a href="">
+                                    <a>
                                         <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-flag"></i>
                                         রিপোর্ট
+                                        <span class="fa fa-chevron-down"></span>
                                     </a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('milk.create') }}">Milk Sale Report</a></li>
+                                        <li><a href="{{ route('milk.sell') }}">দুধ বিক্রয়</a></li>
+                                        <li><a href="{{ route('milk_sell.collect') }}">বাকী সংগ্রহ</a></li>
+                                    </ul>
                                 </li>
-
                             </ul>
                         </div>
 

@@ -8,6 +8,12 @@
         </div>
     </div>
 
+    <div class="page_header">
+        <div class="page_header_menu">
+            <a class="btn btn-sm btn-primary" href="{{ route('milk.list') }}">Milk List</a>
+        </div>
+    </div>
+
     <div class="container mt-5">
         <h2 style="color: #000; font-weight:bold;" class="mb-4">Daily Milk Store</h2>
 
@@ -18,8 +24,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <input type="date" class="form-control" name="milk_date" name="date">
-                        <span style="color: red; font-weight:bold;" id="errorMsg"></span>
+                        <input type="date" class="form-control" name="milk_date">
                     </div>
                 </div>
             </div>
@@ -39,10 +44,12 @@
 
                             <td>
                                 <input type="number" class="form-control quantity" data-cow-id="{{ $cow->id }}" name="quantity" placeholder="Enter ltr">
+                                <span style="color: red; font-weight:bold;" class="errorMsg"></span>
                             </td>
 
                             <td>
-                                <button type="button" data-id="{{ $cow->id }}" class="btn btn-primary">Add</button>
+                                <span class="status"></span>
+                                <button type="button" data-id="{{ $cow->id }}" class="btn btn-primary addBtn">Add</button>
                             </td>
 
                         </tr>
@@ -52,13 +59,16 @@
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
         $(document).ready(function(){
-            $('.btn-primary').click(function(){
+            $('.addBtn').click(function(){
                 var id = $(this).data('id');
                 var date = $('input[name="milk_date"]').val();
                 var quantity = $(this).closest('tr').find('.quantity').val();
+
+                var btnClicked = $(this);
 
                 if(id > 0){
                     $.ajax({
@@ -70,24 +80,61 @@
                             quantity: quantity,
                         },
                         success: function(response){
-                            if(response.message){
-                                $('.successMsg').find('h2').text(response.message);
-                                $('.successMsg').show();
+                            console.log(response);
+                            if(response.message && response.status == 'error'){
+                                Swal.fire({
+                                    title: response.message,
+                                    text: "Next Available in one hour!",
+                                    icon: response.status
+                                });
+                            }else{
+                                Swal.fire({
+                                    title: response.message,
+                                    text: "Congrats!",
+                                    icon: response.status
+                                });
                             }
                         },
                         error: function(error){
                             console.log(error);
-                            // Handle error here
-                            if (error.responseJSON && error.responseJSON.message) {
-                                // Display error message in the view
-                                // $(this).closest('tr').find('.error-message').text(error.responseJSON.message).show();
-                                $('#errorMsg').text(error.responseJSON.message);
+
+                            if (error.responseJSON && error.responseJSON.errors) {
+                                // Loop through the error messages and display them for the corresponding row
+                                $.each(error.responseJSON.errors, function(key, value){
+                                    btnClicked.closest('tr').find('.errorMsg').text(value[0]).show();
+                                });
+                            } else {
+                                btnClicked.closest('tr').find('.errorMsg').text('An error occurred while storing milk. Please try again.').show();
                             }
                         }
                     });
                 }else{
                     alert('Your Selectd button have no id!');
                 }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                // Your function logic here
+                var d = new Date();
+
+                var month = d.getMonth()+1;
+                var day = d.getDate();
+
+                var output = d.getFullYear() + '/' +
+                    (month<10 ? '0' : '') + month + '/' +
+                    (day<10 ? '0' : '') + day;
+
+                $('#demo').text('Today : ' + output);
+                $('#demo').show();
+            }, 5000); // 60,000 milliseconds = 1 minute
+
+            $('#msgCross').click(function(){
+                $('.successMsg').hide();
+                location.reload();
             });
         });
     </script>

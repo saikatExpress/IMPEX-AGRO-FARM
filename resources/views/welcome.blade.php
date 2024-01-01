@@ -95,7 +95,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>মোট দুধ</h2>
-                        <p>{{ numberCountingFormat(0) . ' Ltr' }}</p>
+                        <p>{{ numberCountingFormat($totalMilk) . ' Ltr' }}</p>
                     </div>
                 </div>
                 <div class="item-foot-head">
@@ -116,7 +116,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>মোট আয়</h2>
-                        <p>{{ numberCountingFormat($incomes + $beefSellAmount) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($incomes + $beefSellAmount + $milkIncome) . ' Tk' }}</p>
                     </div>
                 </div>
                 <div class="item-foot-head">
@@ -125,7 +125,7 @@
 
                 <div class="item-menu-info">
                     <p>
-                        {{ number_format($incomes + $beefSellAmount, 2) . ' Tk' }}
+                        {{ number_format($incomes + $beefSellAmount + $milkIncome, 2) . ' Tk' }}
                     </p>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>মোট বাকি</h2>
-                        <p>{{ numberCountingFormat($dues + $beefDues) . ' Tk' }}</p>
+                        <p>{{ numberCountingFormat($dues + $beefDues + $milkIdue) . ' Tk' }}</p>
                     </div>
                 </div>
                 <div class="item-foot-head">
@@ -200,7 +200,7 @@
 
                 <div class="item-menu-info">
                     <p>
-                        {{ number_format($dues + $beefDues, 2) . ' Tk' }}
+                        {{ number_format($dues + $beefDues + $milkIdue, 2) . ' Tk' }}
                     </p>
                 </div>
             </div>
@@ -212,7 +212,7 @@
                     </div>
                     <div class="dashboard_item">
                         <h2>আজকের দুধ</h2>
-                        <p>{{ numberCountingFormat(0) . ' Ltr' }}</p>
+                        <p>{{ numberCountingFormat($todayMilkCount) . ' Ltr' }}</p>
                     </div>
                     <div class="item-foot-head">
                         <button><i class="fa-solid fa-caret-down"></i></button>

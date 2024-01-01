@@ -11,7 +11,7 @@
 
         <div class="page_header">
             <div class="page_header_menu">
-                <a class="btn btn-sm btn-primary" href="{{ route('beef.sell_list') }}">Milk Sell List</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('milk.sell_list') }}">Milk Sell List</a>
             </div>
         </div>
 
@@ -40,6 +40,27 @@
                     {{-- <span class="section">
                         <h4 style="font-weight: bold; color:#000;">Today Beef : {{ $totalBeef . ' Kg'}}</h4>
                     </span> --}}
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3  label-align">Milk<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <select name="milk_date" class="form-control" id="" required="required">
+                                <option value="">select</option>
+                                @foreach ($milks as $key => $milk)
+                                    <option value="{{ $milk->milk_date }}">{{ dateTimeFormat($milk->milk_date) . ' : ' .$milk->total_quantity . ' Ltr' }}</option>
+                                @endforeach
+                            </select>
+                            <div class="milk_info_block">
+                                <h5>Milk Information</h5>
+                                <h6>
+                                    <b></b>
+                                </h6>
+                            </div>
+                        </div>
+                        @error('milk_date')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">কাস্টমারের নাম<span class="required">*</span></label>
@@ -130,6 +151,25 @@
     <script src="{{ asset('asset/vendors/validator/validator.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{ asset('asset/vendors/validator/multifield.js') }}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('select[name="milk_date"]').on('change', function(){
+                var selectDate = $(this).val();
+
+                if(selectDate){
+                    $.ajax({
+                        url: '/get/milk/info/' + selectDate,
+                        type: 'GET',
+                        success: function(response){
+                            $('.milk_info_block').find('b').text('Stock : ' + response);
+                            $('.milk_info_block').show();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
     <script>
         $(document).ready(function(){

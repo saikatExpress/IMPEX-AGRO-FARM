@@ -98,10 +98,18 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions');
 
     // For Milk Route
+    Route::get('/milk/list', [MilkController::class, 'index'])->name('milk.list');
+    Route::get('/milk/sell/list', [MilkController::class, 'sellIndex'])->name('milk.sell_list');
     Route::get('/milk/create', [MilkController::class, 'create'])->name('milk.create');
     Route::post('/cow/milk/store/{id}', [MilkController::class, 'store']);
+    Route::post('/cow/milk/edit', [MilkController::class, 'milkSellEdit'])->name('milk.sell_edit');
+    Route::get('/milk/sell/view/{date}', [MilkController::class, 'sellView'])->name('milk_sell.view');
     Route::get('/milk/sell', [MilkController::class, 'milkSellCreate'])->name('milk.sell');
-    Route::post('/sell/milk/store', [MilkController::class, 'milkSellStore'])->name('milk.sell_store');
+    Route::get('/milk/collect/sell', [MilkController::class, 'milkSellCollect'])->name('milk_sell.collect');
+    Route::post('/milk/edit', [MilkController::class, 'update'])->name('milk.edit');
+    Route::post('/milk/sell/store', [MilkController::class, 'milkSellStore'])->name('milk_sell.store');
+    Route::post('/sell/milk/payment', [MilkController::class, 'milkSellPayment'])->name('milk.sell_store');
+    Route::get('/get/milk/info/{date}', [MilkController::class, 'milkInfo']);
 
     // For Pregnancy Route
     Route::get('/pregnancy/monitoring', [PregnancyController::class, 'create'])->name('pregnancy.monitoring');

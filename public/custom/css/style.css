@@ -187,12 +187,61 @@ body {
     background-color: #0c83f1;
 }
 
+.order-mark{
+    background-color: magenta;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.tag-mark{
+    background-color: maroon;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.primary-mark{
+    background-color: teal;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 3px;
+}
+
 .item-menu-info p{
     margin-bottom: 0;
     color: #fff;
     font-weight: bold;
     padding: 5px;
     border-radius: 4px;
+}
+.milk_info_block{
+    border: 1px solid gray;
+    margin-top: 1rem;
+    padding: 5px 5px 5px;
+    display: none;
+}
+
+.milk_info_block h6 strong{
+    padding: 5px 5px 5px;
+    text-align: center;
+    color: darkred;
+    font-size: 1.5rem;
+}
+
+.milk_info_block h6 b{
+    padding: 5px 5px 5px;
+    text-align: center;
+    color: darkblue;
+    font-size: 1rem;
+}
+
+.milk_info_block h5{
+    color: #000;
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {

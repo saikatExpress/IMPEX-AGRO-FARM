@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Cost;
+use App\Models\Milk;
 use App\Models\Staff;
 use App\Models\Beef;
 use App\Models\Income;
 use App\Models\Branch;
 use App\Models\Account;
 use App\Models\BeefSell;
+use App\Models\MilkSell;
 use App\Models\StaffSalary;
 use Illuminate\Http\Request;
 
@@ -37,8 +39,12 @@ class AdminController extends Controller
         $beefSellAmount    = BeefSell::where('branch_id', session('branch_id'))->sum('payment');
         $todayIncome       = BeefSell::where('branch_id', session('branch_id'))->whereDate('created_at', $currentDate)->sum('payment');
         $staffSalaryAmount = StaffSalary::where('branch_id', session('branch_id'))->sum('amount');
+        $totalMilk = Milk::where('branch_id', session('branch_id'))->sum('quantity');
+        $todayMilkCount = Milk::where('branch_id', session('branch_id'))->whereDate('milk_date', $currentDate)->sum('quantity');
+        $milkIncome = MilkSell::where('branch_id', session('branch_id'))->sum('payment');
+        $milkIdue = MilkSell::where('branch_id', session('branch_id'))->sum('due');
 
-        return view('welcome', compact('dues','cows', 'staffSalaryAmount', 'beefDues','todayIncome', 'beefSellAmount', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts','incomes', 'totalCost', 'farm1Cost'));
+        return view('welcome', compact('dues','cows','milkIncome', 'milkIdue','staffSalaryAmount', 'todayMilkCount', 'totalMilk', 'beefDues','todayIncome', 'beefSellAmount', 'totalBeef', 'branchName', 'permanetCost', 'staffs', 'farmCosts','incomes', 'totalCost', 'farm1Cost'));
     }
 
     protected function beefCount($beefsForToday)
