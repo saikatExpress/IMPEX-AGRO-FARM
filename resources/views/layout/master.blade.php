@@ -256,6 +256,7 @@
                                     </a>
                                 </li>
 
+                                {{-- Catalog Menu List --}}
                                 <li>
                                     <a>
                                         <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-list"></i>
@@ -268,8 +269,9 @@
                                         <li><a href="{{ route('farm.expense_report') }}">Designantion</a></li>
                                     </ul>
                                 </li>
+                                {{-- Catalog Menu List --}}
 
-                                {{-- Report Meny List --}}
+                                {{-- Report Menu List --}}
                                 <li>
                                     <a>
                                         <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-flag"></i>
@@ -283,7 +285,7 @@
                                         <li><a href="{{ route('employee.salary_report') }}">Employee Salary Report</a></li>
                                     </ul>
                                 </li>
-                                {{-- Report Meny List --}}
+                                {{-- Report Menu List --}}
                             </ul>
                         </div>
 
