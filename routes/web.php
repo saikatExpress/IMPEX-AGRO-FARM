@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CowController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\BeefController;
 use App\Http\Controllers\MilkController;
 use App\Http\Controllers\UserController;
@@ -152,6 +153,18 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     // For Invoice Controller
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
+
+    // For Food Route
+    Route::get('/food/list', [FoodController::class, 'index'])->name('food.list');
+    Route::post('/food/store', [FoodController::class, 'store'])->name('food.store');
+    Route::post('/food/edit', [FoodController::class, 'update'])->name('food.edit');
+    Route::get('/food/delete/{id}', [FoodController::class, 'destroy']);
+
+    // For Unit Route
+    Route::get('/unit/list', [FoodController::class, 'unitIndex'])->name('unit.list');
+    Route::post('/unit/store', [FoodController::class, 'unitStore'])->name('unit.store');
+    Route::post('/unit/edit', [FoodController::class, 'unitUpdate'])->name('unit.edit');
+    Route::get('/unit/delete/{id}', [FoodController::class, 'unitDestroy']);
 
     // For Buyer Route
     Route::get('/buyer/list', [BuyerController::class, 'index'])->name('buyer.list');
