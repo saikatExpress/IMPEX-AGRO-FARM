@@ -167,6 +167,10 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     // For Report Route
     Route::get('/milk/sale/report', [ReportController::class, 'milkSaleReport'])->name('milk.sale_report');
     Route::post('/show/milk/sale/report', [ReportController::class, 'milkSaleReportShow'])->name('show.milk_sale_report');
+    Route::get('/farm/expense/report', [ReportController::class, 'farmExpenseReport'])->name('farm.expense_report');
+    Route::post('/show/farm/expense/report', [ReportController::class, 'farmExpenseReportShow'])->name('show.farm_expense_report');
+    Route::get('/emplyoee/salary/report', [ReportController::class, 'employeeSalaryReport'])->name('employee.salary_report');
+    Route::post('/show/employee/salary/report', [ReportController::class, 'employeeSalaryReportShow'])->name('show.employee_salary_report');
 
     // Logout Route
     Route::get('/logout', [AuthController::class, 'logout']);

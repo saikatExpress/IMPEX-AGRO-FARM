@@ -258,6 +258,20 @@
 
                                 <li>
                                     <a>
+                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-list"></i>
+                                        ক্যাটালগ
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('milk.sale_report') }}">Food Item</a></li>
+                                        <li><a href="{{ route('milk.sell') }}">Food Unit</a></li>
+                                        <li><a href="{{ route('farm.expense_report') }}">Designantion</a></li>
+                                    </ul>
+                                </li>
+
+                                {{-- Report Meny List --}}
+                                <li>
+                                    <a>
                                         <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-flag"></i>
                                         রিপোর্ট
                                         <span class="fa fa-chevron-down"></span>
@@ -265,10 +279,11 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('milk.sale_report') }}">Milk Sale Report</a></li>
                                         <li><a href="{{ route('milk.sell') }}">Cow Sell Report</a></li>
-                                        <li><a href="{{ route('milk.sell') }}">Farm Expense Report</a></li>
-                                        <li><a href="{{ route('milk_sell.collect') }}">Employee Salary Report</a></li>
+                                        <li><a href="{{ route('farm.expense_report') }}">Farm Expense Report</a></li>
+                                        <li><a href="{{ route('employee.salary_report') }}">Employee Salary Report</a></li>
                                     </ul>
                                 </li>
+                                {{-- Report Meny List --}}
                             </ul>
                         </div>
 
