@@ -60,11 +60,11 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/category/delete/{id}', [CategoryController::class, 'destroy']);
 
     // For Branch Route
-    Route::get('/branch/list', [BranchController::class, 'index'])->name('branch.list');
-    Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create');
-    Route::post('/branch/store', [BranchController::class, 'store'])->name('branch.store');
-    Route::post('/branch/edit', [BranchController::class, 'update'])->name('branch.edit');
-    Route::get('/branch/delete/{id}', [BranchController::class, 'destroy']);
+    Route::get('/branch/list', [BranchController::class, 'index'])->name('branch.list')->middleware('role:admin');
+    Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.create')->middleware('role:admin');
+    Route::post('/branch/store', [BranchController::class, 'store'])->name('branch.store')->middleware('role:admin');
+    Route::post('/branch/edit', [BranchController::class, 'update'])->name('branch.edit')->middleware('role:admin');
+    Route::get('/branch/delete/{id}', [BranchController::class, 'destroy'])->middleware('role:admin');
 
     // For Staff Route
     Route::get('/staff/list', [StaffController::class, 'index'])->name('staff.list');
@@ -73,7 +73,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/staff/show/{id}', [StaffController::class, 'show'])->name('staff.view');
     Route::get('/salary/report', [StaffController::class, 'salaryReport'])->name('salary.report');
     Route::post('/salary/report/view', [StaffController::class, 'salaryReportView'])->name('salary.report_view');
-    Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');
+    Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit')->middleware('role:admin,super-admin');
     Route::get('/staff/salary', [StaffController::class, 'salaryCreate'])->name('staff.salary');
     Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
     Route::post('/salary/store', [StaffController::class, 'storeSalary'])->name('store.salary');

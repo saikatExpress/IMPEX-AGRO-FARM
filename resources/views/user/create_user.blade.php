@@ -115,7 +115,7 @@
                                 <select name="role" id="" class="form-control">
                                     <option value="" selected disabled>Select</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

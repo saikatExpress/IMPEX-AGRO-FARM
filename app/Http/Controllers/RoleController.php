@@ -49,7 +49,7 @@ class RoleController extends Controller
                         ->withInput();
             }
 
-            $role = Role::create(['name' => Str::title($request->name), 'guard_name' => 'web']);
+            $role = Role::create(['name' => Str::slug($request->name, '-'), 'guard_name' => 'web']);
 
             if($role){
                 $permissions = $request->input('permissions');
