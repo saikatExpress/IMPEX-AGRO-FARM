@@ -69,7 +69,7 @@
                         <br />
 
                         <div>
-                            <h1><i class="fa fa-paw"></i> IMPEX AGRO FARM</h1>
+                            <h1><img style="width:40px; height:40px;" src="{{ asset('custom/logos/logo.png') }}" alt=""> IMPEX AGRO FARM</h1>
                             <p>©2023 All Rights Reserved. TS WEB BUILD! is a Advanced Admin Board. Privacy and Terms</p>
                         </div>
                         </div>
@@ -108,8 +108,8 @@
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i>IMPEX AGRO FARM</h1>
-                                <p>©2023 All Rights Reserved. ISBAH IT! is a Bootstrap 4 template. Privacy and Terms</p>
+                                <h1> <img style="width:40px; height:40px;" src="{{ asset('custom/logos/logo.png') }}" alt=""> IMPEX AGRO FARM</h1>
+                                <p>©2023 All Rights Reserved. ISBAH IT!. Privacy and Terms</p>
                             </div>
                         </div>
                     </form>

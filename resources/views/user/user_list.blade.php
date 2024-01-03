@@ -111,9 +111,9 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                <form class="" action="{{ route('category.edit') }}" method="post" novalidate>
+                <form class="" action="{{ route('user.edit') }}" method="post" novalidate>
                     @csrf
-                    <input type="hidden" name="category_id">
+                    <input type="hidden" name="user_id">
 
                     <div class="field item form-group">
                         <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
@@ -121,6 +121,21 @@
                             <input class="form-control" name="name" type="text" required="required" />
                         </div>
                         @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3  label-align">Role<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <select name="role" id="" class="form-control">
+                                <option value="" selected disabled>select</option>
+                                @foreach ($roles as $key => $role)
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('role')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>

@@ -19,7 +19,7 @@
         <div class="tile_count">
 
             <div class="welcome_text">
-                <h2>Welocme To {{ $branchName->branch_address }}</h2>
+                <h2>Welcome To {{ $branchName->branch_name }}</h2>
             </div>
 
             <div class="col-md-3 col-sm-4  tile_stats_count">

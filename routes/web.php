@@ -48,16 +48,19 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     //User Route
-    Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
+    Route::get('/user/list', [UserController::class, 'index'])->name('user.list')->middleware('role:admin|role:super-admin');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create')->middleware('role:admin');
-    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store')->middleware('role:admin|role:super-admin');
+
+    Route::get('/user/profile', [UserController::class, 'userProfile'])->name('user.profile');
+    Route::post('/user/edit', [UserController::class, 'update'])->name('user.edit');
 
     // For Category Route
     Route::get('/catgeory/list', [CategoryController::class, 'index'])->name('category.list');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     Route::post('/category/update', [CategoryController::class, 'update'])->name('category.edit');
-    Route::get('/category/delete/{id}', [CategoryController::class, 'destroy']);
+    Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->middleware('role:admin|role:super-admin');
 
     // For Branch Route
     Route::get('/branch/list', [BranchController::class, 'index'])->name('branch.list')->middleware('role:admin');
@@ -74,7 +77,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/salary/report', [StaffController::class, 'salaryReport'])->name('salary.report');
     Route::post('/salary/report/view', [StaffController::class, 'salaryReportView'])->name('salary.report_view');
     Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit')->middleware('role:admin,super-admin');
-    Route::get('/staff/salary', [StaffController::class, 'salaryCreate'])->name('staff.salary');
+    Route::get('/staff/salary', [StaffController::class, 'salaryCreate'])->name('staff.salary')->middleware('role:admin');
     Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
     Route::post('/salary/store', [StaffController::class, 'storeSalary'])->name('store.salary');
     Route::post('/staff/salary/add/{id}', [StaffController::class, 'storeStaffSalary']);
@@ -89,16 +92,16 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/sell/update', [BeefController::class, 'sellUpdate'])->name('sell.edit');
     Route::post('/beef/sell/store', [BeefController::class, 'beefSellStore'])->name('beef_sell.store');
     Route::post('/beef/sell/update', [BeefController::class, 'beefSellUpdate'])->name('beef.sell_edit');
-    Route::get('/beef/sell/delete/{id}', [BeefController::class, 'destroy']);
+    Route::get('/beef/sell/delete/{id}', [BeefController::class, 'destroy'])->middleware('role:admin,super-admin');
 
     // For Role Route
     Route::get('/role/list', [RoleController::class, 'index'])->name('role.list');
     Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
     Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
-    Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
-    Route::post('/role/update', [RoleController::class, 'update'])->name('role.update');
-    Route::get('/role/delete/{id}', [RoleController::class, 'destroy']);
-    Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions');
+    Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit')->middleware('role:admin|super-admin');
+    Route::post('/role/update', [RoleController::class, 'update'])->name('role.update')->middleware('role:admin|super-admin');;
+    Route::get('/role/delete/{id}', [RoleController::class, 'destroy'])->middleware('role:admin');
+    Route::get('/get-permissions/{id}', [RoleController::class, 'getPermissions'])->name('get.permissions')->middleware('role:admin|super-admin');;
 
     // For Milk Route
     Route::get('/milk/list', [MilkController::class, 'index'])->name('milk.list');
@@ -128,7 +131,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/expense/type', [ExpenseController::class, 'expenseType'])->name('expense.type');
     Route::post('/expense/store', [ExpenseController::class, 'store'])->name('expense.store');
     Route::post('/expense/edit', [ExpenseController::class, 'update'])->name('expense.edit');
-    Route::get('/expense/delete/{id}', [ExpenseController::class, 'destroy']);
+    Route::get('/expense/delete/{id}', [ExpenseController::class, 'destroy'])->middleware('role:admin');
 
     // For Cost Route
     Route::get('/cost/list', [CostController::class, 'index'])->name('cost.list');
@@ -149,8 +152,8 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/cow/sell/collect', [CowController::class, 'sellCollect'])->name('cow_sell.collect');
     Route::get('/cow/sell/invoice/{id}', [CowController::class, 'sellInvoice'])->name('sell.invoice');
     Route::get('/get/cow/info/{id}', [CowController::class, 'cowInfo']);
-    Route::get('/cow/delete/{id}', [CowController::class, 'destroy']);
-    Route::get('/sell/cow/delete/{id}', [CowController::class, 'sellDestroy']);
+    Route::get('/cow/delete/{id}', [CowController::class, 'destroy'])->middleware('role:admin');
+    Route::get('/sell/cow/delete/{id}', [CowController::class, 'sellDestroy'])->middleware('role:admin');
 
     // For Invoice Controller
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
@@ -159,13 +162,13 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/food/list', [FoodController::class, 'index'])->name('food.list');
     Route::post('/food/store', [FoodController::class, 'store'])->name('food.store');
     Route::post('/food/edit', [FoodController::class, 'update'])->name('food.edit');
-    Route::get('/food/delete/{id}', [FoodController::class, 'destroy']);
+    Route::get('/food/delete/{id}', [FoodController::class, 'destroy'])->middleware('role:admin');
 
     // For Unit Route
     Route::get('/unit/list', [FoodController::class, 'unitIndex'])->name('unit.list');
     Route::post('/unit/store', [FoodController::class, 'unitStore'])->name('unit.store');
     Route::post('/unit/edit', [FoodController::class, 'unitUpdate'])->name('unit.edit');
-    Route::get('/unit/delete/{id}', [FoodController::class, 'unitDestroy']);
+    Route::get('/unit/delete/{id}', [FoodController::class, 'unitDestroy'])->middleware('role:admin');
 
     // For Buyer Route
     Route::get('/buyer/list', [BuyerController::class, 'index'])->name('buyer.list');
@@ -173,7 +176,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/buyer/edit', [BuyerController::class, 'update'])->name('buyer.edit');
     Route::post('/buyer/store', [BuyerController::class, 'store'])->name('buyer.store');
     Route::get('/buyer/due', [BuyerController::class, 'buyerDue'])->name('buyer.due');
-    Route::get('/buyer/delete/{id}', [BuyerController::class, 'destroy']);
+    Route::get('/buyer/delete/{id}', [BuyerController::class, 'destroy'])->middleware('role:admin');
 
     // For Languge Route
     Route::get('lang/{lang}', [LanguageController::class, 'languageChange'])->name('lang.switch');

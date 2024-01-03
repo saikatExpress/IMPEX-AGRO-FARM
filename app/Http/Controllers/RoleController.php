@@ -118,7 +118,7 @@ class RoleController extends Controller
 
             $role = Role::find($roleId);
 
-            $role->update(['name' => $request->name]);
+            $role->update(['name' => Str::slug($request->name, '-')]);
 
             $permissions = $request->input('permissions');
 

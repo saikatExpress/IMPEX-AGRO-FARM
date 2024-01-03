@@ -48,7 +48,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="{{ route('dashboard') }}" class="site_title"> <img style="width: 30px; height:30px;"
+                        <a href="{{ route('dashboard') }}" class="site_title"> <img style="width: 30px; height:30px; border-radius:50%;"
                                 src="{{ asset('custom/logos/d020d982-3924-421c-9ea8-95a920b2ed0d.jpg') }}" alt="">
                             <span>Impex Agro Farm</span></a>
                     </div>
@@ -58,7 +58,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{ asset('asset/images/img.jpg') }}" alt="..."
+                            <img src="{{ asset('custom/logos/Untitled.png') }}" alt="..."
                                 class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
@@ -322,12 +322,12 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('asset/images/img.jpg') }}"
+                                    <img src="{{ asset('custom/logos/Untitled.png') }}"
                                         alt="">{{ auth()->user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="{{ route('user.profile') }}"> Profile</a>
                                     <a class="dropdown-item" href="javascript:;">
                                         <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>

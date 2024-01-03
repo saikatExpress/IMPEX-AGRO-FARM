@@ -37,7 +37,7 @@
                                         {{ 'Branch : ' . $branch->id }}
                                     </h4>
                                     <h5 class="card-title_h5">
-                                        {{ $branch->branch_address }}
+                                        {{ $branch->branch_name }}
                                     </h5>
                                 </a>
                             </div>

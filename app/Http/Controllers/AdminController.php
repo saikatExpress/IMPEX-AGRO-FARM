@@ -66,6 +66,8 @@ class AdminController extends Controller
 
         $branches = Branch::where('status', '1')->get();
 
+        // return $branches;
+
         return view('branch.branch', compact('branches'));
     }
 }
