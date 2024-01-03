@@ -50,7 +50,7 @@ class User extends Authenticatable
         'phone_number'      => 'string',
         'password'          => 'hashed',
         'status'            => 'string',
-        'role'              => 'integer',
+        'role'              => 'string',
         'flag'              => 'string',
     ];
 }

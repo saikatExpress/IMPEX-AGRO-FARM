@@ -3,7 +3,7 @@
     <div class="row">
         <div class="page_header">
             <div class="page_header_menu">
-                <a class="btn btn-sm btn-primary" href="{{ route('role.list') }}">User List</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('user.list') }}">User List</a>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
 
                 <div class="x_content">
                     <br />
-                    <form id="demo-form2" action="{{ route('role.store') }}" method="post" enctype="multipart/form-data"
+                    <form id="demo-form2" action="{{ route('user.store') }}" method="post" enctype="multipart/form-data"
                         data-parsley-validate class="form-horizontal form-label-left">
                         @csrf
                         <div class="item form-group">
@@ -112,7 +112,7 @@
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select name="status" id="" class="form-control">
+                                <select name="role" id="" class="form-control">
                                     <option value="" selected disabled>Select</option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->name }}</option>

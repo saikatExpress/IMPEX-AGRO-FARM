@@ -5,7 +5,7 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <a class="btn btn-sm btn-primary" href="{{ route('category.create') }}">Add Category</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('user.create') }}">Add User</a>
                 </div>
             </div>
 
@@ -18,7 +18,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h2>Category List</h2>
+                    <h2>User List</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link">
@@ -52,6 +52,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Role</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -63,6 +64,7 @@
                                             @foreach ($users as $key => $user)
                                                 <tr class="list-item">
                                                     <td>{{ ucfirst($user->name) }}</td>
+                                                    <td>{{ ucfirst($user->role) }}</td>
                                                     <td>
                                                         @if ($user->status == '1')
                                                             Active

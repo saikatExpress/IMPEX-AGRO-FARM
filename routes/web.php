@@ -49,7 +49,8 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     //User Route
     Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
-    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create')->middleware('role:admin');
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
     // For Category Route
     Route::get('/catgeory/list', [CategoryController::class, 'index'])->name('category.list');

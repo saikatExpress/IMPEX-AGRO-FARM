@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,7 @@ class RoleController extends Controller
                         ->withInput();
             }
 
-            $role = Role::create(['name' => $request->name, 'guard_name' => 'web']);
+            $role = Role::create(['name' => Str::title($request->name), 'guard_name' => 'web']);
 
             if($role){
                 $permissions = $request->input('permissions');

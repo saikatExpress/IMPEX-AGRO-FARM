@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
                 'phone_number' => '01713617913',
                 'password'     => $password,
                 'status'       => 1,
+                'role'         => 1,
                 'created_at'   => $now
             ],
             [
@@ -35,6 +36,7 @@ class UserSeeder extends Seeder
                 'phone_number' => '01613617913',
                 'password'     => $password,
                 'status'       => 1,
+                'role'         => 1,
                 'created_at'   => $now
             ]
         ]);

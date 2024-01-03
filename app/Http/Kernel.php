@@ -67,7 +67,10 @@ class Kernel extends HttpKernel
         'branch' => \App\Http\Middleware\EnsureBranchSelected::class,
     ];
 
-     protected $routeMiddleware = [
+    protected $routeMiddleware = [
         'auth.branch' => \App\Http\Middleware\EnsureBranchSelected::class,
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
     ];
 }
