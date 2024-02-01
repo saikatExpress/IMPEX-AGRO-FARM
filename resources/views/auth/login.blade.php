@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -7,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>IMPEX AGRO | Login</title>
+    <title>RH Dairy Farm | Login</title>
     <link rel="icon" href="{{ asset('custom/logos/751280420015239.png') }}" type="image/ico" />
 
     <!-- Bootstrap -->
@@ -31,7 +32,7 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    @if(session('message'))
+                    @if (session('message'))
                         <div class="alert alert-danger">
                             {{ session('message') }}
                         </div>
@@ -40,7 +41,7 @@
                         @csrf
                         <h1>Login Form</h1>
                         <div>
-                            <input type="email" name="email" class="form-control" placeholder="Email"/>
+                            <input type="email" name="email" class="form-control" placeholder="Email" />
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -61,17 +62,19 @@
 
                         <div class="separator">
 
-                        <p class="change_link">New to site?
-                            <a href="#signup" class="to_register"> Create Account </a>
-                        </p>
+                            <p class="change_link">New to site?
+                                <a href="#signup" class="to_register"> Create Account </a>
+                            </p>
 
-                        <div class="clearfix"></div>
-                        <br />
+                            <div class="clearfix"></div>
+                            <br />
 
-                        <div>
-                            <h1><img style="width:40px; height:40px;" src="{{ asset('custom/logos/logo.png') }}" alt=""> IMPEX AGRO FARM</h1>
-                            <p>©2023 All Rights Reserved. TS WEB BUILD! is a Advanced Admin Board. Privacy and Terms</p>
-                        </div>
+                            <div>
+                                <h1><img style="width:40px; height:40px;" src="{{ asset('custom/logos/logo.png') }}"
+                                        alt=""> RH AGRO FARM</h1>
+                                <p>©2023 All Rights Reserved. TS WEB BUILD! is a Advanced Admin Board. Privacy and Terms
+                                </p>
+                            </div>
                         </div>
                     </form>
                 </section>
@@ -101,14 +104,15 @@
 
                         <div class="separator">
                             <p class="change_link">Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
-                        </p>
+                                <a href="#signin" class="to_register"> Log in </a>
+                            </p>
 
-                        <div class="clearfix"></div>
+                            <div class="clearfix"></div>
                             <br />
 
                             <div>
-                                <h1> <img style="width:40px; height:40px;" src="{{ asset('custom/logos/logo.png') }}" alt=""> IMPEX AGRO FARM</h1>
+                                <h1> <img style="width:40px; height:40px;" src="{{ asset('custom/logos/logo.png') }}"
+                                        alt=""> RH DAIRY FARM</h1>
                                 <p>©2023 All Rights Reserved. ISBAH IT!. Privacy and Terms</p>
                             </div>
                         </div>
@@ -118,4 +122,5 @@
         </div>
     </div>
 </body>
+
 </html>

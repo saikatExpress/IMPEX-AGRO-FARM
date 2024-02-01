@@ -48,9 +48,11 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="{{ route('dashboard') }}" class="site_title"> <img style="width: 30px; height:30px; border-radius:50%;"
-                                src="{{ asset('custom/logos/d020d982-3924-421c-9ea8-95a920b2ed0d.jpg') }}" alt="">
-                            <span>Impex Agro Farm</span></a>
+                        <a href="{{ route('dashboard') }}" class="site_title"> <img
+                                style="width: 30px; height:30px; border-radius:50%;"
+                                src="{{ asset('custom/logos/d020d982-3924-421c-9ea8-95a920b2ed0d.jpg') }}"
+                                alt="">
+                            <span>RH Dairy Farm</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -116,7 +118,8 @@
                                 {{-- Buyer Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-money-check"></i> ক্রেতা
+                                        <i style="margin-right:8px; font-size: 1.2rem;"
+                                            class="fa-solid fa-money-check"></i> ক্রেতা
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
                                     <ul class="nav child_menu">
@@ -178,7 +181,8 @@
                                 {{-- Animal Sell Menu List --}}
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-brands fa-sellcast"></i> পশু
+                                        <i style="margin-right:8px; font-size: 1.2rem;"
+                                            class="fa-brands fa-sellcast"></i> পশু
                                         ক্রয়/বিক্রয়
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
@@ -208,10 +212,11 @@
                             <ul class="nav side-menu">
                                 <li>
                                     <a>
-                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-brands fa-watchman-monitoring"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;"
+                                            class="fa-brands fa-watchman-monitoring"></i>
                                         পশু মনিটরিং
                                         <span class="fa fa-chevron-down"></span>
-                                        </a>
+                                    </a>
                                     <ul class="nav child_menu">
                                         <li><a href="e_commerce.html">রুটিন মনিটরিং</a></li>
                                         <li><a href="projects.html">ভ্যাকসিন মনিটরিং</a></li>
@@ -230,7 +235,8 @@
 
                                 <li>
                                     <a href="">
-                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;"
+                                            class="fa-solid fa-bowl-food"></i>
                                         পরিবেশক
                                     </a>
                                 </li>
@@ -251,7 +257,8 @@
 
                                 <li>
                                     <a href="">
-                                        <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-circle-info"></i>
+                                        <i style="margin-right:8px; font-size: 1.2rem;"
+                                            class="fa-solid fa-circle-info"></i>
                                         শেড বিবরণী
                                     </a>
                                 </li>
@@ -282,7 +289,8 @@
                                         <li><a href="{{ route('milk.sale_report') }}">Milk Sale Report</a></li>
                                         <li><a href="{{ route('milk.sell') }}">Cow Sell Report</a></li>
                                         <li><a href="{{ route('farm.expense_report') }}">Farm Expense Report</a></li>
-                                        <li><a href="{{ route('employee.salary_report') }}">Employee Salary Report</a></li>
+                                        <li><a href="{{ route('employee.salary_report') }}">Employee Salary Report</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 {{-- Report Menu List --}}
