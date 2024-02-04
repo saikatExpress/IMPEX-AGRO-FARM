@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 
@@ -67,7 +68,9 @@ class UserController extends Controller
 
     public function userProfile()
     {
-        return view('user.user_profile');
+        $user = User::find(Auth::id());
+
+        return view('user.user_profile', compact('user'));
     }
 
     public function update(Request $request)
@@ -101,6 +104,90 @@ class UserController extends Controller
                 return back()->with('message', 'User & Role update successfully');
 
             }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function ownUserUpdate(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'name'         => ['required'],
+                'email'        => ['required'],
+                'phone_number' => ['required'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $validateData = $validator->validated();
+
+            $userId = $request->input('user_id');
+
+            $user = User::find($userId);
+            if(!$user){
+                return redirect()->back()->with('message', 'User Not Found');
+            }
+
+            $res = $user->update($validateData);
+
+            DB::commit();
+            if($res){
+                return redirect()->back()->with('message', 'Update information successfully');
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function passUpdate(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'password' => ['required'],
+                'con-pass' => ['required', 'same:password'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $userId = $request->input('user_id');
+
+            $user = User::find($userId);
+
+            if(!$user){
+                return redirect()->back()->with('message', 'User not found');
+            }
+
+            $password = $request->input('password');
+            $conPass = $request->input('con-pass');
+
+            if($password == $conPass){
+                $updatedPass = Hash::make($password);
+
+                $res = $user->update(['password' => $updatedPass]);
+
+                DB::commit();
+                if($res){
+                    return redirect()->back()->with('message', 'Password Update Successfully');
+                }
+            }
+
+
         } catch (\Exception $e) {
             DB::rollback();
             info($e);

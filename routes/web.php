@@ -3,23 +3,24 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CowController;
-use App\Http\Controllers\FoodController;
-use App\Http\Controllers\BeefController;
-use App\Http\Controllers\MilkController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BeefController;
 use App\Http\Controllers\CostController;
-use App\Http\Controllers\SemenController;
-use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MilkController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\SemenController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BranchController;
-use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpenseController;
-use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PregnancyController;
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     Route::get('/user/profile', [UserController::class, 'userProfile'])->name('user.profile');
     Route::post('/user/edit', [UserController::class, 'update'])->name('user.edit');
+    Route::post('/own/user/edit', [UserController::class, 'ownUserUpdate'])->name('ownuser.edit');
+    Route::post('/own/pass/edit', [UserController::class, 'passUpdate'])->name('ownpass.edit');
 
     // For Category Route
     Route::get('/catgeory/list', [CategoryController::class, 'index'])->name('category.list');
