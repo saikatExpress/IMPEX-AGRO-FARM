@@ -140,6 +140,8 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     // For Pregnancy Route
     Route::get('/pregnancy/monitoring', [PregnancyController::class, 'create'])->name('pregnancy.monitoring');
     Route::post('/pregnancy/store', [PregnancyController::class, 'store'])->name('pregnancy.store');
+    Route::get('/zones/search', [PregnancyController::class, 'zone_search'])->name('search.zones');
+
 
     // For Semen Route
     Route::get('/semen/list', [SemenController::class, 'index'])->name('semen.list');

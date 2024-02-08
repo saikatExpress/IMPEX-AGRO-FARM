@@ -13,21 +13,13 @@ return new class extends Migration
     {
         Schema::create('pregnancies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->constrained('branches')
-                ->onUpdate('cascade')->onDelete('cascade')->nullable();
-            $table->foreignId('cow_id')->constrained('cows')
-                ->onUpdate('cascade')->onDelete('cascade')->nullable();
-            $table->string('pregnancy_type', 20)->nullable();
-            $table->foreignId('semen_id')->constrained('semens')
-                ->onUpdate('cascade')->onDelete('cascade')->nullable();
-            $table->timestamp('push_date')->nullable();
-            $table->timestamp('start_date')->nullable();
-            $table->integer('semen_cost')->nullable();
-            $table->integer('other_cost')->nullable();
-            $table->integer('due')->nullable();
-            $table->string('status', 10)->default('1')->nullable();
-            $table->integer('flag')->default(0)->nullable();
-            $table->softDeletes();
+            
+            $table->string('cow_id')->nullable();
+            $table->string('pregnancy_type')->nullable();
+            $table->string('push_date')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('semen_cost')->nullable();
+            $table->string('other_cost')->nullable();
             $table->timestamps();
         });
     }
