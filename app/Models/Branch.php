@@ -3,22 +3,23 @@
 namespace App\Models;
 
 use App\Models\Cow;
-use App\Models\Milk;
-use App\Models\Cost;
 use App\Models\Beef;
-use App\Models\Staff;
-use App\Models\Semen;
+use App\Models\Cost;
+use App\Models\Milk;
+use App\Models\Shed;
 use App\Models\Buyer;
+use App\Models\Semen;
+use App\Models\Staff;
 use App\Models\Income;
-use App\Models\CowSell;
 use App\Models\Account;
+use App\Models\CowSell;
 use App\Models\Invoice;
 use App\Models\BeefSell;
 use App\Models\Pregnancy;
 use App\Models\StaffSalary;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Branch extends Model
 {
@@ -117,5 +118,10 @@ class Branch extends Model
     public function pregnancies()
     {
         return $this->hasMany(Pregnancy::class);
+    }
+
+    public function sheds()
+    {
+        return $this->hasMany(Shed::class);
     }
 }

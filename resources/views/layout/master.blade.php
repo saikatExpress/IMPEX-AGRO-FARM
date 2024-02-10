@@ -256,7 +256,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('shed.list') }}">
                                         <i style="margin-right:8px; font-size: 1.2rem;"
                                             class="fa-solid fa-circle-info"></i>
                                         শেড বিবরণী

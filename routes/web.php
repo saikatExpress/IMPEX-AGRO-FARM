@@ -23,6 +23,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PregnancyController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +146,13 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/semen/list', [SemenController::class, 'index'])->name('semen.list');
     Route::get('/semen/create', [SemenController::class, 'create'])->name('semen.create');
     Route::post('/semen/store', [SemenController::class, 'store'])->name('semen.store');
+
+    //For Shed Route
+    Route::controller(ShedController::class)->group(function(){
+        Route::get('/shed/list', 'index')->name('shed.list');
+        Route::post('/shed/store', 'store')->name('shed.store');
+        Route::post('/shed/edit', 'update')->name('shed.edit');
+    });
 
     // For Expense Route
     Route::get('/expense/list', [ExpenseController::class, 'index'])->name('expense.list');
