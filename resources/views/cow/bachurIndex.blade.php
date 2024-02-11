@@ -65,7 +65,7 @@
 
                                     <tbody>
 
-                                        @if (count($sheds) > 0)
+                                        {{-- @if (count($sheds) > 0)
                                             @php
                                                 $sl = 1;
                                             @endphp
@@ -100,7 +100,7 @@
                                             @endforeach
                                         @else
                                             <p>There is no data</p>
-                                        @endif
+                                        @endif --}}
 
                                     </tbody>
                                 </table>

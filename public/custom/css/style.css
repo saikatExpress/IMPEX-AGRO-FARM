@@ -268,6 +268,20 @@ body {
     font-size: 1rem;
 }
 
+.basic_form {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.basic_form h5{
+    border-bottom: 1px solid gray;
+    padding: 5px 5px 5px;
+    background-color: gray;
+    color: #fff;
+    font-weight: 600;
+}
+
 @media (max-width: 768px) {
         .branch_container{
             width: 100%;

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Unit;
 use App\Models\Food;
+use App\Models\Shed;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreFoodRequest;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateFoodRequest;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class FoodController extends Controller
 {
@@ -33,12 +34,21 @@ class FoodController extends Controller
         return view('unit.unit_list', compact('units'));
     }
 
+    public function feedIndex()
+    {
+        return view('cowFeed.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $sheds = Shed::where('branch_id', session('branch_id'))->get();
+        $foods = Food::all();
+        $units = Unit::all();
+
+        return view('cowFeed.create', compact('sheds', 'foods', 'units'));
     }
 
     /**
@@ -60,6 +70,18 @@ class FoodController extends Controller
             if($res){
                 return redirect()->back()->with('message', 'Food Created');
             }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function feedStore(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            return $request->all();
         } catch (\Exception $e) {
             DB::rollback();
             info($e);

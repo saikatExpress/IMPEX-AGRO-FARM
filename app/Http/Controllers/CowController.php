@@ -45,6 +45,11 @@ class CowController extends Controller
         return view('cow.sell_list', compact('sellList', 'cows', 'buyers'));
     }
 
+    public function bachurIndex()
+    {
+        return view('cow.bachurIndex');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

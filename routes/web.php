@@ -152,6 +152,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
         Route::get('/shed/list', 'index')->name('shed.list');
         Route::post('/shed/store', 'store')->name('shed.store');
         Route::post('/shed/edit', 'update')->name('shed.edit');
+        Route::get('/shed/delete/{id}', 'destroy');
     });
 
     // For Expense Route
@@ -166,6 +167,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/cost/create', [CostController::class, 'create'])->name('cost.create');
     Route::post('/cost/store', [CostController::class, 'store'])->name('cost.store');
     Route::post('/cost/edit', [CostController::class, 'update'])->name('cost.edit');
+    Route::get('/bachur/list', [CowController::class, 'bachurIndex'])->name('bachur.list');
 
     // For Cow Route
     Route::get('/cow/list', [CowController::class, 'index'])->name('cow.list');
@@ -188,7 +190,10 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
 
     // For Food Route
     Route::get('/food/list', [FoodController::class, 'index'])->name('food.list');
+    Route::get('cow/feed/list', [FoodController::class, 'feedIndex'])->name('cow.feed');
+    Route::get('cow/feed/create', [FoodController::class, 'create'])->name('cow_feed.create');
     Route::post('/food/store', [FoodController::class, 'store'])->name('food.store');
+    Route::post('/feed/store', [FoodController::class, 'feedStore'])->name('feed.store');
     Route::post('/food/edit', [FoodController::class, 'update'])->name('food.edit');
     Route::get('/food/delete/{id}', [FoodController::class, 'destroy'])->middleware('role:admin');
 

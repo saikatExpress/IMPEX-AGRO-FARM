@@ -174,9 +174,12 @@
                                 </li>
                                 {{-- Milk Menu List --}}
 
-                                <li><a href=""> <i style="font-size: 1.2rem;"
-                                            class="fa-solid fa-bowl-food"></i>
-                                        পশু খাদ্য</a></li>
+                                <li>
+                                    <a href="{{ route('cow.feed') }}">
+                                        <i style="font-size: 1.2rem;" class="fa-solid fa-bowl-food"></i>
+                                        পশু খাদ্য
+                                    </a>
+                                </li>
 
                                 {{-- Animal Sell Menu List --}}
                                 <li>
@@ -249,7 +252,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('bachur.list') }}">
                                         <i style="margin-right:8px; font-size: 1.2rem;" class="fa-solid fa-list"></i>
                                         বাছুরের তালিকা
                                     </a>

@@ -103,8 +103,26 @@ class ShedController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Shed $shed)
+    public function destroy(Shed $shed, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $shed = Shed::find($id);
+
+            if(!$shed){
+                return response()->json(['message' => 'Shed not Found.']);
+            }
+
+            $res = $shed->delete();
+
+            DB::commit();
+            if($res){
+                return response()->json(['message' => 'Shed deleted successfully.']);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 }

@@ -5,9 +5,9 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">
+                    <a href="{{ route('cow_feed.create') }}" class="btn btn-sm btn-primary">
                         Create New
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
 
                                     <tbody>
 
-                                        @if (count($sheds) > 0)
+                                        {{-- @if (count($sheds) > 0)
                                             @php
                                                 $sl = 1;
                                             @endphp
@@ -100,7 +100,7 @@
                                             @endforeach
                                         @else
                                             <p>There is no data</p>
-                                        @endif
+                                        @endif --}}
 
                                     </tbody>
                                 </table>
