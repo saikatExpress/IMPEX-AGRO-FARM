@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->foreignId('category_id')->constrained('categories')
                     ->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->integer('expense_type')->nullable();
+            $table->foreignId('shed_id')->constrained('sheds')
+                ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->string('tag', 200)->nullable();
             $table->string('caste', 200)->nullable();
             $table->string('weight', 200)->nullable();

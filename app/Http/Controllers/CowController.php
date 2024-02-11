@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Cow;
+use App\Models\Shed;
 use App\Models\Buyer;
-use App\Models\CowSell;
 use App\Models\Income;
-use App\Models\Expense;
 use App\Models\Account;
+use App\Models\CowSell;
+use App\Models\Expense;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Service\BalanceService;
@@ -57,8 +58,9 @@ class CowController extends Controller
     {
         $categories = Category::where('status', '1')->get();
         $expenseType = Expense::all();
+        $sheds = Shed::where('branch_id', session('branch_id'))->get();
 
-        return view('cow.create_cow', compact('categories', 'expenseType'));
+        return view('cow.create_cow', compact('categories', 'expenseType', 'sheds'));
     }
 
     public function sellCreate()
@@ -166,22 +168,24 @@ class CowController extends Controller
 
             $total = $price + $transport + $hasil;
 
-            $cowObj->branch_id   = session('branch_id');
-            $cowObj->price       = $price;
-            $cowObj->category_id = $request->input('category_id');
-            $cowObj->tag         = $request->input('tag');
-            $cowObj->caste       = $request->input('caste');
-            $cowObj->weight      = $request->input('weight');
-            $cowObj->transport   = $transport;
-            $cowObj->hasil       = $hasil;
-            $cowObj->total       = $total;
-            $cowObj->color       = $request->input('color');
-            $cowObj->buy_date    = $request->input('buy_date');
-            $cowObj->age         = $request->input('age');
-            $cowObj->description = $request->input('description');
-            $cowObj->status      = '1';
-            $cowObj->flag        = '0';
-            $cowObj->created_at  = Carbon::now();
+            $cowObj->branch_id    = session('branch_id');
+            $cowObj->price        = $price;
+            $cowObj->category_id  = $request->input('category_id');
+            $cowObj->expense_type = $request->input('expense_type');
+            $cowObj->shed_id      = $request->input('shed_id');
+            $cowObj->tag          = $request->input('tag');
+            $cowObj->caste        = $request->input('caste');
+            $cowObj->weight       = $request->input('weight');
+            $cowObj->transport    = $transport;
+            $cowObj->hasil        = $hasil;
+            $cowObj->total        = $total;
+            $cowObj->color        = $request->input('color');
+            $cowObj->buy_date     = $request->input('buy_date');
+            $cowObj->age          = $request->input('age');
+            $cowObj->description  = $request->input('description');
+            $cowObj->status       = '1';
+            $cowObj->flag         = '0';
+            $cowObj->created_at   = Carbon::now();
 
             $res = $cowObj->save();
 

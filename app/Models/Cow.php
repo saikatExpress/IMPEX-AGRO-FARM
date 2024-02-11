@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Shed;
 use App\Models\Branch;
 use App\Models\CowSell;
 use App\Models\Category;
 use App\Models\Pregnancy;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cow extends Model
 {
@@ -17,6 +18,8 @@ class Cow extends Model
         'branch_id',
         'price',
         'category_id',
+        'expense_type',
+        'shed_id',
         'tag',
         'caste',
         'weight',
@@ -32,25 +35,27 @@ class Cow extends Model
     ];
 
     protected $casts = [
-        'id'          => 'integer',
-        'branch_id'   => 'integer',
-        'price'       => 'integer',
-        'category_id' => 'integer',
-        'tag'         => 'string',
-        'caste'       => 'string',
-        'weight'      => 'string',
-        'transport'   => 'integer',
-        'hasil'       => 'integer',
-        'total'       => 'integer',
-        'color'       => 'string',
-        'buy_date'    => 'datetime',
-        'age'         => 'string',
-        'description' => 'string',
-        'status'      => 'string',
-        'flag'        => 'string',
-        'created_at'  => 'datetime',
-        'updated_at'  => 'datetime',
-        'deleted_at'  => 'datetime',
+        'id'           => 'integer',
+        'branch_id'    => 'integer',
+        'price'        => 'integer',
+        'category_id'  => 'integer',
+        'expense_type' => 'integer',
+        'shed_id'      => 'integer',
+        'tag'          => 'string',
+        'caste'        => 'string',
+        'weight'       => 'string',
+        'transport'    => 'integer',
+        'hasil'        => 'integer',
+        'total'        => 'integer',
+        'color'        => 'string',
+        'buy_date'     => 'datetime',
+        'age'          => 'string',
+        'description'  => 'string',
+        'status'       => 'string',
+        'flag'         => 'string',
+        'created_at'   => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'   => 'datetime',
     ];
 
     //Relation Start
@@ -77,5 +82,10 @@ class Cow extends Model
     public function pregnancies()
     {
         return $this->hasMany(Pregnancy::class);
+    }
+
+    public function shed()
+    {
+        return $this->belongsTo(Shed::class, 'shed_id', 'id');
     }
 }

@@ -85,6 +85,22 @@
                         </div>
 
                         <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">শেড<span
+                                    class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="shed_id" id="" class="form-control">
+                                    <option value="" selected disabled>select</option>
+                                    @foreach ($sheds as $key => $shed)
+                                        <option value="{{ $shed->id }}">{{ $shed->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('shed_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">ট্যাগ নাম্বার<span
                                     class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
