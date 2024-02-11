@@ -23,7 +23,7 @@
                             <div class="d-flex justify-content-around">
                                 <div class="form-group">
                                     <label for="">Select Shed</label>
-                                    <select name="shed_id" id="" class="form-control">
+                                    <select name="shed_id" id="shedId" class="form-control">
                                         <option value="">Select</option>
                                         @foreach ($sheds as $key => $shed)
                                             <option value="{{ $shed->id }}">{{ $shed->name }}</option>
@@ -36,11 +36,8 @@
 
                                 <div class="form-group">
                                     <label for="">Select Cow</label>
-                                    <select name="cow_id" id="" class="form-control">
+                                    <select name="cow_id" id="cowId" class="form-control">
                                         <option value="">Select</option>
-                                        @foreach ($sheds as $key => $shed)
-                                            <option value="{{ $shed->id }}">{{ $shed->name }}</option>
-                                        @endforeach
                                     </select>
                                     @error('cow_id')
                                         <span class="text-danger">{{ $message }}</span>
@@ -49,7 +46,7 @@
 
                                 <div class="form-group">
                                     <label for="">Date</label>
-                                    <input type="date" id="name" name="name" class="form-control ">
+                                    <input type="date" id="feed_date" feed_date="name" class="form-control ">
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -58,8 +55,8 @@
 
                             <div class="form-group" style="padding: 5px;">
                                 <label for="">Note</label>
-                                <textarea name="" class="form-control" id="" cols="30" rows="4"></textarea>
-                                @error('name')
+                                <textarea name="description" class="form-control" id="" cols="30" rows="4"></textarea>
+                                @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -90,11 +87,12 @@
                                         @foreach ($foods as $key => $food)
                                             <tr class="even pointer">
                                                 <td class="a-center ">
-                                                    <input type="checkbox" class="flat" name="table_records">
+                                                    <input type="checkbox" value="{{ $food->id }}" class="flat"
+                                                        name="table_records[]">
                                                 </td>
                                                 <td class=" ">{{ $food->name }}</td>
                                                 <td class=" ">
-                                                    <input type="number" class="form-control">
+                                                    <input type="number" class="form-control" name="food_qauntity[]">
                                                 </td>
                                                 <td class=" ">
                                                     <select name="" id="" class="form-control">
@@ -121,4 +119,8 @@
         <div class="col-2"></div>
 
     </div>
+
+    <!-- jQuery CDN from Google -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('custom/js/food.js') }}"></script>
 @endsection

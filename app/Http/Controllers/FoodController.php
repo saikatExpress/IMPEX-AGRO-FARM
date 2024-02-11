@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cow;
 use App\Models\Food;
 use App\Models\Shed;
 use App\Models\Unit;
@@ -108,6 +109,13 @@ class FoodController extends Controller
             DB::rollback();
             info($e);
         }
+    }
+
+    public function shedCows($id)
+    {
+        $shedId = $id;
+        $cows = Cow::where('shed_id', $shedId)->where('branch_id', session('branch_id'))->get();
+        return response()->json($cows);
     }
 
     /**
