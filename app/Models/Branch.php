@@ -12,6 +12,7 @@ use App\Models\Semen;
 use App\Models\Staff;
 use App\Models\Income;
 use App\Models\Account;
+use App\Models\CowFeed;
 use App\Models\CowSell;
 use App\Models\Invoice;
 use App\Models\BeefSell;
@@ -123,5 +124,10 @@ class Branch extends Model
     public function sheds()
     {
         return $this->hasMany(Shed::class);
+    }
+
+    public function cowFeeds()
+    {
+        return $this->hasMany(CowFeed::class);
     }
 }

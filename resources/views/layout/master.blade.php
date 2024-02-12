@@ -221,7 +221,7 @@
                                         <span class="fa fa-chevron-down"></span>
                                     </a>
                                     <ul class="nav child_menu">
-                                        <li><a href="e_commerce.html">রুটিন মনিটরিং</a></li>
+                                        <li><a href="{{ route('routine.monitoring') }}">রুটিন মনিটরিং</a></li>
                                         <li><a href="projects.html">ভ্যাকসিন মনিটরিং</a></li>
                                         <li>
                                             <a href="{{ route('pregnancy.monitoring') }}">

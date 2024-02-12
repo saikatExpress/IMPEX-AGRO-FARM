@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Shed;
 use App\Models\Branch;
+use App\Models\CowFeed;
 use App\Models\CowSell;
 use App\Models\Category;
 use App\Models\Pregnancy;
@@ -82,6 +83,11 @@ class Cow extends Model
     public function pregnancies()
     {
         return $this->hasMany(Pregnancy::class);
+    }
+
+    public function cowFeeds()
+    {
+        return $this->hasMany(CowFeed::class);
     }
 
     public function shed()

@@ -1,6 +1,11 @@
 @extends('layout.master')
 @section('content')
     <div class="row">
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="page_header">
             <div class="page_header_menu">
                 <a class="btn btn-sm btn-primary" href="{{ route('cow.feed') }}">Feed List</a>
@@ -88,14 +93,14 @@
                                             <tr class="even pointer">
                                                 <td class="a-center ">
                                                     <input type="checkbox" value="{{ $food->id }}" class="flat"
-                                                        name="table_records[]">
+                                                        name="food_id[]">
                                                 </td>
                                                 <td class=" ">{{ $food->name }}</td>
                                                 <td class=" ">
-                                                    <input type="number" class="form-control" name="food_qauntity[]">
+                                                    <input type="number" class="form-control" name="food_quantity[]">
                                                 </td>
                                                 <td class=" ">
-                                                    <select name="" id="" class="form-control">
+                                                    <select name="unit_id[]" id="" class="form-control">
                                                         <option value="">Select</option>
                                                         @foreach ($units as $unit)
                                                             <option value="{{ $unit->id }}">{{ $unit->name }}

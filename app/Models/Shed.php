@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Cow;
 use App\Models\Branch;
+use App\Models\CowFeed;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -40,5 +41,10 @@ class Shed extends Model
     public function cows()
     {
         return $this->hasMany(Cow::class);
+    }
+
+    public function cowFeeds()
+    {
+        return $this->hasMany(CowFeed::class);
     }
 }

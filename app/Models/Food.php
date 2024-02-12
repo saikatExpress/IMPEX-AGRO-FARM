@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CowFeed;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Food extends Model
 {
@@ -22,4 +23,10 @@ class Food extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    // Relation Start
+    public function cowFeeds()
+    {
+        return $this->hasMany(CowFeed::class);
+    }
 }

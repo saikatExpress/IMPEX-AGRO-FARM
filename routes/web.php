@@ -196,6 +196,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/feed/store', [FoodController::class, 'feedStore'])->name('feed.store');
     Route::post('/food/edit', [FoodController::class, 'update'])->name('food.edit');
     Route::get('/get/shed/cows/{id}', [FoodController::class, 'shedCows']);
+    Route::get('/get/cow/feed/{id}', [FoodController::class, 'getCowInfo']);
     Route::get('/food/delete/{id}', [FoodController::class, 'destroy'])->middleware('role:admin');
 
     // For Unit Route

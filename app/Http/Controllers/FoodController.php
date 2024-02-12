@@ -13,18 +13,27 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreFoodRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateFoodRequest;
+use App\Models\CowFeed;
+use App\Service\FoodService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use PhpParser\Node\Stmt\Return_;
 
 class FoodController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('login.us');
+        }
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $foods = Food::where('status', '1')->get();
 
+        $foods = Food::where('status', '1')->get();
         return view('food.food_list', compact('foods'));
     }
 
@@ -37,7 +46,9 @@ class FoodController extends Controller
 
     public function feedIndex()
     {
-        return view('cowFeed.index');
+        $data['cows'] = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('flag', 0)->get();
+
+        return view('cowFeed.index')->with($data);
     }
 
     /**
@@ -45,10 +56,9 @@ class FoodController extends Controller
      */
     public function create()
     {
-        $sheds = Shed::where('branch_id', session('branch_id'))->get();
+        $sheds = Shed::with('cows')->where('branch_id', session('branch_id'))->get();
         $foods = Food::all();
         $units = Unit::all();
-
         return view('cowFeed.create', compact('sheds', 'foods', 'units'));
     }
 
@@ -79,13 +89,17 @@ class FoodController extends Controller
 
     public function feedStore(Request $request)
     {
-        try {
-            DB::beginTransaction();
+        $foodServiceObj = new FoodService;
+        $shedId         = $request->input('shed_id');
+        $cowId          = $request->input('cow_id');
+        $description    = $request->input('description');
+        $foodIds        = $request->input('food_id');
+        $foodQuantities = $request->input('food_quantity');
+        $unitIds        = $request->input('unit_id');
 
-            return $request->all();
-        } catch (\Exception $e) {
-            DB::rollback();
-            info($e);
+        $res = $foodServiceObj->create($shedId, $cowId, $description, $foodIds, $foodQuantities, $unitIds);
+        if($res == true){
+            return redirect()->back()->with('message', 'Food assign to the cow');
         }
     }
 
@@ -118,20 +132,11 @@ class FoodController extends Controller
         return response()->json($cows);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Food $food)
+    public function getCowInfo($id)
     {
-        //
-    }
+        $feeds = CowFeed::with('food:id,name', 'unit:id,name')->where('branch_id', session('branch_id'))->where('cow_tag', $id)->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Food $food)
-    {
-
+        return response()->json(['feeds' => $feeds]);
     }
 
     /**

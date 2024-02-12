@@ -56,40 +56,38 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Branch Name</th>
-                                            <th>Shed No</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
+                                            <th>Cow Tag</th>
+                                            <th>Feed</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-                                        {{-- @if (count($sheds) > 0)
+                                        @if (count($cows) > 0)
                                             @php
                                                 $sl = 1;
                                             @endphp
-                                            @foreach ($sheds as $key => $shed)
+                                            @foreach ($cows as $key => $cow)
                                                 <tr class="list-item">
                                                     <td>{{ $sl }}</td>
-                                                    <td>{{ ucfirst($shed->branch->branch_name) }}</td>
-                                                    <td>{{ ucfirst($shed->name) }}</td>
-                                                    <td>{{ $shed->description }}</td>
+                                                    <td>{{ ucfirst($cow->branch->branch_name) }}</td>
+                                                    <td>{{ ucfirst($cow->tag) }}</td>
                                                     <td>
-                                                        <label class="btn btn-sm btn-warning" for="">
-                                                            Avaiable
-                                                        </label>
+                                                        <button type="button" class="btn btn-sm btn-primary feedBtn"
+                                                            data-id="{{ $cow->id }}">
+                                                            <i class="fas fa-regular fa-eye"></i>
+                                                        </button>
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
-                                                            data-target="#myModal" data-id="{{ $shed->id }}"
-                                                            data-name="{{ $shed->name }}"
-                                                            data-description="{{ $shed->description }}"
-                                                            data-status="{{ $shed->status }}">
+                                                            data-target="#myModal" data-id="{{ $cow->id }}"
+                                                            data-name="{{ $cow->name }}"
+                                                            data-status="{{ $cow->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
                                                         <button class="btn btn-sm btn-danger deleteButton"
-                                                            data-id="{{ $shed->id }}">
+                                                            data-id="{{ $cow->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -100,7 +98,7 @@
                                             @endforeach
                                         @else
                                             <p>There is no data</p>
-                                        @endif --}}
+                                        @endif
 
                                     </tbody>
                                 </table>
@@ -114,6 +112,32 @@
     </div>
 
     <!-- Modal -->
+
+    <div class="modal fade" id="feedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Modal content goes here -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Feed Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- Additional buttons if needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -246,6 +270,7 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('custom/js/food.js') }}"></script>
 
     <script>
         $(document).ready(function() {
