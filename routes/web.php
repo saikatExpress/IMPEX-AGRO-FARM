@@ -21,6 +21,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\PregnancyController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShedController;
@@ -65,6 +66,13 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::controller(AdminController::class)->group(function(){
+        Route::get('/designation/list', 'index')->name('designation.list');
+        Route::post('/designation/store', 'store')->name('designation.store');
+        Route::post('/designation/update', 'update')->name('designation.edit');
+        Route::get('/designation/delete/{id}', 'destroy');
+    });
 
     //User Route
     Route::get('/user/list', [UserController::class, 'index'])->name('user.list')->middleware('role:admin|role:super-admin');
@@ -204,6 +212,14 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/unit/store', [FoodController::class, 'unitStore'])->name('unit.store');
     Route::post('/unit/edit', [FoodController::class, 'unitUpdate'])->name('unit.edit');
     Route::get('/unit/delete/{id}', [FoodController::class, 'unitDestroy'])->middleware('role:admin');
+
+    //Monitoring Route
+    Route::controller(MonitoringController::class)->group(function(){
+        Route::get('/routine/monitoring', 'index')->name('routine.monitoring');
+        Route::get('/vaccine/monitoring', 'vaccineIndex')->name('vaccine.monitoring');
+        Route::get('/monitoring/create', 'create')->name('monitoring.create');
+        Route::get('/vaccine/create', 'vaccineCreate')->name('vaccine.create');
+    });
 
     // For Buyer Route
     Route::get('/buyer/list', [BuyerController::class, 'index'])->name('buyer.list');

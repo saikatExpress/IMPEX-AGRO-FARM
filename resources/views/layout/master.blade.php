@@ -222,7 +222,7 @@
                                     </a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('routine.monitoring') }}">রুটিন মনিটরিং</a></li>
-                                        <li><a href="projects.html">ভ্যাকসিন মনিটরিং</a></li>
+                                        <li><a href="{{ route('vaccine.monitoring') }}">ভ্যাকসিন মনিটরিং</a></li>
                                         <li>
                                             <a href="{{ route('pregnancy.monitoring') }}">
                                                 প্রেগনেন্সি মনিটরিং
@@ -276,7 +276,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('food.list') }}">Food Item</a></li>
                                         <li><a href="{{ route('unit.list') }}">Food Unit</a></li>
-                                        <li><a href="{{ route('farm.expense_report') }}">Designantion</a></li>
+                                        <li><a href="{{ route('designation.list') }}">Designantion</a></li>
                                     </ul>
                                 </li>
                                 {{-- Catalog Menu List --}}

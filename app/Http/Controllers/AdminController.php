@@ -4,20 +4,39 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Cow;
+use App\Models\Beef;
 use App\Models\Cost;
 use App\Models\Milk;
+use App\Models\Shed;
 use App\Models\Staff;
-use App\Models\Beef;
-use App\Models\Income;
 use App\Models\Branch;
+use App\Models\Income;
 use App\Models\Account;
 use App\Models\BeefSell;
 use App\Models\MilkSell;
+use App\Models\Designation;
 use App\Models\StaffSalary;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('login.us');
+        }
+    }
+
+    public function index()
+    {
+        $data['designations'] = Designation::where('status', 1)->get();
+
+        return view('designation.index')->with($data);
+    }
+
     public function dashboard()
     {
         $cows          = Cow::where('branch_id', session('branch_id'))->where('status', '1')->where('flag', '0')->count();
@@ -69,5 +88,88 @@ class AdminController extends Controller
         // return $branches;
 
         return view('branch.branch', compact('branches'));
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $designationObj = new Designation();
+
+            $designationObj->name = $request->input('name');
+            $designationObj->slug = Str::slug($request->input('name'), '-');
+            $designationObj->description = $request->input('description');
+
+            $res = $designationObj->save();
+
+            DB::commit();
+            if($res){
+                return redirect()->back()->with('message', 'Designation created');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $designationId = $request->input('designation_id');
+
+            $designation = Designation::where('id', $designationId)->first();
+
+            if(!$designation){
+                return redirect()->back()->with('message', 'Designation Not Found');
+            }
+
+            $validData = [
+                'name'        => $request->input('name'),
+                'description' => $request->input('description'),
+                'status'      => $request->input('status'),
+            ];
+
+            $res = $designation->update($validData);
+
+            DB::commit();
+
+            if($res){
+                return redirect()->back()->with('message', 'Designation updated');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $designation = Designation::find($id);
+
+            if(!$designation){
+                return response()->json(['message' => 'Designation not found']);
+            }
+
+            $res = $designation->delete();
+
+            DB::commit();
+            if($res){
+                return response()->json(['message' => 'Designation deleted']);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
     }
 }
