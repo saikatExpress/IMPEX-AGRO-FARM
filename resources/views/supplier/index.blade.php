@@ -5,9 +5,9 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">
+                    <a href="{{ route('supplier.create') }}" class="btn btn-sm btn-primary">
                         Create New
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -20,7 +20,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h2 style="font-weight: bold; color:#000;">Calf List</h2>
+                    <h2 style="font-weight: bold; color:#000;">Shed List</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link">
@@ -56,8 +56,10 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Branch Name</th>
-                                            <th>Shed No</th>
-                                            <th>Description</th>
+                                            <th>Name</th>
+                                            <th>Company Name</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -65,31 +67,39 @@
 
                                     <tbody>
 
-                                        @if (count($calfs) > 0)
+                                        @if (count($suppliers) > 0)
                                             @php
                                                 $sl = 1;
                                             @endphp
-                                            @foreach ($calfs as $key => $calf)
+                                            @foreach ($suppliers as $key => $supplier)
                                                 <tr class="list-item">
                                                     <td>{{ $sl }}</td>
-                                                    <td>{{ ucfirst($calf->branch->branch_name) }}</td>
-                                                    <td>{{ ucfirst($calf->name) }}</td>
-                                                    <td>{{ $calf->description }}</td>
+                                                    <td>{{ ucfirst($supplier->branch->branch_name) }}</td>
+                                                    <td>{{ ucfirst($supplier->supplier_name) }}</td>
+                                                    <td>{{ ucfirst($supplier->company_name) }}</td>
+                                                    <td>{{ $supplier->phone_number }}</td>
+                                                    <td>{{ $supplier->email }}</td>
                                                     <td>
-                                                        <label class="btn btn-sm btn-warning" for="">
-                                                            Avaiable
-                                                        </label>
+                                                        @if ($supplier->status == '1')
+                                                            <label class="btn btn-sm btn-success" for="">
+                                                                Active
+                                                            </label>
+                                                        @else
+                                                            <label class="btn btn-sm btn-warning" for="">
+                                                                Non-Active
+                                                            </label>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
-                                                            data-target="#myModal" data-id="{{ $calf->id }}"
-                                                            data-name="{{ $calf->name }}"
-                                                            data-description="{{ $calf->description }}"
-                                                            data-status="{{ $calf->status }}">
+                                                            data-target="#myModal" data-id="{{ $supplier->id }}"
+                                                            data-name="{{ $supplier->supplier_name }}"
+                                                            data-description="{{ $supplier->description }}"
+                                                            data-status="{{ $supplier->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
                                                         <button class="btn btn-sm btn-danger deleteButton"
-                                                            data-id="{{ $calf->id }}">
+                                                            data-id="{{ $supplier->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -187,61 +197,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="createModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Add New Shed</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-
-                    <form class="" action="{{ route('shed.store') }}" method="post" novalidate>
-                        @csrf
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Shed Name
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" name="name" placeholder="Shed Name | Number"
-                                    type="text" required="required" />
-                            </div>
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Description
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                                <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
-                            </div>
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="ln_solid">
-                            <div class="form-group">
-                                <div class="col-md-6 offset-md-3">
-                                    <button type='submit' class="btn btn-primary">Create</button>
-                                    <button type='reset' class="btn btn-success">Reset</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -250,7 +205,7 @@
     <script>
         $(document).ready(function() {
             $('.deleteButton').click(function() {
-                var shedId = $(this).data('id');
+                var supplierId = $(this).data('id');
                 var listItem = $(this).closest(
                     '.list-item'); // Adjust the selector based on your HTML structure
 
@@ -268,7 +223,7 @@
                         // If the user confirms, send an AJAX request to delete the pigeon
                         $.ajax({
                             type: 'GET',
-                            url: '/shed/delete/' + shedId,
+                            url: '/supplier/delete/' + supplierId,
                             success: function(response) {
                                 // Remove the deleted item from the DOM
                                 listItem.remove();

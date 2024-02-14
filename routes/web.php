@@ -72,6 +72,12 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
         Route::post('/designation/store', 'store')->name('designation.store');
         Route::post('/designation/update', 'update')->name('designation.edit');
         Route::get('/designation/delete/{id}', 'destroy');
+
+        //For Supplier Route
+        Route::get('/supplier/list', 'SupplierIndex')->name('supplier.list');
+        Route::get('/supplier/create', 'SupplierCreate')->name('supplier.create');
+        Route::post('/supplier/store', 'supplierStore')->name('supplier.store');
+        Route::get('/supplier/delete/{id}', 'SupplierDestroy');
     });
 
     //User Route

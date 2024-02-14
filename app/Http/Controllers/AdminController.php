@@ -14,6 +14,7 @@ use App\Models\Income;
 use App\Models\Account;
 use App\Models\BeefSell;
 use App\Models\MilkSell;
+use App\Models\Supplier;
 use App\Models\Designation;
 use App\Models\StaffSalary;
 use Illuminate\Support\Str;
@@ -166,6 +167,72 @@ class AdminController extends Controller
             DB::commit();
             if($res){
                 return response()->json(['message' => 'Designation deleted']);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+        }
+    }
+
+    public function SupplierIndex()
+    {
+        $data['suppliers'] = Supplier::where('status', '1')->get();
+
+        return view('supplier.index')->with($data);
+    }
+
+    public function SupplierCreate()
+    {
+        return view('supplier.create');
+    }
+
+    public function supplierStore(Request $request)
+    {
+        $request->validate([
+            'name'  => 'required',
+            'company_name'   => 'nullable',
+            'phone_number'   => 'nullable',
+            'email'          => 'nullable|email',
+            'address'        => 'nullable',
+            'supplier_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle file upload
+        $imagePath = $request->file('supplier_image')->store('supplierImage', 'public');
+
+          // Create new Supplier record
+        Supplier::create([
+            'branch_id'      => session('branch_id'),
+            'supplier_name'  => $request->input('name'),
+            'company_name'   => $request->input('company_name'),
+            'phone_number'   => $request->input('phone_number'),
+            'email'          => $request->input('email'),
+            'address'        => $request->input('address'),
+            'supplier_image' => $imagePath,
+        ]);
+
+        return redirect()->back()->with('message', 'Supplier created successfully!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function SupplierDestroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $supplier = Supplier::find($id);
+
+            if(!$supplier){
+                return response()->json(['message' => 'Supplier not found']);
+            }
+
+            $res = $supplier->delete();
+
+            DB::commit();
+            if($res){
+                return response()->json(['message' => 'Supplier deleted']);
             }
         } catch (\Exception $e) {
             DB::rollback();

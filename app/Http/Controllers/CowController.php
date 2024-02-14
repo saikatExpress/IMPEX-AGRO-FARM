@@ -48,7 +48,9 @@ class CowController extends Controller
 
     public function bachurIndex()
     {
-        return view('cow.bachurIndex');
+        $data['calfs'] = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('category_id', 6)->get();
+
+        return view('cow.bachurIndex')->with($data);
     }
 
     /**

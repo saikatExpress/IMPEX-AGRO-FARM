@@ -237,10 +237,10 @@
                                 </li>
 
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('supplier.list') }}">
                                         <i style="margin-right:8px; font-size: 1.2rem;"
                                             class="fa-solid fa-bowl-food"></i>
-                                        পরিবেশক
+                                        Supplier
                                     </a>
                                 </li>
 
