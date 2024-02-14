@@ -14,7 +14,7 @@
 
         <div class="col-2"></div>
         <div class="col-8">
-            <form action="{{ route('feed.store') }}" method="post">
+            <form action="{{ route('vaccine_monitoring.store') }}" method="post">
                 @csrf
                 <input type="submit" value="Save Information" class="form-control btn btn-sm btn-primary">
                 <div class="cow_feed">
@@ -49,29 +49,44 @@
                                     @enderror
                                 </div>
 
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="basic_form">
+                            <h5>
+                                <i class="fa-solid fa-circle-info"></i>
+                                Vaccine Information
+                            </h5>
+
+                            <div class="p-1">
                                 <div class="form-group">
                                     <label for="">Date</label>
-                                    <input type="date" id="feed_date" feed_date="name" class="form-control ">
-                                    @error('name')
+                                    <input type="date" name="date" class="form-control">
+                                    @error('date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Note</label>
+                                    <textarea name="note" id="note" class="form-control" cols="30" rows="2"></textarea>
+                                    @error('note')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
-                            <div class="form-group" style="padding: 5px;">
-                                <label for="">Note</label>
-                                <textarea name="description" class="form-control" id="" cols="30" rows="4"></textarea>
-                                @error('description')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
                         </div>
+
+                        <hr>
 
                         <div class="basic_form">
                             <h5>
                                 <i class="fa-solid fa-circle-info"></i>
-                                Feed Informations :
+                                Vaccine List :
                             </h5>
 
                             <div>
@@ -81,35 +96,38 @@
                                             <th>
                                                 <input type="checkbox" id="check-all" class="flat">
                                             </th>
-                                            <th class="column-title">Food Item </th>
-                                            <th class="column-title">Item Qauntity </th>
-                                            <th class="column-title">Unit</th>
-                                            <th class="column-title">Feeding Time</th>
+                                            <th class="column-title">Vaccine Name </th>
+                                            <th class="column-title">Dose </th>
+                                            <th class="column-title">Repeat</th>
+                                            <th class="column-title">Remarks</th>
+                                            <th class="column-title">Given Time</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($foods as $key => $food)
+                                        @foreach ($vaccines as $key => $vaccine)
                                             <tr class="even pointer">
                                                 <td class="a-center ">
-                                                    <input type="checkbox" value="{{ $food->id }}" class="flat"
-                                                        name="food_id[]">
+                                                    <input type="checkbox" value="{{ $vaccine->id }}" class="flat"
+                                                        name="vaccine_id[]">
                                                 </td>
-                                                <td class=" ">{{ $food->name }}</td>
+                                                <td class=" ">{{ $vaccine->name }}</td>
                                                 <td class=" ">
-                                                    <input type="number" class="form-control" name="food_quantity[]">
-                                                </td>
-                                                <td class=" ">
-                                                    <select name="unit_id[]" id="" class="form-control">
-                                                        <option value="">Select</option>
-                                                        @foreach ($units as $unit)
-                                                            <option value="{{ $unit->id }}">{{ $unit->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                    {{ $vaccine->dose_qty }}
                                                 </td>
                                                 <td class=" ">
-                                                    <input type="text" class="form-control" placeholder="Ex: 10:20 AM">
+                                                    @if ($vaccine->repeat_vaccine == 'yes')
+                                                        <i class="fa-solid fa-check"></i>
+                                                    @else
+                                                        <i class="fas fa-regular fa-circle-xmark"></i>
+                                                    @endif
+                                                </td>
+                                                <td class=" ">
+                                                    <input type="text" class="form-control" name="remarks[]">
+                                                </td>
+                                                <td class=" ">
+                                                    <input type="text" name="given_time[]" class="form-control"
+                                                        placeholder="Ex: 10:20 AM">
                                                 </td>
                                             </tr>
                                         @endforeach

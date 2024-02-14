@@ -152,7 +152,7 @@ class RoleController extends Controller
             $role = Role::find($id);
 
             if (!$role) {
-                return response()->json(['message' => 'Pigeon not found.'], 404);
+                return response()->json(['message' => 'Role not found.'], 404);
             }
 
             $res = $role->delete();

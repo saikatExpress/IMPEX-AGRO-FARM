@@ -14,6 +14,7 @@ use App\Http\Requests\StoreFoodRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateFoodRequest;
 use App\Models\CowFeed;
+use App\Models\CowVaccine;
 use App\Service\FoodService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -226,6 +227,13 @@ class FoodController extends Controller
             DB::rollback();
             info($e);
         }
+    }
+
+    public function getCowVaccine($id)
+    {
+        $vaccines = CowVaccine::with('branch:id,branch_name', 'vaccine:id,name')->where('branch_id', session('branch_id'))->where('cow_tag', $id)->get();
+
+        return response()->json(['vaccines' => $vaccines]);
     }
 
     /**

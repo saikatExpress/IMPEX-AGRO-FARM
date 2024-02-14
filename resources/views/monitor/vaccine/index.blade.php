@@ -5,9 +5,9 @@
 
             <div class="page_header">
                 <div class="page_header_menu">
-                    <a href="{{ route('vaccine.create') }}" class="btn btn-sm btn-primary">
-                        Vaccine Push
-                    </a>
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">
+                        Create New
+                    </button>
                 </div>
             </div>
 
@@ -55,39 +55,56 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Branch Name</th>
-                                            <th>Cow Tag</th>
-                                            <th>Feed</th>
+                                            <th>Vaccine Name</th>
+                                            <th>Period(Days)</th>
+                                            <th>Reapet Vaccine</th>
+                                            <th>Dose</th>
+                                            <th>Note</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-                                        @if (count($cows) > 0)
+                                        @if (count($vaccines) > 0)
                                             @php
                                                 $sl = 1;
                                             @endphp
-                                            @foreach ($cows as $key => $cow)
+                                            @foreach ($vaccines as $key => $vaccine)
                                                 <tr class="list-item">
-                                                    <td>{{ $sl }}</td>
-                                                    <td>{{ ucfirst($cow->branch->branch_name) }}</td>
-                                                    <td>{{ ucfirst($cow->tag) }}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-primary vaccineBtn"
-                                                            data-id="{{ $cow->id }}">
-                                                            <i class="fas fa-regular fa-eye"></i>
-                                                        </button>
+                                                        <label for="" class="btn btn-sm btn-success">
+                                                            {{ $sl }}
+                                                        </label>
                                                     </td>
+                                                    <td>{{ ucfirst($vaccine->name) }}</td>
+                                                    <td>{{ $vaccine->period_days }}</td>
+                                                    <td>
+                                                        @if ($vaccine->repeat_vaccine == 'yes')
+                                                            <label for="" class="btn btn-sm btn-primary">
+                                                                {{ ucfirst($vaccine->repeat_vaccine) }}
+                                                            </label>
+                                                        @else
+                                                            <label for="" class="btn btn-sm btn-danger">
+                                                                {{ ucfirst($vaccine->repeat_vaccine) }}
+                                                            </label>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $vaccine->dose_qty }}</td>
+                                                    <td>{{ $vaccine->note }}</td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
-                                                            data-target="#myModal" data-id="{{ $cow->id }}"
-                                                            data-name="{{ $cow->name }}"
-                                                            data-status="{{ $cow->status }}">
+                                                            data-target="#myModal" data-id="{{ $vaccine->id }}"
+                                                            data-name="{{ $vaccine->name }}"
+                                                            data-period_days="{{ $vaccine->period_days }}"
+                                                            data-repeat_vaccine="{{ $vaccine->repeat_vaccine }}"
+                                                            data-dose_qty="{{ $vaccine->dose_qty }}"
+                                                            data-note="{{ $vaccine->note }}"
+                                                            data-status="{{ $vaccine->status }}">
                                                             <i class="fa-regular fa-pen-to-square"></i>
                                                         </button>
                                                         <button class="btn btn-sm btn-danger deleteButton"
-                                                            data-id="{{ $cow->id }}">
+                                                            data-id="{{ $vaccine->id }}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -112,55 +129,29 @@
     </div>
 
     <!-- Modal -->
-
-    <div class="modal fade" id="showVaccineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <!-- Modal content goes here -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Vaccine Info</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul>
-
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- Additional buttons if needed -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Shed</h4>
+                    <h4 class="modal-title">Edit Vaccine</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
 
-                    <form class="" action="{{ route('shed.edit') }}" method="post" novalidate>
+                    <form class="" action="{{ route('vaccine.edit') }}" method="post" novalidate>
                         @csrf
                         <span class="section">Cost Info</span>
-                        <input type="hidden" name="shed_id">
+                        <input type="hidden" name="vaccine_id">
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Shed Name
+                                Vaccine Name
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" name="name" placeholder="Shed Name | Number" type="text"
+                                <input class="form-control" id="name" name="name" placeholder="Name" type="text"
                                     required="required" />
                             </div>
                             @error('name')
@@ -170,27 +161,57 @@
 
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Description
+                                Period(Days)
+                                <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
-                                <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
+                                <input class="form-control" name="period_day" id="period_day" placeholder="Days"
+                                    type="text" required="required" />
                             </div>
-                            @error('description')
+                            @error('period_day')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Status
+                                Reapeat Vaccine
+                                <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
-                                <select name="status" id="status" class="form-control">
-                                    <option value="1">Active</option>
-                                    <option value="0">Non Active</option>
+                                <select name="repeat_vaccine" id="repeat_vaccine" class="form-control" id="">
+                                    <option value="">Select</option>
+                                    <option value="yes">yes</option>
+                                    <option value="no">no</option>
                                 </select>
                             </div>
-                            @error('description')
+                            @error('repeat_vaccine')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">
+                                Dose :
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="dose_qty" id="dose_qty" placeholder="Days"
+                                    type="text" required="required" />
+                            </div>
+                            @error('dose_qty')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">
+                                Note
+                            </label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea name="note" id="" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                            @error('note')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -216,23 +237,23 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Add New Shed</h4>
+                    <h4 class="modal-title">Add New Vaccine</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
 
-                    <form class="" action="{{ route('shed.store') }}" method="post" novalidate>
+                    <form class="" action="{{ route('vaccine.store') }}" method="post" novalidate>
                         @csrf
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Shed Name
+                                Vaccine Name
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" name="name" placeholder="Shed Name | Number"
-                                    type="text" required="required" />
+                                <input class="form-control" name="name" placeholder="Name" type="text"
+                                    required="required" />
                             </div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -241,12 +262,57 @@
 
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Description
+                                Period(Days)
+                                <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
-                                <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
+                                <input class="form-control" name="period_day" placeholder="Days" type="text"
+                                    required="required" />
                             </div>
-                            @error('description')
+                            @error('period_day')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">
+                                Reapeat Vaccine
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="repeat_vaccine" class="form-control" id="">
+                                    <option value="">Select</option>
+                                    <option value="yes">yes</option>
+                                    <option value="no">no</option>
+                                </select>
+                            </div>
+                            @error('repeat_vaccine')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">
+                                Dose :
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" name="dose_qty" placeholder="Days" type="text"
+                                    required="required" />
+                            </div>
+                            @error('dose_qty')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">
+                                Note
+                            </label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea name="note" id="" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                            @error('note')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -270,12 +336,11 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="{{ asset('custom/js/vaccine.js') }}"></script>
 
     <script>
         $(document).ready(function() {
             $('.deleteButton').click(function() {
-                var shedId = $(this).data('id');
+                var vaccineId = $(this).data('id');
                 var listItem = $(this).closest(
                     '.list-item'); // Adjust the selector based on your HTML structure
 
@@ -293,7 +358,7 @@
                         // If the user confirms, send an AJAX request to delete the pigeon
                         $.ajax({
                             type: 'GET',
-                            url: '/shed/delete/' + shedId,
+                            url: '/vaccine/delete/' + vaccineId,
                             success: function(response) {
                                 // Remove the deleted item from the DOM
                                 listItem.remove();
@@ -335,14 +400,20 @@
                 const shedData = {
                     id: $(this).data('id'),
                     name: $(this).data('name'),
-                    description: $(this).data('description'),
+                    period_days: $(this).data('period_days'),
+                    dose_qty: $(this).data('dose_qty'),
+                    repeat_vaccine: $(this).data('repeat_vaccine'),
+                    note: $(this).data('note'),
                     status: $(this).data('status'),
                 };
 
                 // Set values to form fields
-                $('input[name="shed_id"]').val(shedData.id);
-                $('input[name="name"]').val(shedData.name);
-                $('textarea[name="description"]').val(shedData.description);
+                $('input[name="vaccine_id"]').val(shedData.id);
+                $('#name').val(shedData.name);
+                $('#period_day').val(shedData.period_days);
+                $('#dose_qty').val(shedData.dose_qty);
+                $('#repeat_vaccine').val(shedData.repeat_vaccine);
+                $('textarea[name="note"]').val(shedData.note);
                 $('#status').val(shedData.status);
 
                 // Open the modal

@@ -205,6 +205,7 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::post('/food/edit', [FoodController::class, 'update'])->name('food.edit');
     Route::get('/get/shed/cows/{id}', [FoodController::class, 'shedCows']);
     Route::get('/get/cow/feed/{id}', [FoodController::class, 'getCowInfo']);
+    Route::get('/get/cow/vaccine/{id}', [FoodController::class, 'getCowVaccine']);
     Route::get('/food/delete/{id}', [FoodController::class, 'destroy'])->middleware('role:admin');
 
     // For Unit Route
@@ -217,8 +218,15 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
     Route::controller(MonitoringController::class)->group(function(){
         Route::get('/routine/monitoring', 'index')->name('routine.monitoring');
         Route::get('/vaccine/monitoring', 'vaccineIndex')->name('vaccine.monitoring');
+        Route::post('/monitoring/vaccine/store', 'vaccineMonitoringStore')->name('vaccine_monitoring.store');
         Route::get('/monitoring/create', 'create')->name('monitoring.create');
         Route::get('/vaccine/create', 'vaccineCreate')->name('vaccine.create');
+
+        // For Vaccine Model
+        Route::get('/vaccine/list', 'vaccineList')->name('vaccine.list');
+        Route::post('/vaccine/store', 'vaccineStore')->name('vaccine.store');
+        Route::post('/vaccine/edit', 'vaccineUpdate')->name('vaccine.edit');
+        Route::get('/vaccine/delete/{id}', 'vaccineDestroy');
     });
 
     // For Buyer Route
