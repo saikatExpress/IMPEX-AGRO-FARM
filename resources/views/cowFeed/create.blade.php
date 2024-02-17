@@ -51,7 +51,7 @@
 
                                 <div class="form-group">
                                     <label for="">Date</label>
-                                    <input type="date" id="feed_date" feed_date="name" class="form-control ">
+                                    <input type="date" id="feed_date" name="feed_date" class="form-control ">
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

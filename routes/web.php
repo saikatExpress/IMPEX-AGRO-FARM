@@ -231,7 +231,8 @@ Route::middleware(['auth', 'auth.branch'])->group(function(){
         // For Vaccine Model
         Route::get('/vaccine/list', 'vaccineList')->name('vaccine.list');
         Route::post('/vaccine/store', 'vaccineStore')->name('vaccine.store');
-        Route::post('/vaccine/edit', 'vaccineUpdate')->name('vaccine.edit');
+        Route::post('/vaccine/edit', 'vaccineMonitoringUpdate')->name('vaccine.update');
+        Route::get('/monitoring/update/vaccine/{id}', 'monitoringVaccineUpdate')->name('vacinne.update');
         Route::get('/vaccine/delete/{id}', 'vaccineDestroy');
     });
 

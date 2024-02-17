@@ -77,6 +77,11 @@ class MonitoringController extends Controller
         }
     }
 
+    public function monitoringVaccineUpdate($id)
+    {
+        return $id;
+    }
+
     public function vaccineDestroy($id)
     {
         $vaccineServiceObj = new VaccineService;

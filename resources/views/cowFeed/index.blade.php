@@ -56,6 +56,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Branch Name</th>
+                                            <th>Shed No</th>
                                             <th>Cow Tag</th>
                                             <th>Feed</th>
                                             <th>Action</th>
@@ -72,6 +73,7 @@
                                                 <tr class="list-item">
                                                     <td>{{ $sl }}</td>
                                                     <td>{{ ucfirst($cow->branch->branch_name) }}</td>
+                                                    <td>{{ ucfirst($cow->shed->name) }}</td>
                                                     <td>{{ ucfirst($cow->tag) }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-primary feedBtn"
@@ -143,7 +145,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Shed</h4>
+                    <h4 class="modal-title">Edit Feed</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -152,7 +154,7 @@
 
                     <form class="" action="{{ route('shed.edit') }}" method="post" novalidate>
                         @csrf
-                        <span class="section">Cost Info</span>
+                        <span class="section">Feed Info</span>
                         <input type="hidden" name="shed_id">
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">

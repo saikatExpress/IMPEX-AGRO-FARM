@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cow;
 use App\Models\Food;
 use App\Models\Shed;
 use App\Models\Unit;
+use App\Models\CowFeed;
+use App\Models\CowVaccine;
+use App\Service\FoodService;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreFoodRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateFoodRequest;
-use App\Models\CowFeed;
-use App\Models\CowVaccine;
-use App\Service\FoodService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
-use PhpParser\Node\Stmt\Return_;
 
 class FoodController extends Controller
 {
@@ -47,8 +48,10 @@ class FoodController extends Controller
 
     public function feedIndex()
     {
-        $data['cows'] = Cow::with('branch:id,branch_name')->where('branch_id', session('branch_id'))->where('flag', 0)->get();
-
+        $data['cows'] = Cow::with('branch:id,branch_name', 'shed:id,name')
+        ->where('branch_id', session('branch_id'))
+        ->where('flag', 0)
+        ->get();
         return view('cowFeed.index')->with($data);
     }
 
@@ -93,12 +96,13 @@ class FoodController extends Controller
         $foodServiceObj = new FoodService;
         $shedId         = $request->input('shed_id');
         $cowId          = $request->input('cow_id');
+        $feedDate          = $request->input('feed_date');
         $description    = $request->input('description');
         $foodIds        = $request->input('food_id');
         $foodQuantities = $request->input('food_quantity');
         $unitIds        = $request->input('unit_id');
 
-        $res = $foodServiceObj->create($shedId, $cowId, $description, $foodIds, $foodQuantities, $unitIds);
+        $res = $foodServiceObj->create($shedId, $cowId,$feedDate, $description, $foodIds, $foodQuantities, $unitIds);
         if($res == true){
             return redirect()->back()->with('message', 'Food assign to the cow');
         }
@@ -135,7 +139,11 @@ class FoodController extends Controller
 
     public function getCowInfo($id)
     {
-        $feeds = CowFeed::with('food:id,name', 'unit:id,name')->where('branch_id', session('branch_id'))->where('cow_tag', $id)->get();
+        $feeds = CowFeed::with('food:id,name', 'unit:id,name')
+        ->where('branch_id', session('branch_id'))
+        ->where('cow_tag', $id)
+        ->whereDate('created_at', Carbon::now())
+        ->get();
 
         return response()->json(['feeds' => $feeds]);
     }

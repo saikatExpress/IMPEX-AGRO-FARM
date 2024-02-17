@@ -15,7 +15,7 @@ class FoodService
         }
     }
 
-    public function create($shedId, $cowId, $description, $foodIds, $foodQuantities, $unitIds)
+    public function create($shedId, $cowId,$feedDate, $description, $foodIds, $foodQuantities, $unitIds)
     {
         try {
             DB::beginTransaction();
@@ -23,8 +23,9 @@ class FoodService
             foreach($foodIds as $key => $foodId){
                 $cowFeedObj = new CowFeed();
 
-                $cowFeedObj->branch_id       = session('branch_id');
+                $cowFeedObj->branch_id     = session('branch_id');
                 $cowFeedObj->cow_tag       = $cowId;
+                $cowFeedObj->feed_date     = $feedDate;
                 $cowFeedObj->description   = $description;
                 $cowFeedObj->shed_id       = $shedId;
                 $cowFeedObj->food_id       = $foodId;

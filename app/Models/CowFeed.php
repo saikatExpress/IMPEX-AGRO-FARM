@@ -17,6 +17,7 @@ class CowFeed extends Model
     protected $fillable = [
         'branch_id',
         'cow_tag',
+        'feed_date',
         'description',
         'shed_id',
         'food_id',
@@ -28,6 +29,7 @@ class CowFeed extends Model
         'id'            => 'integer',
         'branch_id'     => 'integer',
         'cow_tag'       => 'integer',
+        'feed_date'     => 'integer',
         'description'   => 'string',
         'shed_id'       => 'integer',
         'food_id'       => 'integer',

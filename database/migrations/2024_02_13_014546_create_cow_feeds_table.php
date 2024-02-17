@@ -19,6 +19,7 @@ return new class extends Migration
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->foreignId('shed_id')->constrained('sheds')
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->timestamp('feed_date')->nullable();
             $table->string('description', 250)->nullable();
             $table->foreignId('food_id')->constrained('food')
                 ->onUpdate('cascade')->onDelete('cascade')->nullable();

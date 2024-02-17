@@ -80,12 +80,10 @@
                                                         </button>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-primary editBtn" data-toggle="modal"
-                                                            data-target="#myModal" data-id="{{ $cow->id }}"
-                                                            data-name="{{ $cow->name }}"
-                                                            data-status="{{ $cow->status }}">
+                                                        <a href="{{ route('vacinne.update', ['id' => $cow->id]) }}"
+                                                            class="btn btn-sm btn-primary editBtn">
                                                             <i class="fa-regular fa-pen-to-square"></i>
-                                                        </button>
+                                                        </a>
                                                         <button class="btn btn-sm btn-danger deleteButton"
                                                             data-id="{{ $cow->id }}">
                                                             <i class="fa-solid fa-trash"></i>
@@ -137,80 +135,6 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Shed</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-
-                    <form class="" action="{{ route('shed.edit') }}" method="post" novalidate>
-                        @csrf
-                        <span class="section">Cost Info</span>
-                        <input type="hidden" name="shed_id">
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Shed Name
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" name="name" placeholder="Shed Name | Number" type="text"
-                                    required="required" />
-                            </div>
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Description
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                                <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
-                            </div>
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                Status
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                                <select name="status" id="status" class="form-control">
-                                    <option value="1">Active</option>
-                                    <option value="0">Non Active</option>
-                                </select>
-                            </div>
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="ln_solid">
-                            <div class="form-group">
-                                <div class="col-md-6 offset-md-3">
-                                    <button type='submit' class="btn btn-primary">Update</button>
-                                    <button type='reset' class="btn btn-success">Reset</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="createModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -231,8 +155,8 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" name="name" placeholder="Shed Name | Number"
-                                    type="text" required="required" />
+                                <input class="form-control" name="name" placeholder="Shed Name | Number" type="text"
+                                    required="required" />
                             </div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
